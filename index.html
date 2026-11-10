@@ -27,6 +27,55 @@ body{background:radial-gradient(ellipse at 82% -8%,#382052 0,transparent 36%),ra
 .liveHero{padding:20px 5px 18px}.liveHero h1{font-size:29px;margin:5px 0}.liveHero h1 span{font-size:15px;color:#ff4e79;text-shadow:0 0 14px #ff4e79}.liveHero p{margin:0}.liveStats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:18px}.liveStats div{padding:12px 7px;border:1px solid #332943;border-radius:16px;background:#171425;text-align:center}.liveStats b{display:block;font-size:19px;color:#d4aaff}.liveStats span{display:block;color:#aaa2bb;font-size:9px;margin-top:4px}.liveCreate{padding:17px}.liveCreateHead,.liveListHead{display:flex;align-items:center;justify-content:space-between}.liveCreateHead h2{margin:4px 0 13px}.liveBadge{font-size:10px;color:#ff7a96;border:1px solid #7a354a;padding:5px 9px;border-radius:30px}.liveListHead{padding:18px 4px 8px}.liveGrid{display:grid;grid-template-columns:1fr;gap:12px}.liveCard{overflow:hidden;border:1px solid #342b48;border-radius:20px;background:linear-gradient(145deg,#1b172b,#11101a)}.liveThumb{height:145px;display:grid;place-items:center;background:radial-gradient(circle at 50% 35%,#6b35a6,#211a35 55%,#11101a);font-size:43px;position:relative}.liveThumb .liveBadge{position:absolute;top:12px;right:12px;background:#29101c}.liveCardBody{padding:13px}.liveCardBody h3{margin:0 0 6px;font-size:16px}.liveMeta{display:flex;justify-content:space-between;color:#aaa2bb;font-size:11px;margin-top:10px}.tokenInfo{margin-top:15px;padding:16px;border-color:#49305d;background:linear-gradient(120deg,#261839,#151321)}.tokenInfo h3{margin:0 0 6px;color:#d5adff}.livePlayer{width:100%;aspect-ratio:16/9;background:#050509;border-radius:17px;object-fit:contain}.liveAudio{display:none}.liveMediaBox{width:100%;min-height:190px;background:#050509;border-radius:17px;overflow:hidden;display:grid;place-items:center;color:#aaa2bb}.liveMediaBox video{width:100%;max-height:65vh;object-fit:contain}.liveRoomBox{padding:12px}.liveRoomActions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.tokenBreakdown{display:grid;grid-template-columns:1fr 1fr;gap:8px}.tokenBreakdown div{padding:11px;border-radius:14px;background:#201a30;text-align:center}.tokenBreakdown b{display:block;font-size:20px;color:#d4aaff}.tokenBreakdown span{font-size:10px;color:#aaa2bb}.liveRoomTitle{font-size:22px;margin:13px 0 5px}.liveSupport{display:flex;gap:8px;align-items:center;margin-top:12px}.liveSupport .field{margin:0;flex:1}.liveEmpty{padding:24px;text-align:center}
 @media(min-width:650px){.liveGrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 #resetPassword{display:block;margin:12px auto 0;background:transparent;border:0;color:#c49aff;font-size:13px}.liveReady{border-color:#7252a5}.liveReady .liveThumb{background:radial-gradient(circle at 50% 35%,#4e3a78,#211a35 55%,#11101a)}
+
+/* NEXO visible redesign v3 */
+:root{--bg:#07070f;--panel:#151322;--line:#332b49;--purple:#9657ff;--pink:#dc68f0;--text:#fbf9ff;--muted:#aaa3bd}
+body{background:radial-gradient(ellipse at 50% -12%,#533078 0,transparent 42%),radial-gradient(ellipse at 100% 40%,#1b1730 0,transparent 36%),#07070f;padding-bottom:112px}
+.wrap{width:min(780px,100%);padding:14px 15px 42px}
+.top{margin:0 -15px 18px;padding:14px 16px;background:linear-gradient(110deg,#100d1beF,#171027eF);border-bottom:1px solid #3a2c50;box-shadow:0 10px 35px #0004}
+.brand{font-size:31px;letter-spacing:4px;text-shadow:0 0 24px #a45cff55}
+.brandBlock .muted{font-size:10px;letter-spacing:1px}
+.topIcon,.topAvatar{width:41px;height:41px;border-radius:15px;background:#211a31;border-color:#46365e;box-shadow:inset 0 1px #ffffff12}
+.welcomeLine{position:relative;overflow:hidden;margin:8px 0 17px;padding:23px 19px;border:1px solid #67428d;border-radius:25px;background:linear-gradient(115deg,#28183e 0%,#191329 56%,#11101d 100%);box-shadow:0 16px 42px #0005}
+.welcomeLine:after{content:"N";position:absolute;left:26px;top:-35px;font-size:155px;font-weight:1000;color:#ffffff08;pointer-events:none}
+.welcomeLine h1{font-size:27px;letter-spacing:-.5px}
+.welcomeOrb{width:67px;height:67px;border-radius:23px;background:linear-gradient(145deg,#d46af0,#743de1 65%,#42216e);box-shadow:0 10px 35px #a84fff66;border:1px solid #ffffff24}
+.storiesCard{border-radius:23px;background:linear-gradient(120deg,#1b1729,#12111c);box-shadow:0 12px 30px #0003}
+.storyRing{box-shadow:0 0 0 2px #191326,0 0 0 4px #8d4de9}
+.composer{border-radius:23px;padding:16px;border-color:#423452;background:linear-gradient(145deg,#1b1728,#11101b);box-shadow:0 13px 34px #0004}
+.composerTrigger{background:#0c0b14;border-color:#3d3450;border-radius:18px;min-height:47px}
+.composerTools{justify-content:space-around}
+.toolChip{padding:8px 12px;border-radius:12px;background:#211b30}
+.feedHeading{margin-top:8px;padding:17px 5px 5px}
+.feedHeading .section-title{font-size:23px}
+.post{border-radius:23px;border:1px solid #332b47;background:linear-gradient(150deg,#191626,#11101a);box-shadow:0 12px 32px #0003;padding:16px}
+.postname{font-size:14px}
+.postbody{font-size:15px;line-height:1.9}
+.postimg{border-radius:18px;border:1px solid #ffffff12}
+.action{border-radius:14px;padding:9px 13px;transition:transform .15s ease,background .15s ease}
+.action:active,.btn:active,.nav:active{transform:scale(.97)}
+.btn{border-radius:15px;box-shadow:0 7px 20px #8a42df35;letter-spacing:.1px}
+.btn.secondary{box-shadow:none}
+.field{background:#0d0c16;border-color:#393149;border-radius:15px;padding:14px}
+.field:focus{border-color:#ad70ff;box-shadow:0 0 0 3px #9b5cff22}
+.card{border-radius:23px}
+.bottom{left:10px;right:10px;bottom:8px;border:1px solid #403252;border-radius:22px;padding:9px 8px calc(9px + env(safe-area-inset-bottom));background:#100d1cf2;box-shadow:0 8px 36px #0009}
+.nav{border-radius:14px;min-height:48px}
+.nav.active{background:#2a1d3e;color:#e4caff}
+.createNav .ico{width:39px;height:35px;border-radius:13px}
+.liveHero{padding:23px 19px;margin:7px 0 16px;border:1px solid #593b75;border-radius:24px;background:linear-gradient(120deg,#281738,#171326 65%,#10101a);box-shadow:0 14px 36px #0004}
+.liveStats div{background:#20182e;border-color:#49345d}
+.liveCreate{border-color:#483456}
+.liveCard{border-radius:22px;box-shadow:0 12px 30px #0003}
+.liveThumb{height:165px}
+.liveCardBody{padding:16px}
+.liveCardBody h3{font-size:17px}
+.auth{margin:7vh auto;padding:25px;border:1px solid #5a3c78;background:linear-gradient(145deg,#1c1730,#11101b);box-shadow:0 25px 70px #0008}
+.auth h1{font-size:27px;margin-top:3px}
+#authView:before{content:"NEXO";display:block;text-align:center;font-size:42px;font-weight:1000;letter-spacing:7px;color:#d7b5ff;text-shadow:0 0 30px #a34eff77;margin:0 0 19px}
+.footer{padding:22px 0 30px}
+@media(min-width:700px){.wrap{width:min(780px,100%)}.bottom{left:calc(50% - 390px);right:calc(50% - 390px)}.welcomeLine{padding:28px 24px}}
+@media(max-width:380px){.topActions{gap:5px}.topIcon,.topAvatar{width:35px;height:35px}.nav{font-size:8px}.nav .ico{font-size:19px}}
 </style></head>
 <body><main class="wrap">
 <header class="top"><div class="brandBlock"><div class="brand">NEXO<span class="brandDot">.</span></div><div class="muted small">مساحتك، عالمك</div></div><div class="topActions"><button class="topIcon" id="topCommunities">◎</button><button class="topIcon" id="topChats">✉</button><button class="topIcon" id="topSettings">⚙</button><button class="topAvatar" id="topProfile">N</button></div><span id="connection" class="hidden">NEXO</span></header>

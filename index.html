@@ -231,6 +231,174 @@ body{background:radial-gradient(ellipse at 50% -12%,#533078 0,transparent 42%),r
 .cameraResultActions{display:flex;gap:8px;flex-wrap:wrap}.cameraResultActions>*{flex:1}
 .cameraPrivacy{text-align:center;padding:8px 12px}
 @media(max-width:699px){.instaBottom{grid-template-columns:repeat(6,minmax(0,1fr))}.instaBottom .nav .ico{font-size:23px}.cameraStage{aspect-ratio:3/4;max-height:62vh;border-radius:19px}.cameraFilter{min-width:63px}.cameraShutter{width:64px;height:64px}.cameraShutter span{width:44px;height:44px}}
+
+/* NEXO DESIGN SYSTEM 2026 — premium interface pass */
+:root{
+ --bg:#080914;--panel:#121526;--line:#282e49;--purple:#9b7bff;--pink:#e18bff;
+ --text:#f5f6ff;--muted:#9ba4bd;--accent:#9c8bff;--mint:#73e6d1;
+ --surface:rgba(20,24,43,.88);--surface2:#171c31;--glow:rgba(135,104,255,.22);
+ --radius-xl:26px;--radius-lg:20px;--radius-md:15px;
+}
+html{background:var(--bg);scroll-behavior:smooth}
+body{
+ color:var(--text);
+ background:
+ radial-gradient(ellipse at 8% 0%,rgba(92,71,173,.22),transparent 34%),
+ radial-gradient(ellipse at 100% 28%,rgba(39,137,148,.10),transparent 30%),
+ linear-gradient(180deg,#090b18 0%,#080914 55%,#0b0d19 100%);
+ font-family: -apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Tahoma,Arial,sans-serif;
+ letter-spacing:.05px;
+}
+::selection{background:#8e79e866;color:#fff}
+button{transition:transform .18s ease,background .18s ease,border-color .18s ease,box-shadow .18s ease}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid #a995ff;outline-offset:3px}
+.wrap{width:min(900px,100%);padding:18px 22px 48px}
+.top{
+ margin:0 -22px 22px;padding:15px 22px;
+ background:rgba(10,13,27,.82);border-bottom:1px solid rgba(143,151,204,.15);
+ box-shadow:0 12px 38px #0003;backdrop-filter:blur(24px) saturate(150%);
+}
+.brand{font-size:32px;letter-spacing:4px;font-weight:1000;background:linear-gradient(105deg,#fff 5%,#c7bcff 47%,#70e5d0 100%);background-clip:text}
+.brandBlock .muted{font-size:9px;letter-spacing:2.2px;text-transform:uppercase;color:#8490ae}
+.topIcon,.topAvatar{background:linear-gradient(145deg,#1c2340,#111629);border:1px solid #343d60;color:#e4e7ff;box-shadow:0 5px 16px #0003}
+.topIcon:hover,.topAvatar:hover{border-color:#8275d7;background:#262c4b;transform:translateY(-2px)}
+.card,.storiesCard,.composer,.post,.liveCard,.liveHero,.liveCreate{
+ border:1px solid rgba(135,148,202,.17);
+ background:linear-gradient(145deg,rgba(25,31,54,.96),rgba(15,19,35,.98));
+ border-radius:var(--radius-xl);box-shadow:0 18px 48px rgba(0,0,0,.22),inset 0 1px rgba(255,255,255,.035);
+}
+.card{padding:20px}
+.section-title{font-size:21px;letter-spacing:-.35px;font-weight:850}
+.eyebrow{color:#9c9cf4;letter-spacing:2.1px;font-size:9px}
+.muted{color:var(--muted)}
+.welcomeLine,.liveHero{
+ border:1px solid rgba(151,130,255,.28);
+ background:
+ radial-gradient(circle at 12% 0%,rgba(118,224,211,.16),transparent 40%),
+ linear-gradient(115deg,#252448 0%,#1b203b 52%,#141a2d 100%);
+ box-shadow:0 20px 50px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.07);
+}
+.welcomeLine{border-radius:29px;padding:25px 24px}
+.welcomeLine h1{font-size:29px;font-weight:900;letter-spacing:-.8px}
+.welcomeOrb{background:linear-gradient(145deg,#a69aff,#6659c8 65%,#3c8f91);box-shadow:0 12px 34px rgba(117,112,232,.38)}
+.storiesCard{background:linear-gradient(120deg,#1b2038,#121729 75%);padding:18px}
+.storyRing{background:conic-gradient(from 25deg,#7ce8d4,#8d79ff,#dc8bff,#7ce8d4);box-shadow:0 0 0 2px #151a2d}
+.storyAvatar{background:#171d33;border-color:#151a2d}
+.composer{padding:17px;background:linear-gradient(145deg,#1b2038,#121729)}
+.composerTrigger{background:#0d1223;border-color:#343c5b;color:#aeb8d2}
+.toolChip{background:#222943;color:#d9dcff;border-radius:13px}
+.toolChip:first-child{color:#82e4ca}
+.toolChip:nth-child(2){color:#c5a6ff}
+.post{padding:18px;margin:15px 0;background:linear-gradient(145deg,#171d33,#111628)}
+.postimg{border-radius:19px;border:1px solid rgba(255,255,255,.1)}
+.actions{border-color:rgba(146,157,206,.17)}
+.action{background:#202742;border:1px solid #394365;color:#dce1f7}
+.action:hover{background:#2a3354;border-color:#7168b2}
+.action.active{background:#392c61;border-color:#9581e8;color:#eee7ff}
+.btn{background:linear-gradient(110deg,#7569e9,#9b70ef 55%,#6ccdbd);box-shadow:0 8px 22px rgba(117,105,233,.23);border-radius:15px}
+.btn:hover{filter:brightness(1.08);transform:translateY(-1px);box-shadow:0 12px 28px rgba(117,105,233,.3)}
+.btn.secondary{background:#202742;border:1px solid #3a4568;color:#e3e7ff}
+.field{background:#0d1223;border:1px solid #303a5b;color:#f4f5ff;border-radius:15px}
+.field::placeholder{color:#77819e}
+.field:focus{border-color:#9a8aff;box-shadow:0 0 0 4px rgba(142,126,255,.12)}
+.status{background:#202746;border:1px solid #3d4a72;color:#dce5ff}
+.status.ok{background:#15352f;border-color:#286d5e;color:#a9f2df}
+.status.error{background:#3a202d;border-color:#764052;color:#ffc0cf}
+.pill{background:#29294c;color:#d9d4ff}
+.bottom{
+ left:12px;right:12px;bottom:10px;border:1px solid rgba(154,161,220,.22);
+ border-radius:23px;background:rgba(13,17,34,.91);
+ box-shadow:0 12px 42px #0009;backdrop-filter:blur(25px) saturate(150%);
+ padding:9px 10px calc(9px + env(safe-area-inset-bottom));
+}
+.nav{border-radius:15px;color:#929dbb}
+.nav .ico{font-size:22px}
+.nav.active{background:linear-gradient(145deg,rgba(125,112,225,.25),rgba(100,196,181,.10));color:#e7e5ff}
+.nav.active .ico{filter:drop-shadow(0 0 8px rgba(166,148,255,.5))}
+.liveStats div{background:rgba(11,16,32,.55);border-color:#384365;border-radius:17px}
+.liveStats b{color:#b5a8ff}
+.liveBadge{border-color:#8b496a;color:#ff9db5;background:#321d31}
+.liveThumb{background:radial-gradient(circle at 50% 35%,#6256a9,#202544 57%,#101528)}
+.liveCard{background:linear-gradient(145deg,#1c2340,#12182c)}
+.tokenInfo{background:linear-gradient(120deg,#282044,#172b36);border-color:#62548d}
+.profileCover{background:radial-gradient(circle at 75% 20%,#6e68b6 0,transparent 40%),linear-gradient(115deg,#26304f,#292344 58%,#1d3b48);border-color:#55568a}
+.profileBigAvatar{box-shadow:0 8px 24px #0008}
+.profileTikStats{border-color:#303954}
+.profileTikStats div{background:transparent}
+.profileTab.active{color:#e8e5ff;border-bottom-color:#91d9d0}
+.profileMediaTile{background:#171e35}
+.cameraStage{border-color:#4a5077;box-shadow:0 18px 48px #0008}
+.cameraPlaceholder{background:radial-gradient(circle at 50% 35%,#34345d,#101629 70%)}
+.cameraSpark{color:#9ce8dc}
+.cameraFilter.active .filterSample{border-color:#8ee2d4;box-shadow:0 0 0 3px rgba(126,222,207,.13)}
+.cameraShutter{border-color:#8e86e8}
+.messages{background:#0d1223}
+.bubble{background:#252d49;color:#f3f4ff}
+.bubble.mine{background:linear-gradient(120deg,#6557c6,#477f91)}
+.chatrow:hover,.item:hover{background:rgba(137,143,208,.07)}
+.auth{border-color:#454b76;background:linear-gradient(145deg,#1d2340,#111729)}
+#authView:before{background:linear-gradient(100deg,#fff,#c4b8ff,#82e4d3);background-clip:text;color:transparent}
+.footer{color:#6f7b99}
+.reelSlide{border-color:#3a4164;box-shadow:0 15px 40px #0006}
+.reelAction{background:rgba(13,17,33,.65);border-color:#ffffff35;backdrop-filter:blur(12px)}
+.storyViewerCard{background:#111629;border:1px solid #42496a}
+#settingsPage .card,#explorePage .card,#chatPage .card,#communitiesPage .card{background:linear-gradient(145deg,#1a2038,#111729)}
+#settingsPage h3{color:#c9c8ef}
+#homePage .feedHeading{padding-top:20px}
+.liveHero h1,.reelsIntro h1{letter-spacing:-.7px}
+@media(max-width:699px){
+ body{background:linear-gradient(180deg,#0b0e1c,#080914 70%);padding-bottom:calc(72px + env(safe-area-inset-bottom))}
+ .wrap{padding:0 0 25px;width:100%}
+ .top.instaTop{height:61px;background:rgba(10,13,27,.94);border-bottom:1px solid #2a3048;backdrop-filter:blur(20px)}
+ .instaTop .brand{font-size:29px;letter-spacing:2px}
+ .instaTop .topIcon,.instaTop .topAvatar{color:#e5e7ff}
+ #homePage .storiesCard{background:linear-gradient(120deg,#171e35,#0f1527);border-bottom:1px solid #29334d}
+ #homePage .composer{background:#11172a;border-bottom:1px solid #29334d}
+ #homePage .composerTrigger{background:#0b1121;border-color:#303a59}
+ #homePage .post{background:transparent;border-bottom:1px solid #29334d}
+ #homePage .feedHeading{padding:17px 14px 5px}
+ #homePage .postimg{border-radius:0}
+ .instaBottom{background:rgba(10,14,28,.94);border-top:1px solid #303650;backdrop-filter:blur(22px)}
+ .instaBottom .nav{color:#a2abc4}
+ .instaBottom .nav.active{color:#e8e6ff;background:rgba(126,117,226,.12)}
+ #profilePage{padding:0 12px}
+ .profileCover{border-radius:20px}
+ .profileTab.active{color:#e8e5ff;border-bottom-color:#8fe1d3}
+ .cameraStage{border-radius:22px}
+ .liveHero{margin:12px 12px 16px;padding:22px 18px}
+ .liveCreate,.liveGrid,.liveListHead{margin-left:12px;margin-right:12px}
+ #liveRoomPage,#explorePage,#chatPage,#communitiesPage,#settingsPage,#storePage,#cameraPage,#reelsPage{padding-left:12px;padding-right:12px}
+ #reelsPage .reelsFeed{width:calc(100% + 24px);margin-inline:-12px}
+ .reelSlide{border-radius:18px}
+ .auth{margin:6vh 14px;padding:23px}
+}
+@media(min-width:700px){
+ .wrap{width:min(900px,100%)}
+ .bottom{left:calc(50% - 438px);right:calc(50% - 438px)}
+ #homePage{max-width:790px;margin:0 auto}
+ .storiesCard,.composer,.post{margin-left:0;margin-right:0}
+ .liveGrid{gap:16px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}
+}
+body.light{
+ --bg:#f3f5fb;--panel:#fff;--line:#dfe4f0;--text:#20253a;--muted:#69738e;
+ background:linear-gradient(180deg,#f4f5fc,#edf1f8);color:var(--text)
+}
+body.light .top{background:rgba(249,250,255,.9);border-color:#dce2ef}
+body.light .card,body.light .storiesCard,body.light .composer,body.light .post,body.light .liveCard{background:#fff;border-color:#e0e5f0;box-shadow:0 12px 30px #28375a0d}
+body.light .field{background:#f6f7fb;color:#20253a;border-color:#dce2ef}
+body.light .composerTrigger{background:#f3f5fa;color:#69738e}
+body.light .action{background:#f1f3fa;color:#414b67;border-color:#e0e5f0}
+body.light .bottom{background:rgba(250,251,255,.94);border-color:#dce2ef}
+body.light .nav{color:#68728c}
+body.light .nav.active{color:#4f4b9b;background:#eeedff}
+body.light .postbody{color:#30364d}
+body.light .liveStats div{background:#f3f5fc;border-color:#e1e6f2}
+body.light .bubble{background:#eef1f8;color:#30364d}
+body.light .bubble.mine{background:#6d65c8;color:white}
+
 </style></head>
 <body><main class="wrap">
 <header class="top instaTop"><div class="topActions"><button class="topIcon instaPlus" id="topCreate" aria-label="إنشاء منشور">＋</button><button class="topIcon" id="topCommunities" aria-label="المجتمعات">◎</button></div><div class="brandBlock"><div class="brand">NEXO<span class="brandDot">.</span></div></div><div class="topActions"><button class="topIcon" id="topChats" aria-label="الرسائل">♡</button><button class="topIcon" id="topStore" title="متجر NEXO">✧</button><button class="topIcon" id="topSettings">⚙</button><button class="topAvatar" id="topProfile">N</button></div><span id="connection" class="hidden">NEXO</span></header>

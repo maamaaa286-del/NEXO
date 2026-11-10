@@ -181,6 +181,26 @@ async function ensureProfile(){let r=await db.from('profiles').select('*').eq('i
 function syncProfile(){let n=profile?.display_name||profile?.username||'عضو NEXO';$('helloName').textContent='أهلاً، '+n;$('miniAvatar').textContent=initial(n);$('profileAvatar').src=profile?.avatar_url||'';$('profileName').textContent=n;$('profileUsername').textContent='@'+(profile?.username||'');$('topProfile').textContent=initial(n);$('profileBio').textContent=profile?.bio||'لا توجد نبذة بعد'}
 async function enter(u){user=u;hide('authView');show('appView');show('bottomNav');try{await ensureProfile();await loadPosts();page('home');await handlePayPalReturn()}catch(e){note('authMsg','تعذر تحميل الحساب: '+e.message,'error')}}
 async function upload(file,bucket){if(!file)return null;const max=bucket==='avatars'?5*1024*1024:8*1024*1024,types=bucket==='avatars'?/^image\/(jpeg|png|webp)$/:/^image\/(jpeg|png|webp|gif)$/;if(file.size>max)throw Error(bucket==='avatars'?'حجم الصورة الشخصية يجب ألا يتجاوز 5 ميغابايت':'حجم الصورة يجب ألا يتجاوز 8 ميغابايت');if(!types.test(file.type))throw Error('نوع الصورة غير مدعوم لهذا القسم');let ext=file.name.split('.').pop().toLowerCase().replace(/[^a-z0-9]/g,'')||'jpg',path=user.id+'/'+Date.now()+'_'+Math.random().toString(36).slice(2)+'.'+ext;let r=await db.storage.from(bucket).upload(path,file,{cacheControl:'3600',upsert:false});if(r.error)throw r.error;return db.storage.from(bucket).getPublicUrl(path).data.publicUrl}
+
+function mediaPath(url){
+ if(!url)return null;
+ const raw=String(url),marker='/storage/v1/object/public/post-media/',signed='/storage/v1/object/sign/post-media/';
+ const i=raw.indexOf(marker),j=raw.indexOf(signed);
+ if(i>=0)return decodeURIComponent(raw.slice(i+marker.length).split('?')[0]);
+ if(j>=0)return decodeURIComponent(raw.slice(j+signed.length).split('?')[0]);
+ if(!raw.startsWith('http'))return raw;
+ return null;
+}
+async function signedMediaMap(urls){
+ const paths=[...new Set((urls||[]).map(mediaPath).filter(Boolean))],map=new Map();
+ if(!paths.length)return map;
+ const r=await db.storage.from('post-media').createSignedUrls(paths,3600);
+ if(r.error)throw r.error;
+ (r.data||[]).forEach(x=>{if(x.path&&x.signedUrl)map.set(x.path,x.signedUrl)});
+ return map;
+}
+function mediaFor(url,map){const path=mediaPath(url);return path?(map.get(path)||url):url}
+
 $('postFiles').onchange=()=>{selectedFiles=[...$('postFiles').files].slice(0,4);$('imagePreview').innerHTML=selectedFiles.map(f=>'<img src="'+URL.createObjectURL(f)+'">').join('');$('charCount').textContent=$('postText').value.length+' / 500 · '+selectedFiles.length+'/4 صور'};
 $('postText').oninput=()=>$('charCount').textContent=$('postText').value.length+' / 500 · '+selectedFiles.length+'/4 صور';
 
@@ -188,7 +208,7 @@ async function loadPosts(){
  const r=await db.from('posts').select('id,user_id,body,created_at,image_urls,video_url').order('created_at',{ascending:false}).limit(60);
  if(r.error){$('posts').innerHTML='<div class="card">'+esc(r.error.message)+'</div>';return}
  if(!r.data?.length){$('posts').innerHTML='<div class="card empty">ما في منشورات لسه. تابع أشخاصاً أو شارك أول منشور.</div>';return}
- const ids=r.data.map(x=>x.id),uids=[...new Set(r.data.map(x=>x.user_id))];
+ const ids=r.data.map(x=>x.id),uids=[...new Set(r.data.map(x=>x.user_id))],mediaMap=await signedMediaMap(r.data.flatMap(x=>[...(x.image_urls||[]),x.video_url]).filter(Boolean));
  const [lr,cr,pr,sr,fr]=await Promise.all([
   db.from('likes').select('post_id,user_id').in('post_id',ids),
   db.from('comments').select('id,post_id,user_id,body,created_at').in('post_id',ids).order('created_at'),
@@ -201,7 +221,7 @@ async function loadPosts(){
  r.data.sort((a,b)=>{const af=follows.some(x=>x.following_id===a.user_id&&x.status==='accepted')||a.user_id===user.id,bf=follows.some(x=>x.following_id===b.user_id&&x.status==='accepted')||b.user_id===user.id;return Number(bf)-Number(af)||new Date(b.created_at)-new Date(a.created_at)});
  $('posts').innerHTML=r.data.map(p=>{
   const a=person(p.user_id),mine=p.user_id===user.id,liked=likes.some(x=>x.post_id===p.id&&x.user_id===user.id),following=follows.find(x=>x.following_id===p.user_id),pc=comments.filter(x=>x.post_id===p.id);
-  const media=(p.image_urls||[]).map(url=>'<img class="postimg" loading="lazy" src="'+esc(url)+'">').join('')+(p.video_url?'<video class="postimg" controls playsinline preload="metadata" src="'+esc(p.video_url)+'"></video>':'');
+  const media=(p.image_urls||[]).map(url=>'<img class="postimg" loading="lazy" src="'+esc(mediaFor(url,mediaMap))+'">').join('')+(p.video_url?'<video class="postimg" controls playsinline preload="metadata" src="'+esc(mediaFor(p.video_url,mediaMap))+'"></video>':'');
   return '<article class="card post"><div class="posttop">'+avatar(a)+'<div><div class="postname">'+esc(a?.display_name||a?.username||'عضو NEXO')+'</div><div class="posttime">@'+esc(a?.username||'nexo_user')+' · '+esc(stamp(p.created_at))+'</div></div>'+(!mine?'<button class="action" data-follow="'+p.user_id+'">'+(following?(following.status==='pending'?'مطلوب':'تتابعه'):'متابعة')+'</button>':'')+'</div><div class="postbody">'+esc(p.body)+'</div>'+media+'<div class="actions"><button class="action '+(liked?'active':'')+'" data-like="'+p.id+'">'+(liked?'♥':'♡')+' '+likes.filter(x=>x.post_id===p.id).length+'</button><button class="action" data-toggle="'+p.id+'">تعليقات '+pc.length+'</button><button class="action '+(saved.has(p.id)?'active':'')+'" data-save="'+p.id+'">'+(saved.has(p.id)?'محفوظ':'حفظ')+'</button><button class="action" data-share="'+p.id+'" data-url="'+esc(p.video_url||(p.image_urls||[])[0]||location.href)+'" data-caption="'+esc(p.body||'')+'">مشاركة ↗</button>'+(mine?'<button class="action" data-del="'+p.id+'">حذف</button>':'')+'</div><div id="comments-'+p.id+'" class="hidden">'+pc.map(c=>'<div class="comment"><b>'+esc(person(c.user_id)?.display_name||'عضو')+':</b> '+esc(c.body)+'</div>').join('')+'<div class="commentbox"><input class="field" id="c-'+p.id+'" maxlength="500" placeholder="اكتب تعليقاً"><button class="btn" data-sendcomment="'+p.id+'">إرسال</button></div></div></article>';
  }).join('');
 }
@@ -242,7 +262,7 @@ async function shareMedia(url,caption){
 async function loadStories(){
  const r=await db.from('nexo_stories').select('id,user_id,media_url,media_type,caption,created_at,expires_at').gt('expires_at',new Date().toISOString()).order('created_at',{ascending:true}).limit(100);
  if(r.error){$('storyRail').innerHTML='<span class="muted small">تعذر تحميل القصص: '+esc(r.error.message)+'</span>';return}
- const ids=[...new Set((r.data||[]).map(x=>x.user_id))];
+ const mediaMap=await signedMediaMap((r.data||[]).map(x=>x.media_url));(r.data||[]).forEach(x=>x.display_url=mediaFor(x.media_url,mediaMap));const ids=[...new Set((r.data||[]).map(x=>x.user_id))];
  let people=[];
  if(ids.length){const p=await db.from('profiles').select('id,username,display_name,avatar_url').in('id',ids);people=p.data||[]}
  storyGroups=ids.map(id=>({userId:id,person:people.find(p=>p.id===id),items:r.data.filter(x=>x.user_id===id)})).sort((a,b)=>a.userId===user.id?-1:b.userId===user.id?1:0);
@@ -273,7 +293,7 @@ function renderStory(){
  const item=g.items[storyItemIndex];if(!item)return;
  $('storyViewerName').textContent=g.person?.display_name||g.person?.username||'قصتي';
  $('storyViewerCaption').textContent=item.caption||'';
- $('storyViewerContent').innerHTML=item.media_type==='video'?'<video class="storyViewerMedia" src="'+esc(item.media_url)+'" autoplay controls playsinline></video>':'<img class="storyViewerMedia" src="'+esc(item.media_url)+'" alt="قصة">';
+ $('storyViewerContent').innerHTML=item.media_type==='video'?'<video class="storyViewerMedia" src="'+esc(item.display_url||item.media_url)+'" autoplay controls playsinline></video>':'<img class="storyViewerMedia" src="'+esc(item.display_url||item.media_url)+'" alt="قصة">';
  show('storyViewer');
 }
 function moveStory(dir){
@@ -288,7 +308,7 @@ async function loadReels(){
  const r=await db.from('posts').select('id,user_id,body,created_at,video_url').not('video_url','is',null).order('created_at',{ascending:false}).limit(60);
  if(r.error){$('reelsFeed').innerHTML='<div class="empty">'+esc(r.error.message)+'</div>';return}
  if(!r.data?.length){$('reelsFeed').innerHTML='<div class="empty reelEmpty">لسه ما في ريلز. انشر أول فيديو في NEXO ✦</div>';return}
- const ids=r.data.map(x=>x.id),uids=[...new Set(r.data.map(x=>x.user_id))];
+ const ids=r.data.map(x=>x.id),uids=[...new Set(r.data.map(x=>x.user_id))],mediaMap=await signedMediaMap(r.data.map(x=>x.video_url));
  const [lr,cr,pr,sr,fr]=await Promise.all([
   db.from('likes').select('post_id,user_id').in('post_id',ids),
   db.from('comments').select('id,post_id,user_id,body,created_at').in('post_id',ids).order('created_at'),
@@ -300,7 +320,7 @@ async function loadReels(){
  const person=id=>people.find(x=>x.id===id);
  $('reelsFeed').innerHTML=r.data.map(p=>{
   const a=person(p.user_id),mine=p.user_id===user.id,liked=likes.some(x=>x.post_id===p.id&&x.user_id===user.id),following=follows.find(x=>x.following_id===p.user_id),pc=comments.filter(x=>x.post_id===p.id),avatarHtml=a?.avatar_url?'<img class="reelAvatar" src="'+esc(a.avatar_url)+'">':'<div class="reelAvatar" style="display:grid;place-items:center;color:white">'+esc((a?.display_name||a?.username||'N').slice(0,1))+'</div>';
-  return '<article class="reelSlide" data-reel-slide="'+p.id+'"><video src="'+esc(p.video_url)+'" autoplay muted playsinline loop preload="metadata"></video><div class="reelShade"></div><div class="reelInfo"><b>@'+esc(a?.username||'nexo_user')+(mine?' · أنت':'')+'</b><p>'+esc(p.body||'مقطع من NEXO')+'</p></div><div class="reelRail">'+avatarHtml+(!mine?'<button class="reelFollow" data-reel-follow="'+p.user_id+'" title="متابعة">'+(following?(following.status==='pending'?'…':'✓'):'＋')+'</button>':'')+'<button class="reelAction '+(liked?'active':'')+'" data-reel-like="'+p.id+'">♥<small>'+likes.filter(x=>x.post_id===p.id).length+'</small></button><button class="reelAction" data-reel-comment="'+p.id+'">▤<small>'+pc.length+'</small></button><button class="reelAction '+(saved.has(p.id)?'active':'')+'" data-reel-save="'+p.id+'">▣<small>حفظ</small></button><button class="reelAction" data-reel-share="'+p.id+'" data-url="'+esc(p.video_url)+'" data-caption="'+esc(p.body||'')+'">↗<small>مشاركة</small></button><button class="reelAction" data-reel-sound="'+p.id+'">♪<small>صوت</small></button></div><div class="reelComments hidden" id="reel-comments-'+p.id+'"><div class="reelCommentList">'+pc.slice(-6).map(c=>'<div class="reelCommentLine"><b>'+esc(people.find(x=>x.id===c.user_id)?.display_name||'عضو')+':</b> '+esc(c.body)+'</div>').join('')+'</div><div class="reelCommentInput"><input class="field" id="reel-c-'+p.id+'" maxlength="500" placeholder="اكتب تعليقاً…"><button class="btn" data-reel-send="'+p.id+'">إرسال</button></div></div></article>';
+  return '<article class="reelSlide" data-reel-slide="'+p.id+'"><video src="'+esc(mediaFor(p.video_url,mediaMap))+'" autoplay muted playsinline loop preload="metadata"></video><div class="reelShade"></div><div class="reelInfo"><b>@'+esc(a?.username||'nexo_user')+(mine?' · أنت':'')+'</b><p>'+esc(p.body||'مقطع من NEXO')+'</p></div><div class="reelRail">'+avatarHtml+(!mine?'<button class="reelFollow" data-reel-follow="'+p.user_id+'" title="متابعة">'+(following?(following.status==='pending'?'…':'✓'):'＋')+'</button>':'')+'<button class="reelAction '+(liked?'active':'')+'" data-reel-like="'+p.id+'">♥<small>'+likes.filter(x=>x.post_id===p.id).length+'</small></button><button class="reelAction" data-reel-comment="'+p.id+'">▤<small>'+pc.length+'</small></button><button class="reelAction '+(saved.has(p.id)?'active':'')+'" data-reel-save="'+p.id+'">▣<small>حفظ</small></button><button class="reelAction" data-reel-share="'+p.id+'" data-url="'+esc(mediaFor(p.video_url,mediaMap))+'" data-caption="'+esc(p.body||'')+'">↗<small>مشاركة</small></button><button class="reelAction" data-reel-sound="'+p.id+'">♪<small>صوت</small></button></div><div class="reelComments hidden" id="reel-comments-'+p.id+'"><div class="reelCommentList">'+pc.slice(-6).map(c=>'<div class="reelCommentLine"><b>'+esc(people.find(x=>x.id===c.user_id)?.display_name||'عضو')+':</b> '+esc(c.body)+'</div>').join('')+'</div><div class="reelCommentInput"><input class="field" id="reel-c-'+p.id+'" maxlength="500" placeholder="اكتب تعليقاً…"><button class="btn" data-reel-send="'+p.id+'">إرسال</button></div></div></article>';
  }).join('');
  if(reelsObserver)reelsObserver.disconnect();
  if('IntersectionObserver' in window){
@@ -412,8 +432,8 @@ async function loadProfilePage(){
  ]);
  if(postsResult.error)note('profileMsg',postsResult.error.message,'error');
  $('myPostCount').textContent=postsResult.data?.length||0;$('myFollowerCount').textContent=followersResult.data?.length||0;$('myFollowingCount').textContent=followingResult.data?.length||0;
- $('myPosts').innerHTML=postsResult.data?.length?postsResult.data.map(p=>'<div class="item"><div>'+esc(p.body)+'<div class="muted small">'+esc(stamp(p.created_at))+'</div></div>'+(p.video_url?'<span class="pill">فيديو</span>':p.image_urls?.[0]?'<img src="'+esc(p.image_urls[0])+'" style="width:54px;height:54px;object-fit:cover;border-radius:10px">':'')+'</div>').join(''):'<div class="empty">ما نشرت أي شيء بعد.</div>';
- const req=requestsResult.data||[];
+ $('myPosts').innerHTML=postsResult.data?.length?postsResult.data.map(p=>'<div class="item"><div>'+esc(p.body)+'<div class="muted small">'+esc(stamp(p.created_at))+'</div></div>'+(p.video_url?'<span class="pill">فيديو</span>':p.image_urls?.[0]?'<img src="'+esc(mediaFor(p.image_urls[0],mediaMap))+'" style="width:54px;height:54px;object-fit:cover;border-radius:10px">':'')+'</div>').join(''):'<div class="empty">ما نشرت أي شيء بعد.</div>';
+ const mediaMap=await signedMediaMap((postsResult.data||[]).flatMap(p=>[...(p.image_urls||[]),p.video_url]).filter(Boolean));const req=requestsResult.data||[];
  if(req.length){const ids=req.map(x=>x.follower_id),pr=await db.from('profiles').select('id,username,display_name,avatar_url').in('id',ids);$('followRequests').innerHTML=req.map(x=>{const p=pr.data?.find(y=>y.id===x.follower_id);return '<div class="followRequest">'+avatar(p)+'<span>'+esc(p?.display_name||p?.username||'عضو')+'</span><div class="requestActions"><button class="btn" data-accept-follow="'+x.follower_id+'">قبول</button><button class="btn secondary" data-decline-follow="'+x.follower_id+'">رفض</button></div></div>'}).join('')}
  else $('followRequests').textContent='لا توجد طلبات جديدة.';
  const savedIds=(savedResult.data||[]).map(x=>x.post_id);

@@ -304,6 +304,7 @@ function moveStory(dir){
 }
 $('storyPrev').onclick=()=>moveStory(-1);$('storyNext').onclick=()=>moveStory(1);$('storyClose').onclick=()=>hide('storyViewer');
 async function loadReels(){
+ const previousScroll=$('reelsFeed').scrollTop;
  const r=await db.from('posts').select('id,user_id,body,created_at,video_url').not('video_url','is',null).order('created_at',{ascending:false}).limit(60);
  if(r.error){$('reelsFeed').innerHTML='<div class="empty">'+esc(r.error.message)+'</div>';return}
  if(!r.data?.length){$('reelsFeed').innerHTML='<div class="empty reelEmpty">لسه ما في ريلز. انشر أول فيديو في NEXO ✦</div>';return}
@@ -321,6 +322,7 @@ async function loadReels(){
   const a=person(p.user_id),mine=p.user_id===user.id,liked=likes.some(x=>x.post_id===p.id&&x.user_id===user.id),following=follows.find(x=>x.following_id===p.user_id),pc=comments.filter(x=>x.post_id===p.id),avatarHtml=a?.avatar_url?'<img class="reelAvatar" src="'+esc(a.avatar_url)+'">':'<div class="reelAvatar" style="display:grid;place-items:center;color:white">'+esc((a?.display_name||a?.username||'N').slice(0,1))+'</div>';
   return '<article class="reelSlide" data-reel-slide="'+p.id+'"><video src="'+esc(mediaFor(p.video_url,mediaMap))+'" autoplay muted playsinline loop preload="metadata"></video><div class="reelShade"></div><div class="reelInfo"><b>@'+esc(a?.username||'nexo_user')+(mine?' · أنت':'')+'</b><p>'+esc(p.body||'مقطع من NEXO')+'</p></div><div class="reelRail">'+avatarHtml+(!mine?'<button class="reelFollow" data-reel-follow="'+p.user_id+'" title="متابعة">'+(following?(following.status==='pending'?'…':'✓'):'＋')+'</button>':'')+'<button class="reelAction '+(liked?'active':'')+'" data-reel-like="'+p.id+'">♥<small>'+likes.filter(x=>x.post_id===p.id).length+'</small></button><button class="reelAction" data-reel-comment="'+p.id+'">▤<small>'+pc.length+'</small></button><button class="reelAction '+(saved.has(p.id)?'active':'')+'" data-reel-save="'+p.id+'">▣<small>حفظ</small></button><button class="reelAction" data-reel-share="'+p.id+'" data-url="'+esc(mediaFor(p.video_url,mediaMap))+'" data-caption="'+esc(p.body||'')+'">↗<small>مشاركة</small></button><button class="reelAction" data-reel-sound="'+p.id+'">♪<small>صوت</small></button></div><div class="reelComments hidden" id="reel-comments-'+p.id+'"><div class="reelCommentList">'+pc.slice(-6).map(c=>'<div class="reelCommentLine"><b>'+esc(people.find(x=>x.id===c.user_id)?.display_name||'عضو')+':</b> '+esc(c.body)+'</div>').join('')+'</div><div class="reelCommentInput"><input class="field" id="reel-c-'+p.id+'" maxlength="500" placeholder="اكتب تعليقاً…"><button class="btn" data-reel-send="'+p.id+'">إرسال</button></div></div></article>';
  }).join('');
+ $('reelsFeed').scrollTop=previousScroll;
  if(reelsObserver)reelsObserver.disconnect();
  if('IntersectionObserver' in window){
   reelsObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{

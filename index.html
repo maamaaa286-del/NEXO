@@ -1150,6 +1150,7 @@ function applyTheme(theme,save=true){
  const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=light?'#f7f8fc':'#0b1020';
  if(save)localStorage.setItem('nexo-theme',light?'light':'dark');
 }
+applyTheme(localStorage.getItem('nexo-theme')==='light'?'light':'dark',false);
 function loadSettings(){$('settingsEmail').textContent=user.email||'—';applyTheme(localStorage.getItem('nexo-theme')==='light'?'light':'dark',false);$('emailVisibility').checked=localStorage.getItem('nexo-email-visible')==='true';$('confirmDelete').checked=localStorage.getItem('nexo-confirm-delete')!=='false'}
 $('themeToggle').onchange=()=>applyTheme($('themeToggle').checked?'light':'dark');
 $('themeQuickToggle').onclick=()=>applyTheme(document.body.classList.contains('light')?'dark':'light');$('emailVisibility').onchange=()=>localStorage.setItem('nexo-email-visible',$('emailVisibility').checked?'true':'false');$('confirmDelete').onchange=()=>localStorage.setItem('nexo-confirm-delete',$('confirmDelete').checked?'true':'false');Object.defineProperty($('confirmDelete'),'checked',{get(){return localStorage.getItem('nexo-confirm-delete')!=='false'},set(v){localStorage.setItem('nexo-confirm-delete',v?'true':'false')}});$('settingsProfile').onclick=()=>page('profile');

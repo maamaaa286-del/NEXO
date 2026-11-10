@@ -208,6 +208,29 @@ body{background:radial-gradient(ellipse at 50% -12%,#533078 0,transparent 42%),r
  .profileTab{padding:14px;background:transparent;color:#aaa}
  .profileTab.active{color:white;border-bottom:2px solid #bd83ff}
 }
+
+/* NEXO standalone camera studio */
+.cameraHeader{display:flex;justify-content:space-between;align-items:center;padding:8px 4px}
+.cameraSpark{font-size:30px;color:#c28aff}
+.cameraStage{position:relative;width:100%;aspect-ratio:3/4;max-height:68vh;overflow:hidden;border-radius:24px;background:#08070d;border:1px solid #433354;box-shadow:0 16px 40px #0006}
+.cameraStage video{width:100%;height:100%;object-fit:cover;display:block;filter:none}
+.cameraPlaceholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:25px;color:#eee;background:radial-gradient(circle at 50% 35%,#302040,#100d18 70%)}
+.cameraPlaceholder div{font-size:65px;color:#c18aff}.cameraPlaceholder span{font-size:12px;color:#bdb2ca;max-width:250px;line-height:1.6}
+.cameraLiveTag,.cameraRecordingTag{position:absolute;top:13px;right:13px;border-radius:20px;padding:7px 11px;background:#08070dbb;font-size:10px;letter-spacing:1px}
+.cameraLiveTag i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#9b69ff;margin-left:5px}
+.cameraRecordingTag{right:auto;left:13px;color:#ff879d}
+.cameraFilters{display:flex;gap:10px;overflow-x:auto;padding:14px 2px;scrollbar-width:none}.cameraFilters::-webkit-scrollbar{display:none}
+.cameraFilter{min-width:69px;background:transparent;color:#bcb4c9;font-size:10px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.cameraFilter.active{color:#fff}.filterSample{width:49px;height:49px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#b58be9,#47305c);border:2px solid #bd86ff;font-size:16px;font-weight:900}
+.filterMono{filter:grayscale(1)}.filterWarm{filter:sepia(.65)}.filterVivid{filter:contrast(1.2) saturate(1.4)}.filterSoft{filter:brightness(1.2) saturate(.7)}.filterColor{filter:hue-rotate(35deg)}
+.cameraControls{padding:4px 0 10px}.cameraActionRow{display:flex;align-items:center;justify-content:space-around;gap:12px;padding:14px 0}
+.cameraActionRow .btn{min-width:90px}.cameraShutter{width:68px;height:68px;border-radius:50%;padding:6px;background:#fff;border:4px solid #a77bdb;display:grid;place-items:center;box-shadow:0 0 0 4px #ffffff25}
+.cameraShutter span{width:48px;height:48px;border-radius:50%;background:#fff;border:2px solid #191321}
+.cameraShutter:disabled{opacity:.4}
+.cameraResult img,.cameraResult video{display:block;width:100%;max-height:55vh;object-fit:contain;border-radius:15px;background:#050505;margin:12px 0}
+.cameraResultActions{display:flex;gap:8px;flex-wrap:wrap}.cameraResultActions>*{flex:1}
+.cameraPrivacy{text-align:center;padding:8px 12px}
+@media(max-width:699px){.instaBottom{grid-template-columns:repeat(6,minmax(0,1fr))}.instaBottom .nav .ico{font-size:23px}.cameraStage{aspect-ratio:3/4;max-height:62vh;border-radius:19px}.cameraFilter{min-width:63px}.cameraShutter{width:64px;height:64px}.cameraShutter span{width:44px;height:44px}}
 </style></head>
 <body><main class="wrap">
 <header class="top instaTop"><div class="topActions"><button class="topIcon instaPlus" id="topCreate" aria-label="إنشاء منشور">＋</button><button class="topIcon" id="topCommunities" aria-label="المجتمعات">◎</button></div><div class="brandBlock"><div class="brand">NEXO<span class="brandDot">.</span></div></div><div class="topActions"><button class="topIcon" id="topChats" aria-label="الرسائل">♡</button><button class="topIcon" id="topStore" title="متجر NEXO">✧</button><button class="topIcon" id="topSettings">⚙</button><button class="topAvatar" id="topProfile">N</button></div><span id="connection" class="hidden">NEXO</span></header>
@@ -219,7 +242,33 @@ body{background:radial-gradient(ellipse at 50% -12%,#533078 0,transparent 42%),r
 <div class="card composer"><div class="head"><div class="avatar" id="miniAvatar">N</div><button class="composerTrigger" id="focusComposer">شاركنا بماذا تفكر؟</button></div><div class="composerTools"><button class="toolChip" id="composerPhoto">▧ صورة</button><button class="toolChip" id="composerReel">▷ مقطع ريلز</button><button class="toolChip" id="composerCommunity">◎ مجتمع</button></div></div>
 <div class="card composerExpanded hidden" id="composerExpanded"><h2 class="section-title">إنشاء منشور</h2><textarea id="postText" class="field" maxlength="500" placeholder="اكتب شيئاً يستحق المشاركة…"></textarea><input id="postFiles" type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple class="field"><div id="imagePreview" class="preview"></div><div class="row" style="justify-content:space-between"><span class="muted small" id="charCount">0 / 500 · حتى 4 صور</span><button id="publishBtn" class="btn">نشر المنشور</button></div><div id="postMsg" class="status hidden"></div></div>
 <div class="feedHeading"><div><div class="eyebrow">THE LATEST</div><h2 class="section-title">آخر المنشورات</h2></div><span class="livePill"><i></i> مباشر</span></div><div id="posts"><div class="empty">جاري تحميل المنشورات…</div></div></section>
-<section id="reelsPage" class="hidden"><div class="reelTop"><div><div class="eyebrow">NEXO SHORTS</div><b>ريلز لك ✦</b></div><button id="showReelComposer" class="btn">＋ انشر فيديو</button></div><div id="reelComposer" class="card hidden"><b>انشر مقطعك</b><p class="muted small">MP4 أو WebM أو MOV · حتى 30 ميغابايت</p><input id="reelFile" class="field" type="file" accept="video/mp4,video/webm,video/quicktime"><input id="reelCaption" class="field" maxlength="500" placeholder="اكتب وصفاً للمقطع…"><div class="row"><button id="publishReel" class="btn">نشر الريلز</button><button id="hideReelComposer" class="btn secondary">إغلاق</button></div><div id="reelMsg" class="status hidden"></div></div><div id="reelsFeed" class="reelsFeed"><div class="empty">جاري تحميل الريلز…</div></div></section><section id="livePage" class="hidden">
+<section id="reelsPage" class="hidden"><div class="reelTop"><div><div class="eyebrow">NEXO SHORTS</div><b>ريلز لك ✦</b></div><button id="showReelComposer" class="btn">＋ انشر فيديو</button></div><div id="reelComposer" class="card hidden"><b>انشر مقطعك</b><p class="muted small">MP4 أو WebM أو MOV · حتى 30 ميغابايت</p><input id="reelFile" class="field" type="file" accept="video/mp4,video/webm,video/quicktime"><input id="reelCaption" class="field" maxlength="500" placeholder="اكتب وصفاً للمقطع…"><div class="row"><button id="publishReel" class="btn">نشر الريلز</button><button id="hideReelComposer" class="btn secondary">إغلاق</button></div><div id="reelMsg" class="status hidden"></div></div><div id="reelsFeed" class="reelsFeed"><div class="empty">جاري تحميل الريلز…</div></div></section><section id="cameraPage" class="hidden">
+ <div class="cameraHeader"><div><div class="eyebrow">NEXO CAMERA STUDIO</div><h2 class="section-title">استوديو الكاميرا</h2><p class="muted small">التقط لحظتك بفلاتر NEXO</p></div><span class="cameraSpark">✦</span></div>
+ <div class="cameraStage">
+  <video id="cameraPreview" autoplay muted playsinline></video>
+  <canvas id="cameraCanvas" class="hidden"></canvas>
+  <div id="cameraPlaceholder" class="cameraPlaceholder"><div>◎</div><b>كاميرتك بانتظارك</b><span>اضغط تشغيل الكاميرا واسمح بالوصول من المتصفح</span></div>
+  <div class="cameraLiveTag"><i></i> CAMERA</div>
+  <div id="cameraRecordingTag" class="cameraRecordingTag hidden">● جاري التسجيل</div>
+ </div>
+ <div class="cameraFilters" id="cameraFilters">
+  <button class="cameraFilter active" data-filter="none"><span class="filterSample">Aa</span>طبيعي</button>
+  <button class="cameraFilter" data-filter="grayscale(1)"><span class="filterSample filterMono">Aa</span>أبيض وأسود</button>
+  <button class="cameraFilter" data-filter="sepia(.65) saturate(1.2)"><span class="filterSample filterWarm">Aa</span>دافئ</button>
+  <button class="cameraFilter" data-filter="contrast(1.2) saturate(1.35)"><span class="filterSample filterVivid">Aa</span>سينمائي</button>
+  <button class="cameraFilter" data-filter="brightness(1.12) saturate(.75)"><span class="filterSample filterSoft">Aa</span>ناعم</button>
+  <button class="cameraFilter" data-filter="hue-rotate(35deg) saturate(1.3)"><span class="filterSample filterColor">Aa</span>ألوان</button>
+ </div>
+ <div class="cameraControls">
+  <button id="cameraStart" class="btn wide">تشغيل الكاميرا</button>
+  <div class="cameraActionRow"><button id="cameraFlip" class="btn secondary" disabled>⇄ تبديل</button><button id="cameraCapture" class="cameraShutter" disabled aria-label="التقاط صورة"><span></span></button><button id="cameraRecord" class="btn secondary" disabled>● فيديو</button></div>
+  <button id="cameraStop" class="btn secondary wide" disabled>إيقاف الكاميرا</button>
+  <div id="cameraStatus" class="status hidden"></div>
+ </div>
+ <div id="cameraResult" class="card cameraResult hidden"><h3>معاينة اللقطة</h3><img id="cameraPhotoResult" class="hidden" alt="الصورة الملتقطة"><video id="cameraVideoResult" class="hidden" controls playsinline></video><div class="cameraResultActions"><button id="cameraUsePost" class="btn">استخدام كمنشور</button><button id="cameraUseReel" class="btn secondary hidden">استخدام كريلز</button><button id="cameraDiscard" class="btn secondary">إلغاء</button></div></div>
+ <p class="muted small cameraPrivacy">🔒 الكاميرا محلية على جهازك. لا يتم تشغيلها إلا بعد ضغطك على زر التشغيل والسماح للمتصفح.</p>
+</section>
+<section id="livePage" class="hidden">
 <div class="liveHero"><div class="eyebrow">NEXO LIVE ARENA</div><h1>ساحة البثوث <span>●</span></h1><p class="muted">تابع لاعبيك المفضلين وشاركهم اللحظة.</p><div class="liveStats"><div><b id="liveCount">0</b><span>بث مباشر</span></div><div><b>80%</b><span>حصة الستريمر من دعم التوكن</span></div><div><b>20%</b><span>حصة NEXO</span></div></div></div>
 <div class="card liveCreate"><div class="liveCreateHead"><div><div class="eyebrow">GO LIVE</div><h2 class="section-title">أنشئ صفحة بثك</h2></div><span class="liveBadge">● LIVE</span></div>
 <input id="liveTitle" class="field" maxlength="100" placeholder="عنوان البث — مثلاً رانكد مع الشباب">
@@ -256,7 +305,7 @@ body{background:radial-gradient(ellipse at 50% -12%,#533078 0,transparent 42%),r
 </section>
 </section><div class="footer">NEXO · تواصل، شارك، وانضم</div></main>
 <div id="storyViewer" class="storyViewer hidden"><div class="storyViewerCard"><div class="storyViewerTop"><b id="storyViewerName">قصة</b><div class="row"><button id="storyPrev" class="reelAction">‹</button><button id="storyNext" class="reelAction">›</button><button id="storyClose" class="reelAction">×</button></div></div><div id="storyViewerContent"></div><div id="storyViewerCaption" class="storyViewerCaption"></div></div></div>
-<button id="navCreate" class="hidden" type="button"></button><nav id="bottomNav" class="bottom hidden instaBottom"><button class="nav active" data-page="home" aria-label="الرئيسية"><span class="ico">⌂</span></button><button class="nav" data-page="reels" aria-label="ريلز"><span class="ico">▣</span></button><button class="nav" data-page="communities" aria-label="المجتمعات"><span class="ico">♧</span></button><button class="nav" data-page="live" aria-label="البث المباشر"><span class="ico">◉</span></button><button class="nav" data-page="explore" aria-label="استكشاف"><span class="ico">⌕</span></button><button class="nav" data-page="profile" aria-label="حسابي"><span class="ico">♙</span></button></nav>
+<button id="navCreate" class="hidden" type="button"></button><nav id="bottomNav" class="bottom hidden instaBottom"><button class="nav active" data-page="home" aria-label="الرئيسية"><span class="ico">⌂</span></button><button class="nav" data-page="camera" aria-label="الكاميرا"><span class="ico">◎</span></button><button class="nav" data-page="reels" aria-label="ريلز"><span class="ico">▣</span></button><button class="nav" data-page="communities" aria-label="المجتمعات"><span class="ico">♧</span></button><button class="nav" data-page="live" aria-label="البث المباشر"><span class="ico">◉</span></button><button class="nav" data-page="profile" aria-label="حسابي"><span class="ico">♙</span></button></nav>
 <script>
 window.addEventListener('error',e=>{const m=document.getElementById('authMsg');if(m){m.textContent='تعذر تشغيل التطبيق: '+(e.message||'خطأ غير معروف');m.className='status error'}});
 try {
@@ -272,7 +321,56 @@ $('saveNewPassword').onclick=async()=>{const password=$('newPassword').value;if(
 $('signupBtn').onclick=async()=>{const b=$('signupBtn');b.disabled=true;try{let email=$('email').value.trim(),password=$('password').value;if(!email||!password){note('authMsg','أدخل البريد الإلكتروني وكلمة المرور.','error');return}if(password.length<6){note('authMsg','كلمة المرور يجب أن تكون 6 أحرف على الأقل.','error');return}let r=await db.auth.signUp({email,password});if(r.error)note('authMsg',r.error.message,'error');else if(r.data.session)await enter(r.data.user);else note('authMsg','تم إنشاء الحساب. افحص بريدك لتأكيده ثم سجّل الدخول.','ok')}catch(e){note('authMsg','تعذر إنشاء الحساب: '+(e?.message||String(e)),'error')}finally{b.disabled=false}};
 const initial=s=>(String(s||'N').trim()[0]||'N').toUpperCase(),stamp=s=>new Date(s).toLocaleString('ar-JO',{dateStyle:'short',timeStyle:'short'});
 const avatar=(p)=>p?.avatar_url?'<img class="avatar" src="'+esc(p.avatar_url)+'" alt="">':'<div class="avatar">'+esc(initial(p?.display_name||p?.username))+'</div>';
-function page(n){['home','explore','reels','live','liveRoom','communities','chat','profile','settings','store'].forEach(x=>$(x+'Page').classList.toggle('hidden',x!==n));document.querySelectorAll('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===n));if(n==='home'){loadStories();loadPosts()}if(n==='explore')loadExplore();if(n==='reels')loadReels();if(n==='live')loadLive();if(n==='communities')loadCommunities();if(n==='chat')loadChats();if(n==='profile')loadProfilePage();if(n==='settings')loadSettings();if(n==='store')loadStore()}
+function page(n){if(n!=='camera'&&typeof stopCameraStudio==='function')stopCameraStudio();['home','explore','reels','live','liveRoom','communities','chat','profile','settings','store','camera'].forEach(x=>$(x+'Page').classList.toggle('hidden',x!==n));document.querySelectorAll('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===n));if(n==='home'){loadStories();loadPosts()}if(n==='explore')loadExplore();if(n==='reels')loadReels();if(n==='live')loadLive();if(n==='communities')loadCommunities();if(n==='chat')loadChats();if(n==='profile')loadProfilePage();if(n==='settings')loadSettings();if(n==='store')loadStore()}
+
+let cameraStream=null,cameraFacing='user',cameraFilter='none',cameraRecorder=null,cameraChunks=[],cameraResultBlob=null,cameraResultType='',cameraAnimation=0;
+const cameraFilterButtons=()=>document.querySelectorAll('.cameraFilter');
+function setCameraFilter(filter){cameraFilter=filter;const v=$('cameraPreview');if(v)v.style.filter=filter==='none'?'none':filter;cameraFilterButtons().forEach(b=>b.classList.toggle('active',b.dataset.filter===filter))}
+function stopCameraStudio(){
+ if(cameraRecorder&&cameraRecorder.state==='recording'){try{cameraRecorder.stop()}catch(_){}}
+ if(cameraStream){cameraStream.getTracks().forEach(t=>t.stop());cameraStream=null}
+ if($('cameraPreview'))$('cameraPreview').srcObject=null;
+ ['cameraFlip','cameraCapture','cameraRecord','cameraStop'].forEach(id=>$(id).disabled=true);
+ $('cameraStart').disabled=false;$('cameraPlaceholder').classList.remove('hidden');
+}
+async function startCameraStudio(){
+ if(!navigator.mediaDevices?.getUserMedia){note('cameraStatus','هذا المتصفح لا يدعم الكاميرا أو أن الصفحة ليست على اتصال آمن HTTPS. افتح NEXO من الرابط الرسمي.','error');return}
+ $('cameraStart').disabled=true;
+ try{
+  cameraStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:cameraFacing,width:{ideal:1280},height:{ideal:1920}},audio:true});
+  $('cameraPreview').srcObject=cameraStream;await $('cameraPreview').play();
+  $('cameraPlaceholder').classList.add('hidden');
+  ['cameraFlip','cameraCapture','cameraRecord','cameraStop'].forEach(id=>$(id).disabled=false);
+  note('cameraStatus','الكاميرا جاهزة. اختر فلتر والتقط صورتك أو سجل فيديو.','ok');
+ }catch(e){cameraStream=null;$('cameraStart').disabled=false;note('cameraStatus','ما قدرنا نشغل الكاميرا: '+(e.name==='NotAllowedError'?'اسمح للكاميرا والمايك من إعدادات Safari.':e.message||e.name),'error')}
+}
+function captureCameraPhoto(){
+ const v=$('cameraPreview'),c=$('cameraCanvas');if(!cameraStream||!v.videoWidth)return;
+ c.width=v.videoWidth;c.height=v.videoHeight;const ctx=c.getContext('2d');ctx.filter=cameraFilter==='none'?'none':cameraFilter;
+ if(cameraFacing==='user'){ctx.translate(c.width,0);ctx.scale(-1,1)}ctx.drawImage(v,0,0,c.width,c.height);ctx.setTransform(1,0,0,1,0,0);ctx.filter='none';
+ c.toBlob(blob=>{if(!blob){note('cameraStatus','تعذر حفظ الصورة. حاول مرة ثانية.','error');return}cameraResultBlob=blob;cameraResultType='image';const url=URL.createObjectURL(blob);$('cameraPhotoResult').src=url;$('cameraPhotoResult').classList.remove('hidden');$('cameraVideoResult').classList.add('hidden');hide('cameraUseReel');show('cameraResult');},'image/jpeg',.92);
+}
+function recordCameraVideo(){
+ if(!cameraStream)return;
+ if(cameraRecorder?.state==='recording'){cameraRecorder.stop();return}
+ if(!window.MediaRecorder){note('cameraStatus','تسجيل الفيديو غير مدعوم في هذا المتصفح. جرب Safari محدثاً.','error');return}
+ const v=$('cameraPreview'),canvas=$('cameraCanvas'),ctx=canvas.getContext('2d');canvas.width=v.videoWidth||720;canvas.height=v.videoHeight||1280;
+ const draw=()=>{if(!cameraStream)return;ctx.filter=cameraFilter==='none'?'none':cameraFilter;if(cameraFacing==='user'){ctx.save();ctx.translate(canvas.width,0);ctx.scale(-1,1);ctx.drawImage(v,0,0,canvas.width,canvas.height);ctx.restore()}else ctx.drawImage(v,0,0,canvas.width,canvas.height);ctx.filter='none';cameraAnimation=requestAnimationFrame(draw)};draw();
+ const videoStream=canvas.captureStream(24);cameraStream.getAudioTracks().forEach(t=>videoStream.addTrack(t));
+ const mime=['video/mp4;codecs=h264','video/mp4','video/webm;codecs=vp9','video/webm'].find(t=>MediaRecorder.isTypeSupported(t));
+ try{cameraChunks=[];cameraRecorder=new MediaRecorder(videoStream,mime?{mimeType:mime}:undefined);cameraRecorder.ondataavailable=e=>{if(e.data.size)cameraChunks.push(e.data)};cameraRecorder.onstop=()=>{cancelAnimationFrame(cameraAnimation);videoStream.getTracks().forEach(t=>{if(t.kind==='video')t.stop()});const type=cameraRecorder.mimeType||'video/webm';cameraResultBlob=new Blob(cameraChunks,{type});cameraResultType='video';const url=URL.createObjectURL(cameraResultBlob);$('cameraVideoResult').src=url;$('cameraVideoResult').classList.remove('hidden');$('cameraPhotoResult').classList.add('hidden');show('cameraUseReel');show('cameraResult');$('cameraRecord').textContent='● فيديو';$('cameraRecordingTag').classList.add('hidden');note('cameraStatus','انتهى التسجيل. راجع الفيديو ثم استخدمه كريلز.','ok')};cameraRecorder.start();$('cameraRecord').textContent='■ إيقاف';$('cameraRecordingTag').classList.remove('hidden');note('cameraStatus','التسجيل يعمل. اضغط إيقاف عند الانتهاء.','ok')}catch(e){cancelAnimationFrame(cameraAnimation);note('cameraStatus','تعذر بدء التسجيل: '+e.message,'error')}
+}
+async function flipCamera(){
+ if(!cameraStream)return;cameraFacing=cameraFacing==='user'?'environment':'user';
+ cameraStream.getTracks().forEach(t=>t.stop());cameraStream=null;
+ try{cameraStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:cameraFacing,width:{ideal:1280},height:{ideal:1920}},audio:true});$('cameraPreview').srcObject=cameraStream;await $('cameraPreview').play()}
+ catch(e){cameraFacing=cameraFacing==='user'?'environment':'user';note('cameraStatus','تعذر تبديل الكاميرا: '+e.message,'error')}
+}
+$('cameraStart').onclick=startCameraStudio;$('cameraStop').onclick=stopCameraStudio;$('cameraCapture').onclick=captureCameraPhoto;$('cameraRecord').onclick=recordCameraVideo;$('cameraFlip').onclick=flipCamera;
+$('cameraFilters').onclick=e=>{const b=e.target.closest('[data-filter]');if(b)setCameraFilter(b.dataset.filter)};
+$('cameraDiscard').onclick=()=>{hide('cameraResult');cameraResultBlob=null};
+$('cameraUsePost').onclick=()=>{if(!cameraResultBlob||cameraResultType!=='image')return;const f=new File([cameraResultBlob],'nexo-camera.jpg',{type:'image/jpeg'});const dt=new DataTransfer();dt.items.add(f);$('postFiles').files=dt.files;page('home');show('composerExpanded');$('imagePreview').innerHTML='<img src="'+URL.createObjectURL(f)+'" alt="معاينة الصورة" style="width:100%;border-radius:14px">';$('postText').focus();note('postMsg','الصورة جاهزة. اكتب وصفك واضغط نشر المنشور.','ok');hide('cameraResult')};
+$('cameraUseReel').onclick=()=>{if(!cameraResultBlob||cameraResultType!=='video')return;const ext=cameraResultBlob.type.includes('mp4')?'mp4':'webm',f=new File([cameraResultBlob],'nexo-camera.'+ext,{type:cameraResultBlob.type});const dt=new DataTransfer();dt.items.add(f);$('reelFile').files=dt.files;page('reels');show('reelComposer');$('reelCaption').focus();note('reelMsg','الفيديو جاهز للنشر كريلز.','ok');hide('cameraResult')};
 document.querySelectorAll('.nav[data-page]').forEach(b=>b.onclick=()=>page(b.dataset.page));$('topCreate').onclick=()=>{page('home');show('composerExpanded');$('postText').focus();$('composerExpanded').scrollIntoView({behavior:'smooth',block:'center'})};$('topChats').onclick=()=>page('chat');$('refreshLives').onclick=loadLive;$('backLive').onclick=async()=>{if(activeLive?.streamer_id===user.id&&activeLive.status==='live'){if(!confirm('الرجوع سينهي البث المباشر. هل تريد المتابعة؟'))return;let q=await db.from('live_streams').update({status:'ended',ended_at:new Date().toISOString()}).eq('id',activeLive.id).eq('streamer_id',user.id);if(q.error){note('liveRoomMsg','تعذر إنهاء البث: '+q.error.message,'error');return}}await stopLiveKit();if(activeLive&&activeLive.streamer_id!==user.id)await db.from('live_stream_viewers').delete().eq('stream_id',activeLive.id).eq('user_id',user.id);activeLive=null;page('live')};$('startLive').onclick=createLive;$('navCreate').onclick=()=>{page('home');show('composerExpanded');$('postText').focus();$('composerExpanded').scrollIntoView({behavior:'smooth',block:'center'})};$('focusComposer').onclick=()=>{show('composerExpanded');$('postText').focus()};$('composerPhoto').onclick=()=>{show('composerExpanded');$('postFiles').click()};$('composerReel').onclick=()=>page('reels');$('composerCommunity').onclick=()=>page('communities');$('storyExplore').onclick=()=>page('explore');$('topCommunities').onclick=()=>page('communities');$('topChats').onclick=()=>page('chat');$('topSettings').onclick=()=>page('settings');$('topStore').onclick=()=>page('store');$('topProfile').onclick=()=>page('profile');
 async function ensureProfile(){let r=await db.from('profiles').select('*').eq('id',user.id).maybeSingle();if(r.error)throw r.error;if(!r.data){let uname='user_'+user.id.replace(/-/g,'').slice(0,12);r=await db.from('profiles').upsert({id:user.id,username:uname,display_name:user.email?.split('@')[0]||'عضو NEXO',bio:''},{onConflict:'id'}).select().single();if(r.error)throw r.error}profile=r.data;syncProfile()}
 function syncProfile(){let n=profile?.display_name||profile?.username||'عضو NEXO';$('helloName').textContent='أهلاً، '+n;$('miniAvatar').textContent=initial(n);$('profileAvatar').src=profile?.avatar_url||'';$('profileName').textContent=n;$('profileUsername').textContent='@'+(profile?.username||'');$('topProfile').textContent=initial(n);$('profileBio').textContent=profile?.bio||'لا توجد نبذة بعد'}

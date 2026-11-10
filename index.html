@@ -399,6 +399,144 @@ body.light .liveStats div{background:#f3f5fc;border-color:#e1e6f2}
 body.light .bubble{background:#eef1f8;color:#30364d}
 body.light .bubble.mine{background:#6d65c8;color:white}
 
+
+/* NEXO CLEAN UX — calm light interface */
+:root{
+ color-scheme:light;
+ --bg:#f5f7fb;
+ --panel:#ffffff;
+ --line:#e7eaf1;
+ --purple:#4566d8;
+ --pink:#4566d8;
+ --text:#20283a;
+ --muted:#788196;
+}
+html{background:#f5f7fb}
+body,body.light{
+ color-scheme:light;
+ background:#f5f7fb;
+ color:#20283a;
+ padding-bottom:94px;
+}
+.wrap{width:min(700px,100%);padding:12px 16px 32px}
+.top{
+ position:sticky;top:0;z-index:12;
+ margin:0 -16px 16px;padding:12px 16px;
+ background:rgba(255,255,255,.96);
+ border-bottom:1px solid #e9edf4;
+ backdrop-filter:blur(14px);
+}
+.brand{font-size:25px;letter-spacing:1.4px;background:none;color:#25324a}
+.brandDot{color:#4566d8}
+.topIcon,.topAvatar{
+ width:38px;height:38px;border-radius:12px;
+ background:#f4f6fa;border:1px solid #e8ebf2;color:#46536d;
+ box-shadow:none
+}
+.topIcon#topStore{background:#edf2ff;border-color:#dce5ff;color:#3659c7}
+.topAvatar{background:#4566d8;color:white;border:0}
+.topActions{gap:7px}
+.welcomeLine{padding:10px 2px 17px}
+.welcomeLine h1{font-size:24px;color:#20283a;margin:5px 0}
+.welcomeLine p{font-size:13px;color:#788196}
+.eyebrow{color:#6b7fc0;letter-spacing:1px;font-size:10px}
+.welcomeOrb{width:48px;height:48px;border-radius:15px;background:#edf2ff;color:#4566d8;box-shadow:none;font-size:22px}
+.card,.storiesCard,.composer,.liveCard,.tokenInfo{
+ background:#fff!important;border:1px solid #e8ebf2!important;
+ border-radius:16px!important;box-shadow:0 3px 14px rgba(31,45,75,.045)!important;
+}
+.card{padding:16px;margin:11px 0}
+.storiesCard{padding:14px;margin:0 0 11px}
+.storiesHead{color:#303a50}
+.storyRing{background:#dce5ff;padding:2px}
+.storyAvatar{background:#f1f4fa;border-color:#fff;color:#425477}
+.storyItem{color:#69758d}
+.composer{padding:13px}
+.composerTrigger{background:#f6f8fb;border:1px solid #e8edf4;color:#788196;border-radius:13px}
+.composerTools{border-color:#edf0f5}
+.toolChip,.textBtn{color:#5269b5}
+.section-title{font-size:19px;color:#263148}
+.feedHeading{padding:13px 3px 3px}
+.post{padding:15px}
+.postbody{color:#30394d;line-height:1.75}
+.postimg{border-radius:13px}
+.avatar{background:#e8edfb;color:#3d5ab6}
+.field{
+ background:#f8f9fc!important;color:#20283a!important;
+ border:1px solid #e4e8f0!important;border-radius:12px!important;
+ padding:13px 14px;box-shadow:none
+}
+.field:focus{border-color:#8ea5f2!important;box-shadow:0 0 0 3px rgba(69,102,216,.09)}
+.btn{
+ background:#4566d8!important;color:#fff!important;
+ border:1px solid #4566d8!important;border-radius:12px!important;
+ box-shadow:none!important;font-weight:700;padding:11px 16px
+}
+.btn.secondary{background:#fff!important;color:#46536d!important;border-color:#e1e6ef!important}
+.btn:disabled{opacity:.55}
+.status{background:#eef3ff;color:#3655ae}
+.status.error{background:#fff0f0;color:#a83e48}
+.status.ok{background:#eaf8f0;color:#23794b}
+.action{background:#f5f7fb!important;border:1px solid #e8ebf2!important;color:#536078!important;border-radius:10px}
+.action.active{background:#edf2ff!important;color:#3659c7!important;border-color:#dce5ff!important}
+.comment{background:#f4f6fa;color:#364158}
+.bottom{
+ left:0;right:0;z-index:20;
+ grid-template-columns:repeat(6,minmax(0,1fr));
+ gap:2px;padding:7px 5px calc(7px + env(safe-area-inset-bottom));
+ background:rgba(255,255,255,.97)!important;
+ border-top:1px solid #e7eaf1!important;
+ box-shadow:0 -4px 18px rgba(31,45,75,.06)!important;
+ backdrop-filter:blur(16px)
+}
+.nav{
+ color:#8791a4!important;background:transparent!important;
+ border:0!important;border-radius:11px!important;
+ min-width:0;padding:5px 1px 4px;gap:3px;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;
+ font-size:10px;font-weight:600
+}
+.nav .ico{font-size:19px;line-height:21px}
+.navLabel{font-size:9px;line-height:12px;white-space:nowrap}
+.nav.active{color:#3659c7!important;background:#eef2ff!important}
+.nav.active .ico{color:#3659c7}
+.reelsFeed{gap:9px}
+.reelTile{border-radius:13px;border:1px solid #e8ebf2}
+.liveHero{padding:16px 4px}
+.liveHero h1{font-size:25px;color:#20283a}
+.liveHero h1 span{color:#d64a68;text-shadow:none}
+.liveStats{gap:7px}
+.liveStats div{background:#f7f8fc;border:1px solid #e8ebf2;border-radius:13px}
+.liveStats b,.tokenBreakdown b{color:#4566d8}
+.liveCard{overflow:hidden}
+.liveThumb{background:linear-gradient(145deg,#e9eeff,#dce5fa);color:#4566d8}
+.liveCardBody h3{color:#263148}
+.liveMeta{color:#788196}
+.liveRoomBox{padding:12px}
+.liveMediaBox{background:#172033;color:#c7d0e0;border-radius:13px}
+.liveRoomTitle{color:#263148}
+.tokenBreakdown div{background:#f4f6fb;border:1px solid #e8ebf2}
+.messages{background:#f5f7fb}
+.bubble{background:#e9edf5;color:#30394d}
+.bubble.mine{background:#4566d8;color:white}
+.chatrow{border-color:#edf0f5}
+.pill{background:#edf2ff;color:#4566c8}
+.setting,.item{border-color:#edf0f5}
+.profilehero{color:#263148}
+body.light .bottom{background:rgba(255,255,255,.97);border-color:#e7eaf1}
+@media(min-width:700px){
+ .wrap{padding-top:16px}
+ .bottom{left:calc(50% - 350px);right:calc(50% - 350px);border-radius:16px 16px 0 0}
+}
+@media(max-width:370px){
+ .navLabel{font-size:8px}
+ .topActions{gap:4px}
+ .topIcon,.topAvatar{width:34px;height:34px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+
 </style></head>
 <body><main class="wrap">
 <header class="top instaTop"><div class="topActions"><button class="topIcon instaPlus" id="topCreate" aria-label="إنشاء منشور">＋</button><button class="topIcon" id="topCommunities" aria-label="المجتمعات">◎</button></div><div class="brandBlock"><div class="brand">NEXO<span class="brandDot">.</span></div></div><div class="topActions"><button class="topIcon" id="topChats" aria-label="الرسائل">♡</button><button class="topIcon" id="topStore" title="متجر NEXO">✧</button><button class="topIcon" id="topSettings">⚙</button><button class="topAvatar" id="topProfile">N</button></div><span id="connection" class="hidden">NEXO</span></header>
@@ -473,7 +611,7 @@ body.light .bubble.mine{background:#6d65c8;color:white}
 </section>
 </section><div class="footer">NEXO · تواصل، شارك، وانضم</div></main>
 <div id="storyViewer" class="storyViewer hidden"><div class="storyViewerCard"><div class="storyViewerTop"><b id="storyViewerName">قصة</b><div class="row"><button id="storyPrev" class="reelAction">‹</button><button id="storyNext" class="reelAction">›</button><button id="storyClose" class="reelAction">×</button></div></div><div id="storyViewerContent"></div><div id="storyViewerCaption" class="storyViewerCaption"></div></div></div>
-<button id="navCreate" class="hidden" type="button"></button><nav id="bottomNav" class="bottom hidden instaBottom"><button class="nav active" data-page="home" aria-label="الرئيسية"><span class="ico">⌂</span></button><button class="nav" data-page="camera" aria-label="الكاميرا"><span class="ico">◎</span></button><button class="nav" data-page="reels" aria-label="ريلز"><span class="ico">▣</span></button><button class="nav" data-page="communities" aria-label="المجتمعات"><span class="ico">♧</span></button><button class="nav" data-page="live" aria-label="البث المباشر"><span class="ico">◉</span></button><button class="nav" data-page="profile" aria-label="حسابي"><span class="ico">♙</span></button></nav>
+<button id="navCreate" class="hidden" type="button"></button><nav id="bottomNav" class="bottom hidden instaBottom"><button class="nav active" data-page="home" aria-label="الرئيسية"><span class="ico">⌂</span><span class="navLabel">الرئيسية</span></button><button class="nav" data-page="camera" aria-label="الكاميرا"><span class="ico">◎</span><span class="navLabel">الكاميرا</span></button><button class="nav" data-page="reels" aria-label="ريلز"><span class="ico">▣</span><span class="navLabel">ريلز</span></button><button class="nav" data-page="communities" aria-label="المجتمعات"><span class="ico">♧</span><span class="navLabel">المجتمعات</span></button><button class="nav" data-page="live" aria-label="البث المباشر"><span class="ico">◉</span><span class="navLabel">البث</span></button><button class="nav" data-page="profile" aria-label="حسابي"><span class="ico">♙</span><span class="navLabel">حسابي</span></button></nav>
 <script>
 window.addEventListener('error',e=>{const m=document.getElementById('authMsg');if(m){m.textContent='تعذر تشغيل التطبيق: '+(e.message||'خطأ غير معروف');m.className='status error'}});
 try {

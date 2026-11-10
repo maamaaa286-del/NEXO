@@ -101,13 +101,14 @@ async function connectLiveKit(role){
     const {Room,RoomEvent,Track}=window.LivekitClient;
     const room=new Room({adaptiveStream:true,dynacast:true});liveRoomConnection=room;
     room.on(RoomEvent.TrackSubscribed,(track)=>{
-      const el=track.attach();el.className=track.kind===Track.Kind.Video?'livePlayer':'liveAudio';$('liveMedia').appendChild(el);
+      if(!$('liveMedia').querySelector('video'))$('liveMedia').textContent='';const el=track.attach();el.className=track.kind===Track.Kind.Video?'livePlayer':'liveAudio';$('liveMedia').appendChild(el);
       const placeholder=$('liveMedia').querySelector(':scope > span');if(placeholder)placeholder.remove();
     });
     room.on(RoomEvent.TrackUnsubscribed,(track)=>track.detach().forEach(el=>el.remove()));
     room.on(RoomEvent.Disconnected,()=>{if(liveRoomConnection===room)liveRoomConnection=null});
     await room.connect(serverUrl,token);
     if(role==='publisher'){
+      $('liveMedia').textContent='';
       await room.localParticipant.enableCameraAndMicrophone();
       for(const pub of room.localParticipant.videoTrackPublications.values()){if(pub.track){const el=pub.track.attach();el.className='livePlayer';$('liveMedia').appendChild(el)}}
       note('liveRoomMsg','أنت الآن تبث بالكاميرا والمايك. اترك صفحة البث مفتوحة أثناء البث.','ok');

@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
@@ -6,107 +7,484 @@
 <title>NEXO</title>
 <style>
 :root{color-scheme:dark;--bg:#090912;--panel:#151522;--line:#29293d;--purple:#8b5cf6;--muted:#a7a7bc}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#20133b 0,#090912 45%);color:#f7f4ff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
-main{max-width:720px;margin:auto;padding:22px 16px 60px}.brand{font-size:34px;font-weight:900;letter-spacing:3px;color:#c4a7ff;text-align:center;margin:12px}
-.sub{text-align:center;color:var(--muted);margin-bottom:24px}.card{background:#151522eF;border:1px solid var(--line);border-radius:18px;padding:18px;margin:14px 0;box-shadow:0 12px 35px #0005}
-h2{font-size:19px;margin:0 0 14px}label{display:block;color:#d6c9f7;font-size:14px;margin:12px 0 6px}
-input,textarea{width:100%;background:#0d0d17;color:white;border:1px solid #38364e;border-radius:11px;padding:13px;font-size:15px;outline:none}textarea{min-height:90px;resize:vertical}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at top,#20133b 0,#090912 45%);color:#f7f4ff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
+main{max-width:720px;margin:auto;padding:22px 16px 60px}
+.brand{font-size:34px;font-weight:900;letter-spacing:3px;color:#c4a7ff;text-align:center;margin:12px}
+.sub{text-align:center;color:var(--muted);margin-bottom:24px}
+.card{background:#151522ef;border:1px solid var(--line);border-radius:18px;padding:18px;margin:14px 0;box-shadow:0 12px 35px #0005}
+h2{font-size:19px;margin:0 0 14px}
+label{display:block;color:#d6c9f7;font-size:14px;margin:12px 0 6px}
+input,textarea{width:100%;background:#0d0d17;color:white;border:1px solid #38364e;border-radius:11px;padding:13px;font-size:15px;outline:none}
+textarea{min-height:90px;resize:vertical}
 button{border:0;border-radius:11px;background:linear-gradient(100deg,#7c3aed,#a855f7);color:white;padding:12px 17px;font-weight:700;font-size:15px;cursor:pointer;margin-top:12px}
-button.secondary{background:#29263a;border:1px solid #45405c}button:disabled{opacity:.5}
-.row{display:flex;gap:8px;flex-wrap:wrap}.row button{flex:1}.muted{color:var(--muted);font-size:13px;line-height:1.7}.hidden{display:none!important}.post{white-space:pre-wrap;line-height:1.7}.meta{font-size:12px;color:var(--muted);margin-bottom:8px}.status{padding:10px;border-radius:10px;background:#211b32;color:#d9c7ff;font-size:13px;margin-top:12px;white-space:pre-wrap}.tabs{display:flex;gap:8px;position:sticky;top:0;background:#090912eF;padding:8px 0;z-index:2}.tabs button{flex:1;margin:0}.empty{text-align:center;color:var(--muted);padding:20px}
+button.secondary{background:#29263a;border:1px solid #45405c}
+button:disabled{opacity:.5}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.row button{flex:1}
+.muted{color:var(--muted);font-size:13px;line-height:1.7}
+.hidden{display:none!important}
+.post{white-space:pre-wrap;line-height:1.7}
+.meta{font-size:12px;color:var(--muted);margin-bottom:8px}
+.status{padding:10px;border-radius:10px;background:#211b32;color:#d9c7ff;font-size:13px;margin-top:12px;white-space:pre-wrap}
+.tabs{display:flex;gap:8px;position:sticky;top:0;background:#090912ef;padding:8px 0;z-index:2}
+.tabs button{flex:1;margin:0}
+.empty{text-align:center;color:var(--muted);padding:20px}
 </style>
 </head>
 <body>
 <main>
-<div class="brand">NEXO</div><div class="sub">مساحتك للتواصل والمجتمعات</div>
+
+<div class="brand">NEXO</div>
+<div class="sub">مساحتك للتواصل والمجتمعات</div>
+
 <section id="setup" class="card">
 <h2>ربط مشروع NEXO</h2>
 <p class="muted">أدخل بيانات مشروع Supabase لربط التطبيق بقاعدة البيانات.</p>
-<label>Project URL</label><input id="url" type="url" placeholder="https://xxxxx.supabase.co" autocomplete="url">
-<label>Publishable Key</label><input id="key" type="password" placeholder="sb_publishable_..." autocomplete="off">
+
+<label>Project URL</label>
+<input id="url" type="url" placeholder="https://xxxxx.supabase.co" autocomplete="url">
+
+<label>Publishable Key</label>
+<input id="key" type="password" placeholder="sb_publishable_..." autocomplete="off">
+
 <button id="connect">اتصال بالمشروع</button>
 <div id="setupStatus" class="status">أدخل رابط المشروع والمفتاح العام ثم اضغط اتصال.</div>
 <p class="muted">استخدم المفتاح العام Publishable فقط. لا تضع مفتاح Secret أو service_role هنا.</p>
 </section>
+
 <section id="auth" class="card hidden">
 <h2>تسجيل الدخول أو إنشاء حساب</h2>
-<label>البريد الإلكتروني</label><input id="email" type="email" placeholder="name@example.com">
-<label>كلمة المرور</label><input id="password" type="password" placeholder="كلمة المرور">
-<div class="row"><button id="signup">إنشاء حساب</button><button class="secondary" id="login">دخول</button></div>
+
+<label>البريد الإلكتروني</label>
+<input id="email" type="email" placeholder="name@example.com" autocomplete="email">
+
+<label>كلمة المرور</label>
+<input id="password" type="password" placeholder="كلمة المرور" autocomplete="current-password">
+
+<div class="row">
+<button id="signup">إنشاء حساب</button>
+<button class="secondary" id="login">دخول</button>
+</div>
+
 <div id="authStatus" class="status"></div>
 </section>
+
 <section id="app" class="hidden">
-<div class="card"><div class="row"><div style="flex:1"><b id="welcome">أهلاً بك في NEXO</b><div class="muted" id="userEmail"></div></div><button class="secondary" id="logout">خروج</button></div></div>
-<div class="tabs"><button data-tab="feed">المنشورات</button><button data-tab="communities">المجتمعات</button></div>
+
+<div class="card">
+<div class="row">
+<div style="flex:1">
+<b id="welcome">أهلاً بك في NEXO</b>
+<div class="muted" id="userEmail"></div>
+</div>
+<button class="secondary" id="logout">خروج</button>
+</div>
+</div>
+
+<div class="tabs">
+<button data-tab="feed">المنشورات</button>
+<button data-tab="communities">المجتمعات</button>
+</div>
+
 <div id="feed">
-<div class="card"><h2>اكتب منشوراً</h2><textarea id="postText" placeholder="شو حاب تشارك؟"></textarea><button id="publish">نشر</button><div id="postStatus" class="status hidden"></div></div>
+<div class="card">
+<h2>اكتب منشوراً</h2>
+<textarea id="postText" placeholder="شو حاب تشارك؟"></textarea>
+<button id="publish">نشر</button>
+<div id="postStatus" class="status hidden"></div>
+</div>
 <div id="posts"></div>
 </div>
-<div id="communities" class="hidden"><div class="card"><h2>المجتمعات</h2><div id="communityList" class="muted">لا توجد مجتمعات معروضة حالياً.</div></div></div>
+
+<div id="communities" class="hidden">
+<div class="card">
+<h2>المجتمعات</h2>
+<div id="communityList" class="muted">لا توجد مجتمعات بعد.</div>
+</div>
+</div>
+
 </section>
 </main>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
 (() => {
- let supabase=null, currentUser=null;
- const $=id=>document.getElementById(id);
- const msg=(id,text)=>{$(id).textContent=text;$(id).classList.remove('hidden')};
- const show=(id,on)=>$(id).classList.toggle('hidden',!on);
- $('connect').onclick=async()=>{
-  const url=$('url').value.trim(),key=$('key').value.trim();
-  if(!url||!key){$('setupStatus').textContent='أدخل رابط المشروع والمفتاح العام أولاً.';return}
-  if(!window.supabase){$('setupStatus').textContent='تعذر تحميل مكتبة الاتصال. تأكد من الإنترنت ثم أعد فتح الصفحة.';return}
-  try{
-   supabase=window.supabase.createClient(url,key);
-   const {data,error}=await supabase.auth.getSession();
-   if(error)throw error;
-   localStorage.setItem('nexo_url',url);localStorage.setItem('nexo_key',key);
-   $('setupStatus').textContent='تم الاتصال بإعدادات المشروع. سجّل الدخول أو أنشئ حساباً.';
-   show('auth',true);show('app',false);
-   if(data.session)await enterApp(data.session.user);
-  }catch(e){$('setupStatus').textContent='تعذر الاتصال: '+e.message}
+ let supabase = null;
+ let currentUser = null;
+
+ const $ = id => document.getElementById(id);
+
+ const msg = (id,text) => {
+  $(id).textContent = text;
+  $(id).classList.remove('hidden');
  };
- $('url').value=localStorage.getItem('nexo_url')||'';
- $('key').value=localStorage.getItem('nexo_key')||'';
- $('signup').onclick=async()=>{
-  if(!supabase)return;
-  const {data,error}=await supabase.auth.signUp({email:$('email').value.trim(),password:$('password').value});
-  msg('authStatus',error?'خطأ: '+error.message:(data.session?'تم إنشاء الحساب.':'تم إرسال رسالة تأكيد إلى بريدك إذا كان تأكيد البريد مفعّلاً.'));
-  if(data.session)await enterApp(data.user);
+
+ const show = (id,on) => {
+  $(id).classList.toggle('hidden',!on);
  };
- $('login').onclick=async()=>{
-  if(!supabase)return;
-  const {data,error}=await supabase.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});
-  msg('authStatus',error?'خطأ: '+error.message:'تم تسجيل الدخول.');
-  if(data.user)await enterApp(data.user);
+
+ function normalizeProjectUrl(rawUrl){
+  const parsed = new URL(rawUrl.trim());
+
+  if(parsed.protocol !== 'https:' && parsed.hostname !== 'localhost'){
+   throw new Error('يجب أن يبدأ رابط المشروع بـ https://');
+  }
+
+  if(!parsed.hostname){
+   throw new Error('رابط المشروع غير صحيح.');
+  }
+
+  // استخدام أصل الرابط فقط وإزالة أي مسار إضافي مثل rest/v1
+  return parsed.origin;
+ }
+
+ $('url').value = localStorage.getItem('nexo_url') || '';
+ $('key').value = localStorage.getItem('nexo_key') || '';
+
+ $('connect').onclick = async () => {
+  const rawUrl = $('url').value.trim();
+  const key = $('key').value.trim();
+
+  if(!rawUrl || !key){
+   msg('setupStatus','أدخل رابط المشروع والمفتاح العام أولاً.');
+   return;
+  }
+
+  if(!window.supabase){
+   msg('setupStatus','تعذر تحميل مكتبة Supabase. تأكد من الإنترنت وأعد فتح الصفحة.');
+   return;
+  }
+
+  try {
+   const projectUrl = normalizeProjectUrl(rawUrl);
+
+   supabase = window.supabase.createClient(projectUrl,key,{
+    auth:{
+     persistSession:true,
+     autoRefreshToken:true,
+     detectSessionInUrl:true
+    }
+   });
+
+   const {data,error} = await supabase.auth.getSession();
+
+   if(error) throw error;
+
+   localStorage.setItem('nexo_url',projectUrl);
+   localStorage.setItem('nexo_key',key);
+
+   $('url').value = projectUrl;
+
+   msg('setupStatus','تم الاتصال بإعدادات المشروع. سجّل الدخول أو أنشئ حساباً.');
+
+   show('auth',true);
+   show('app',false);
+
+   if(data.session){
+    await enterApp(data.session.user);
+   }
+
+  } catch(e) {
+   msg('setupStatus','تعذر الاتصال: '+e.message);
+  }
  };
- async function enterApp(user){currentUser=user;show('auth',false);show('setup',false);show('app',true);$('userEmail').textContent=user.email||'';await loadPosts();await loadCommunities()}
- $('logout').onclick=async()=>{await supabase.auth.signOut();currentUser=null;show('app',false);show('auth',true);show('setup',true)};
- $('publish').onclick=async()=>{
-  const content=$('postText').value.trim();if(!content)return msg('postStatus','اكتب شيئاً قبل النشر.');
-  const {error}=await supabase.from('posts').insert({user_id:currentUser.id,content});
-  if(error)return msg('postStatus','تعذر النشر: '+error.message);
-  $('postText').value='';msg('postStatus','تم نشر المنشور.');await loadPosts();
+
+ $('signup').onclick = async () => {
+  if(!supabase){
+   msg('authStatus','اضغط اتصال بالمشروع أولاً.');
+   return;
+  }
+
+  const email = $('email').value.trim();
+  const password = $('password').value;
+
+  if(!email || !password){
+   msg('authStatus','أدخل البريد الإلكتروني وكلمة المرور.');
+   return;
+  }
+
+  if(password.length < 6){
+   msg('authStatus','كلمة المرور يجب أن تكون 6 أحرف على الأقل.');
+   return;
+  }
+
+  const button = $('signup');
+  button.disabled = true;
+
+  try {
+   msg('authStatus','جاري إنشاء الحساب...');
+
+   const {data,error} = await supabase.auth.signUp({
+    email:email,
+    password:password
+   });
+
+   if(error){
+    console.error('NEXO SIGNUP ERROR:',error);
+    msg('authStatus','خطأ التسجيل: '+error.message);
+    return;
+   }
+
+   if(data.session && data.user){
+    msg('authStatus','تم إنشاء الحساب بنجاح.');
+    await enterApp(data.user);
+   } else {
+    msg('authStatus','تم إرسال طلب التسجيل. افحص بريدك الإلكتروني إذا كان تأكيد البريد مفعّلاً.');
+   }
+
+  } catch(e) {
+   console.error('NEXO SIGNUP DETAILS:',e);
+   msg('authStatus','خطأ غير متوقع أثناء التسجيل: '+e.message);
+  } finally {
+   button.disabled = false;
+  }
  };
+
+ $('login').onclick = async () => {
+  if(!supabase){
+   msg('authStatus','اضغط اتصال بالمشروع أولاً.');
+   return;
+  }
+
+  const email = $('email').value.trim();
+  const password = $('password').value;
+
+  if(!email || !password){
+   msg('authStatus','أدخل البريد الإلكتروني وكلمة المرور.');
+   return;
+  }
+
+  const button = $('login');
+  button.disabled = true;
+
+  try {
+   msg('authStatus','جاري تسجيل الدخول...');
+
+   const {data,error} = await supabase.auth.signInWithPassword({
+    email:email,
+    password:password
+   });
+
+   if(error){
+    msg('authStatus','تعذر تسجيل الدخول: '+error.message);
+    return;
+   }
+
+   msg('authStatus','تم تسجيل الدخول بنجاح.');
+
+   if(data.user){
+    await enterApp(data.user);
+   }
+
+  } catch(e) {
+   msg('authStatus','خطأ أثناء الدخول: '+e.message);
+  } finally {
+   button.disabled = false;
+  }
+ };
+
+ async function enterApp(user){
+  currentUser = user;
+
+  show('auth',false);
+  show('setup',false);
+  show('app',true);
+
+  $('userEmail').textContent = user.email || '';
+
+  await loadPosts();
+  await loadCommunities();
+ }
+
+ $('logout').onclick = async () => {
+  if(!supabase) return;
+
+  try {
+   await supabase.auth.signOut();
+  } catch(e) {
+   console.error(e);
+  }
+
+  currentUser = null;
+
+  show('app',false);
+  show('auth',true);
+  show('setup',true);
+ };
+
+ $('publish').onclick = async () => {
+  if(!currentUser){
+   msg('postStatus','سجّل الدخول أولاً.');
+   return;
+  }
+
+  const content = $('postText').value.trim();
+
+  if(!content){
+   msg('postStatus','اكتب شيئاً قبل النشر.');
+   return;
+  }
+
+  try {
+   const {error} = await supabase.from('posts').insert({
+    user_id:currentUser.id,
+    content:content
+   });
+
+   if(error){
+    msg('postStatus','تعذر النشر: '+error.message);
+    return;
+   }
+
+   $('postText').value = '';
+   msg('postStatus','تم نشر المنشور.');
+
+   await loadPosts();
+
+  } catch(e) {
+   msg('postStatus','خطأ أثناء النشر: '+e.message);
+  }
+ };
+
  async function loadPosts(){
-  const root=$('posts');root.innerHTML='<div class="empty">جاري تحميل المنشورات...</div>';
-  const {data,error}=await supabase.from('posts').select('id,user_id,content,created_at').order('created_at',{ascending:false}).limit(50);
-  if(error){root.innerHTML='<div class="card muted">تعذر تحميل المنشورات: '+escapeHtml(error.message)+'</div>';return}
-  if(!data.length){root.innerHTML='<div class="card empty">ما في منشورات لحد الآن. كن أول من ينشر!</div>';return}
-  root.innerHTML='';
-  for(const p of data){
-   const card=document.createElement('div');card.className='card';
-   const date=new Date(p.created_at).toLocaleString('ar');
-   card.innerHTML='<div class="meta">'+escapeHtml(date)+'</div><div class="post">'+escapeHtml(p.content)+'</div><div class="row"><button class="secondary like">إعجاب</button><button class="secondary commentBtn">تعليق</button></div><div class="comments muted"></div>';
-   card.querySelector('.like').onclick=async()=>{const {error}=await supabase.from('likes').upsert({post_id:p.id,user_id:currentUser.id},{onConflict:'post_id,user_id'});if(error)alert('تعذر تسجيل الإعجاب: '+error.message);else card.querySelector('.like').textContent='تم الإعجاب'};
-   card.querySelector('.commentBtn').onclick=async()=>{const text=prompt('اكتب تعليقك');if(!text||!text.trim())return;const {error}=await supabase.from('comments').insert({post_id:p.id,user_id:currentUser.id,content:text.trim()});if(error)alert('تعذر إضافة التعليق: '+error.message);else loadComments(p.id,card.querySelector('.comments'))};
-   root.appendChild(card);await loadComments(p.id,card.querySelector('.comments'));
+  const root = $('posts');
+
+  root.innerHTML = '<div class="empty">جاري تحميل المنشورات...</div>';
+
+  try {
+   const {data,error} = await supabase
+    .from('posts')
+    .select('id,user_id,content,created_at')
+    .order('created_at',{ascending:false})
+    .limit(50);
+
+   if(error){
+    root.innerHTML = '<div class="card muted">تعذر تحميل المنشورات: '+escapeHtml(error.message)+'</div>';
+    return;
+   }
+
+   if(!data || !data.length){
+    root.innerHTML = '<div class="card empty">ما في منشورات لحد الآن. كن أول من ينشر!</div>';
+    return;
+   }
+
+   root.innerHTML = '';
+
+   for(const p of data){
+    const card = document.createElement('div');
+    card.className = 'card';
+
+    const date = p.created_at ? new Date(p.created_at).toLocaleString('ar') : '';
+
+    card.innerHTML =
+     '<div class="meta">'+escapeHtml(date)+'</div>'+
+     '<div class="post">'+escapeHtml(p.content)+'</div>'+
+     '<div class="row">'+
+     '<button class="secondary like">إعجاب</button>'+
+     '<button class="secondary commentBtn">تعليق</button>'+
+     '</div>'+
+     '<div class="comments muted"></div>';
+
+    card.querySelector('.like').onclick = async () => {
+     if(!currentUser) return;
+
+     const {error} = await supabase.from('likes').upsert({
+      post_id:p.id,
+      user_id:currentUser.id
+     },{onConflict:'post_id,user_id'});
+
+     if(error){
+      alert('تعذر تسجيل الإعجاب: '+error.message);
+     } else {
+      card.querySelector('.like').textContent = 'تم الإعجاب';
+     }
+    };
+
+    card.querySelector('.commentBtn').onclick = async () => {
+     if(!currentUser) return;
+
+     const text = prompt('اكتب تعليقك');
+
+     if(!text || !text.trim()) return;
+
+     const {error} = await supabase.from('comments').insert({
+      post_id:p.id,
+      user_id:currentUser.id,
+      content:text.trim()
+     });
+
+     if(error){
+      alert('تعذر إضافة التعليق: '+error.message);
+     } else {
+      await loadComments(p.id,card.querySelector('.comments'));
+     }
+    };
+
+    root.appendChild(card);
+
+    await loadComments(p.id,card.querySelector('.comments'));
+   }
+
+  } catch(e) {
+   root.innerHTML = '<div class="card muted">حدث خطأ: '+escapeHtml(e.message)+'</div>';
   }
  }
- async function loadComments(postId,el){const {data,error}=await supabase.from('comments').select('content,created_at').eq('post_id',postId).order('created_at');if(error){el.textContent='تعذر تحميل التعليقات';return}el.textContent=data.length?data.map(c=>'• '+c.content).join('\n'):'لا توجد تعليقات بعد.'}
- async function loadCommunities(){const root=$('communityList');const {data,error}=await supabase.from('communities').select('id,name,description').order('created_at',{ascending:false});if(error){root.textContent='تعذر تحميل المجتمعات: '+error.message;return}root.textContent=data.length?data.map(c=>c.name+(c.description?' — '+c.description:'')).join('\n'):'لا توجد مجتمعات بعد.'}
- function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
- document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{show('feed',b.dataset.tab==='feed');show('communities',b.dataset.tab==='communities')});
+
+ async function loadComments(postId,el){
+  const {data,error} = await supabase
+   .from('comments')
+   .select('content,created_at')
+   .eq('post_id',postId)
+   .order('created_at');
+
+  if(error){
+   el.textContent = 'تعذر تحميل التعليقات: '+error.message;
+   return;
+  }
+
+  el.textContent = data && data.length
+   ? data.map(c=>'• '+c.content).join('\n')
+   : 'لا توجد تعليقات بعد.';
+ }
+
+ async function loadCommunities(){
+  const root = $('communityList');
+
+  const {data,error} = await supabase
+   .from('communities')
+   .select('id,name,description')
+   .order('created_at',{ascending:false});
+
+  if(error){
+   root.textContent = 'تعذر تحميل المجتمعات: '+error.message;
+   return;
+  }
+
+  root.textContent = data && data.length
+   ? data.map(c=>c.name+(c.description?' — '+c.description:'')).join('\n')
+   : 'لا توجد مجتمعات بعد.';
+ }
+
+ function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g,c=>({
+   '&':'&amp;',
+   '<':'&lt;',
+   '>':'&gt;',
+   '"':'&quot;',
+   "'":'&#39;'
+  }[c]));
+ }
+
+ document.querySelectorAll('[data-tab]').forEach(b=>{
+  b.onclick = () => {
+   show('feed',b.dataset.tab==='feed');
+   show('communities',b.dataset.tab==='communities');
+  };
+ });
+
 })();
 </script>
-</body></html>
+</body>
+</html>

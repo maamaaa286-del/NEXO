@@ -586,9 +586,84 @@ body.light .bottom{background:rgba(255,255,255,.97);border-color:#e7eaf1}
 .tokenBreakdown b{font-size:20px!important}
 @media(max-width:390px){.liveHero{padding:17px!important}.liveHero h1{font-size:25px!important}.liveHeroMark{width:52px;height:52px;border-radius:16px}.liveStats span{font-size:9px!important}.liveRoomActions{grid-template-columns:1fr!important}.liveRoomActions .field{grid-column:auto}}
 @media(prefers-reduced-motion:no-preference){.liveCard{transition:transform .18s ease,box-shadow .18s ease}.liveCard:active{transform:scale(.99)}}
+
+/* NEXO PREMIUM SYSTEM — unified light and dark themes */
+:root{
+ --bg:#0b1020;--panel:#121a2b;--panel-2:#172238;--line:#283650;
+ --text:#edf3ff;--muted:#9aa9c0;--accent:#829cff;--accent-strong:#617ff0;
+ --accent-soft:#202e50;--field:#0d1627;--shadow:0 14px 38px rgba(0,0,0,.22);
+ --surface-glass:rgba(12,18,32,.92);--nav-text:#9eabc2;
+}
+body{background:radial-gradient(ellipse at 50% -18%,#24365d 0,transparent 43%),var(--bg)!important;color:var(--text);transition:background .2s ease,color .2s ease}
+body.light{
+ --bg:#f5f7fc;--panel:#fff;--panel-2:#f0f3fa;--line:#e3e8f1;
+ --text:#202b42;--muted:#738099;--accent:#5475dc;--accent-strong:#3f60c7;
+ --accent-soft:#edf2ff;--field:#f7f9fd;--shadow:0 8px 28px rgba(38,56,91,.07);
+ --surface-glass:rgba(255,255,255,.94);--nav-text:#7e8aa1;
+ background:radial-gradient(ellipse at 50% -18%,#e5ebff 0,transparent 43%),var(--bg)!important;
+}
+.top{background:var(--surface-glass)!important;border-color:var(--line)!important;box-shadow:0 5px 22px rgba(20,35,65,.05)}
+body:not(.light) .top{border-color:#283650!important}
+.brand{background:linear-gradient(100deg,var(--text),#9eb2ff 65%,#829cff)!important;color:transparent!important;background-clip:text!important}
+.topIcon,.topAvatar{background:var(--panel-2)!important;border:1px solid var(--line)!important;color:var(--text)!important;box-shadow:none!important}
+.themeQuick{font-size:18px}
+.card,.storiesCard,.composer,.post,.liveCard,.tokenInfo,.liveRoomBox{
+ background:var(--panel)!important;border:1px solid var(--line)!important;
+ color:var(--text);box-shadow:var(--shadow)!important;
+}
+body.light .card,body.light .storiesCard,body.light .composer,body.light .post,body.light .liveCard,body.light .tokenInfo,body.light .liveRoomBox{background:var(--panel)!important}
+.welcomeLine{background:linear-gradient(115deg,var(--panel-2),var(--panel))!important;border:1px solid var(--line)!important;box-shadow:var(--shadow)!important}
+.welcomeLine h1,.section-title,.liveHero h1,.liveRoomTitle,.liveCardBody h3{color:var(--text)!important}
+.welcomeLine p,.muted,.liveHero p,.liveMeta{color:var(--muted)!important}
+.eyebrow{color:var(--accent)!important}
+.welcomeOrb,.liveCreateIcon{background:var(--accent-soft)!important;color:var(--accent)!important;box-shadow:none!important}
+.storiesHead,.storyItem{color:var(--text)}
+.storyRing{background:linear-gradient(135deg,var(--accent),#a9baff)!important}
+.storyAvatar{background:var(--panel-2)!important;border-color:var(--panel)!important;color:var(--accent)!important}
+.composerTrigger,.field{background:var(--field)!important;color:var(--text)!important;border:1px solid var(--line)!important}
+.field::placeholder,.composerTrigger{color:var(--muted)!important}
+.field:focus{border-color:var(--accent)!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 16%,transparent)!important}
+.btn{background:var(--accent-strong)!important;border:1px solid var(--accent-strong)!important;color:#fff!important;box-shadow:none!important}
+.btn.secondary{background:var(--panel-2)!important;border-color:var(--line)!important;color:var(--text)!important}
+.action,.toolChip,.textBtn{background:var(--panel-2)!important;border:1px solid var(--line)!important;color:var(--text)!important}
+.action.active{background:var(--accent-soft)!important;border-color:var(--accent)!important;color:var(--accent)!important}
+.comment{background:var(--panel-2)!important;color:var(--text)!important}
+.bottom{background:var(--surface-glass)!important;border:1px solid var(--line)!important;box-shadow:0 -8px 28px rgba(20,35,65,.09)!important}
+.nav{color:var(--nav-text)!important}
+.nav.active{background:var(--accent-soft)!important;color:var(--accent-strong)!important}
+.liveHero{background:linear-gradient(135deg,var(--panel-2),var(--panel))!important;border-color:var(--line)!important;box-shadow:var(--shadow)!important}
+.liveHeroKicker,.liveCreateKicker{color:var(--accent)!important}
+.liveHeroMark{background:var(--panel)!important;border-color:var(--line)!important;color:var(--accent)!important}
+.liveHero h1 span{background:var(--accent-soft)!important;color:var(--accent)!important}
+.liveStats div,.tokenBreakdown div{background:var(--panel-2)!important;border-color:var(--line)!important}
+.liveStats b,.tokenBreakdown b{color:var(--accent)!important}
+.liveStats span,.tokenBreakdown span{color:var(--muted)!important}
+.liveThumb,.liveReady .liveThumb{background:linear-gradient(135deg,var(--accent-soft),var(--panel-2))!important;color:var(--accent)!important}
+.liveThumb>span:first-child{background:var(--panel)!important;border-color:var(--line)!important;color:var(--accent)!important}
+.liveCardBody .muted{color:var(--muted)!important}
+.liveMeta{border-color:var(--line)!important}
+.liveEmpty{background:var(--panel-2)!important;border-color:var(--line)!important;color:var(--muted)!important}
+.liveMediaBox{background:#080d18!important;color:#d6e0f2!important}
+.messages{background:var(--panel-2)!important}
+.bubble{background:var(--panel-2)!important;color:var(--text)!important}
+.bubble.mine{background:var(--accent-strong)!important;color:#fff!important}
+.chatrow,.item,.setting{border-color:var(--line)!important}
+.pill{background:var(--accent-soft)!important;color:var(--accent)!important}
+.status{background:var(--accent-soft)!important;color:var(--accent)!important}
+.status.error{background:#48232c!important;color:#ffd2d9!important}
+.status.ok{background:#173c30!important;color:#b8f2d7!important}
+.profileMediaTile,.reelTile{border-color:var(--line)!important}
+#settingsPage h3{color:var(--text)}
+.switch{accent-color:var(--accent-strong)}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 65%,transparent);outline-offset:2px}
+button,.card,.field{transition:background-color .18s ease,border-color .18s ease,color .18s ease}
+@media(hover:hover){.topIcon:hover,.nav:hover,.action:hover{filter:brightness(1.08)}.btn:not(:disabled):hover{filter:brightness(1.08)}}
+@media(max-width:390px){.wrap{padding-inline:12px}.top{margin-inline:-12px;padding-inline:12px}.topActions{gap:5px}.topIcon,.topAvatar{width:36px;height:36px}.welcomeLine{padding:16px 13px}.welcomeLine h1{font-size:23px}.storiesHead{gap:8px;flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){body,button,.card,.field{transition:none!important}}
+
 </style></head>
-<body><main class="wrap">
-<header class="top instaTop"><div class="topActions"><button class="topIcon instaPlus" id="topCreate" aria-label="إنشاء منشور">＋</button><button class="topIcon" id="topCommunities" aria-label="المجتمعات">◎</button></div><div class="brandBlock"><div class="brand">NEXO<span class="brandDot">.</span></div></div><div class="topActions"><button class="topIcon" id="topChats" aria-label="الرسائل">♡</button><button class="topIcon" id="topStore" title="متجر NEXO">✧</button><button class="topIcon" id="topSettings">⚙</button><button class="topAvatar" id="topProfile">N</button></div><span id="connection" class="hidden">NEXO</span></header>
+<body><script>try{document.body.classList.toggle("light",localStorage.getItem("nexo-theme")==="light")}catch(e){}</script><main class="wrap">
+<header class="top instaTop"><div class="topActions"><button class="topIcon instaPlus" id="topCreate" aria-label="إنشاء منشور">＋</button><button class="topIcon" id="topCommunities" aria-label="المجتمعات">◎</button></div><div class="brandBlock"><div class="brand">NEXO<span class="brandDot">.</span></div></div><div class="topActions"><button class="topIcon" id="topChats" aria-label="الرسائل">♡</button><button class="topIcon themeQuick" id="themeQuickToggle" type="button" aria-label="تبديل المظهر" aria-pressed="false" title="تبديل الوضع">☾</button><button class="topIcon" id="topStore" title="متجر NEXO">✧</button><button class="topIcon" id="topSettings">⚙</button><button class="topAvatar" id="topProfile">N</button></div><span id="connection" class="hidden">NEXO</span></header>
 <section id="authView" class="card auth"><h1>أهلاً بك في NEXO</h1><p class="muted">سجّل دخولك وابدأ التواصل</p><input id="email" class="field" type="email" autocomplete="email" placeholder="البريد الإلكتروني"><input id="password" class="field" type="password" autocomplete="current-password" placeholder="كلمة المرور"><button id="loginBtn" class="btn wide">تسجيل الدخول</button><button id="signupBtn" class="btn secondary wide">إنشاء حساب جديد</button><button id="resetPassword" class="textBtn wide" type="button">نسيت كلمة المرور؟</button><div id="passwordResetPanel" class="hidden"><h3>تعيين كلمة مرور جديدة</h3><p class="muted small">اكتب كلمة مرور جديدة لحسابك.</p><input id="newPassword" class="field" type="password" autocomplete="new-password" minlength="8" placeholder="كلمة المرور الجديدة"><button id="saveNewPassword" class="btn wide">حفظ كلمة المرور الجديدة</button></div><div id="authMsg" class="status hidden"></div></section>
 <section id="appView" class="hidden">
 <section id="homePage">
@@ -1065,8 +1140,19 @@ $('requestPromotion').onclick=async()=>{
  finally{button.disabled=false}
 };
 
-function loadSettings(){$('settingsEmail').textContent=user.email||'—';$('themeToggle').checked=localStorage.getItem('nexo-theme')==='light';document.body.classList.toggle('light',$('themeToggle').checked);$('emailVisibility').checked=localStorage.getItem('nexo-email-visible')==='true';$('confirmDelete').checked=localStorage.getItem('nexo-confirm-delete')!=='false'}
-$('themeToggle').onchange=()=>{document.body.classList.toggle('light',$('themeToggle').checked);localStorage.setItem('nexo-theme',$('themeToggle').checked?'light':'dark')};$('emailVisibility').onchange=()=>localStorage.setItem('nexo-email-visible',$('emailVisibility').checked?'true':'false');$('confirmDelete').onchange=()=>localStorage.setItem('nexo-confirm-delete',$('confirmDelete').checked?'true':'false');Object.defineProperty($('confirmDelete'),'checked',{get(){return localStorage.getItem('nexo-confirm-delete')!=='false'},set(v){localStorage.setItem('nexo-confirm-delete',v?'true':'false')}});$('settingsProfile').onclick=()=>page('profile');
+function applyTheme(theme,save=true){
+ const light=theme==='light';
+ document.body.classList.toggle('light',light);
+ document.documentElement.style.colorScheme=light?'light':'dark';
+ const quick=$('themeQuickToggle');
+ if(quick){quick.textContent=light?'☀':'☾';quick.setAttribute('aria-pressed',String(light));quick.title=light?'التبديل إلى الوضع الداكن':'التبديل إلى الوضع الفاتح';quick.setAttribute('aria-label',quick.title)}
+ const toggle=$('themeToggle');if(toggle)toggle.checked=light;
+ const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.content=light?'#f7f8fc':'#0b1020';
+ if(save)localStorage.setItem('nexo-theme',light?'light':'dark');
+}
+function loadSettings(){$('settingsEmail').textContent=user.email||'—';applyTheme(localStorage.getItem('nexo-theme')==='light'?'light':'dark',false);$('emailVisibility').checked=localStorage.getItem('nexo-email-visible')==='true';$('confirmDelete').checked=localStorage.getItem('nexo-confirm-delete')!=='false'}
+$('themeToggle').onchange=()=>applyTheme($('themeToggle').checked?'light':'dark');
+$('themeQuickToggle').onclick=()=>applyTheme(document.body.classList.contains('light')?'dark':'light');$('emailVisibility').onchange=()=>localStorage.setItem('nexo-email-visible',$('emailVisibility').checked?'true':'false');$('confirmDelete').onchange=()=>localStorage.setItem('nexo-confirm-delete',$('confirmDelete').checked?'true':'false');Object.defineProperty($('confirmDelete'),'checked',{get(){return localStorage.getItem('nexo-confirm-delete')!=='false'},set(v){localStorage.setItem('nexo-confirm-delete',v?'true':'false')}});$('settingsProfile').onclick=()=>page('profile');
 $('logoutBtn').onclick=async()=>{const b=$('logoutBtn');b.disabled=true;try{await stopLiveKit();if(dmChannel)db.removeChannel(dmChannel);if(communityChannel)db.removeChannel(communityChannel);const r=await db.auth.signOut();if(r.error)throw r.error;dmChannel=null;communityChannel=null;activeDm=null;activeCommunity=null;activeLive=null;user=null;profile=null;hide('appView');hide('bottomNav');show('authView');note('authMsg','تم تسجيل الخروج بنجاح.','ok')}catch(e){alert('تعذر تسجيل الخروج: '+(e?.message||String(e)))}finally{b.disabled=false}};
 $('connection').textContent='NEXO';db.auth.getSession().then(({data})=>{if(recoveryMode){hide('appView');hide('bottomNav');show('authView');show('passwordResetPanel')}else if(data.session)enter(data.session.user)});db.auth.onAuthStateChange((event,s)=>{if(event==='PASSWORD_RECOVERY'){recoveryMode=true;hide('appView');hide('bottomNav');show('authView');show('passwordResetPanel');note('authMsg','تم التحقق من رابط الاستعادة. عيّن كلمة مرور جديدة.','ok');return}if(s?.user&&!user&&!recoveryMode)enter(s.user)});
 })();

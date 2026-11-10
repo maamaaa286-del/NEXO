@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#090912">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#090912"><meta name="description" content="NEXO — مجتمعك الاجتماعي للبثوث والمنشورات والريلز."><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><link rel="manifest" href="./manifest.webmanifest">
 <title>NEXO</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/livekit-client@2.23.0/dist/livekit-client.umd.min.js" crossorigin="anonymous"></script>
 <style>
 :root{color-scheme:dark;--bg:#090912;--panel:#151522;--line:#302d45;--purple:#8b5cf6;--pink:#b34fe8;--text:#f7f5ff;--muted:#aaa6bd}
@@ -713,4 +713,12 @@ $('logoutBtn').onclick=async()=>{const b=$('logoutBtn');b.disabled=true;try{awai
 $('connection').textContent='NEXO';db.auth.getSession().then(({data})=>{if(recoveryMode){hide('appView');hide('bottomNav');show('authView');show('passwordResetPanel')}else if(data.session)enter(data.session.user)});db.auth.onAuthStateChange((event,s)=>{if(event==='PASSWORD_RECOVERY'){recoveryMode=true;hide('appView');hide('bottomNav');show('authView');show('passwordResetPanel');note('authMsg','تم التحقق من رابط الاستعادة. عيّن كلمة مرور جديدة.','ok');return}if(s?.user&&!user&&!recoveryMode)enter(s.user)});
 })();
 } catch(e) { const m=document.getElementById('authMsg'); if(m){m.textContent='تعذر تشغيل التطبيق: '+(e?.message||String(e));m.className='status error'} }
+</script><script>
+if ('serviceWorker' in navigator && location.protocol === 'https:') {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(error => {
+      console.warn('NEXO offline support unavailable:', error);
+    });
+  });
+}
 </script></body></html>

@@ -128,7 +128,7 @@ body{background:radial-gradient(ellipse at 50% -12%,#533078 0,transparent 42%),r
 <section id="appView" class="hidden">
 <section id="homePage">
 <div class="welcomeLine"><div><div class="eyebrow">YOUR SPACE. YOUR PEOPLE.</div><h1 id="helloName">أهلاً بك 👋</h1><p class="muted">وش الجديد في عالمك اليوم؟</p></div><div class="welcomeOrb">✦</div></div>
-<div class="storiesCard"><div class="storiesHead"><b>قصص الأشخاص الذين تتابعهم</b><button class="textBtn" id="storyExplore">اكتشف أشخاصاً</button></div><div class="storyRail" id="storyRail"><div class="storyItem"><div class="storyRing"><div class="storyAvatar">…</div></div><span>تحميل</span></div></div><input id="storyFile" class="hidden" type="file" accept="image/jpeg,image/png,image/webp,video/mp4,video/webm,video/quicktime"></div>
+<div class="storiesCard"><div class="storiesHead"><b>قصص الأشخاص الذين تتابعهم</b><div class="row"><button class="textBtn" id="addStory">＋ أضف قصة</button><button class="textBtn" id="storyExplore">اكتشف أشخاصاً</button></div></div><div class="storyRail" id="storyRail"><div class="storyItem"><div class="storyRing"><div class="storyAvatar">…</div></div><span>تحميل</span></div></div><input id="storyFile" class="hidden" type="file" accept="image/jpeg,image/png,image/webp,video/mp4,video/webm,video/quicktime"></div>
 <div class="card composer"><div class="head"><div class="avatar" id="miniAvatar">N</div><button class="composerTrigger" id="focusComposer">شاركنا بماذا تفكر؟</button></div><div class="composerTools"><button class="toolChip" id="composerPhoto">▧ صورة</button><button class="toolChip" id="composerReel">▷ مقطع ريلز</button><button class="toolChip" id="composerCommunity">◎ مجتمع</button></div></div>
 <div class="card composerExpanded hidden" id="composerExpanded"><h2 class="section-title">إنشاء منشور</h2><textarea id="postText" class="field" maxlength="500" placeholder="اكتب شيئاً يستحق المشاركة…"></textarea><input id="postFiles" type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple class="field"><div id="imagePreview" class="preview"></div><div class="row" style="justify-content:space-between"><span class="muted small" id="charCount">0 / 500 · حتى 4 صور</span><button id="publishBtn" class="btn">نشر المنشور</button></div><div id="postMsg" class="status hidden"></div></div>
 <div class="feedHeading"><div><div class="eyebrow">THE LATEST</div><h2 class="section-title">آخر المنشورات</h2></div><span class="livePill"><i></i> مباشر</span></div><div id="posts"><div class="empty">جاري تحميل المنشورات…</div></div></section>
@@ -267,9 +267,8 @@ async function loadStories(){
  if(ids.length){const p=await db.from('profiles').select('id,username,display_name,avatar_url').in('id',ids);people=p.data||[]}
  storyGroups=ids.map(id=>({userId:id,person:people.find(p=>p.id===id),items:r.data.filter(x=>x.user_id===id)})).sort((a,b)=>a.userId===user.id?-1:b.userId===user.id?1:0);
  const own=storyGroups.find(x=>x.userId===user.id);
- $('storyRail').innerHTML='<button class="storyItem" id="createStory"><div class="storyRing"><div class="storyAvatar storyAdd">'+(profile?.avatar_url?'<img src="'+esc(profile.avatar_url)+'">':'＋')+'</div></div><span>قصتك</span></button>'+
- storyGroups.filter(g=>g.userId!==user.id).map(g=>'<button class="storyItem" data-openstory="'+g.userId+'"><div class="storyRing"><div class="storyAvatar">'+(g.person?.avatar_url?'<img src="'+esc(g.person.avatar_url)+'">':esc((g.person?.display_name||g.person?.username||'N').slice(0,1)))+'</div></div><span>'+esc((g.person?.display_name||g.person?.username||'عضو').slice(0,12))+'</span></button>').join('');
- $('createStory').onclick=()=>$('storyFile').click();
+ $('storyRail').innerHTML=storyGroups.map(g=>'<button class="storyItem" data-openstory="'+g.userId+'"><div class="storyRing"><div class="storyAvatar">'+(g.person?.avatar_url?'<img src="'+esc(g.person.avatar_url)+'">':esc((g.person?.display_name||g.person?.username||'N').slice(0,1)))+'</div></div><span>'+esc((g.userId===user.id?'قصتك':g.person?.display_name||g.person?.username||'عضو').slice(0,12))+'</span></button>').join('')||'<span class="muted small">لا توجد قصص جديدة من الأشخاص الذين تتابعهم.</span>';
+ $('addStory').onclick=()=>$('storyFile').click();
  $('storyRail').querySelectorAll('[data-openstory]').forEach(b=>b.onclick=()=>openStory(b.dataset.openstory));
 }
 async function uploadStory(file){
@@ -432,8 +431,9 @@ async function loadProfilePage(){
  ]);
  if(postsResult.error)note('profileMsg',postsResult.error.message,'error');
  $('myPostCount').textContent=postsResult.data?.length||0;$('myFollowerCount').textContent=followersResult.data?.length||0;$('myFollowingCount').textContent=followingResult.data?.length||0;
+ const mediaMap=await signedMediaMap((postsResult.data||[]).flatMap(p=>[...(p.image_urls||[]),p.video_url]).filter(Boolean));
  $('myPosts').innerHTML=postsResult.data?.length?postsResult.data.map(p=>'<div class="item"><div>'+esc(p.body)+'<div class="muted small">'+esc(stamp(p.created_at))+'</div></div>'+(p.video_url?'<span class="pill">فيديو</span>':p.image_urls?.[0]?'<img src="'+esc(mediaFor(p.image_urls[0],mediaMap))+'" style="width:54px;height:54px;object-fit:cover;border-radius:10px">':'')+'</div>').join(''):'<div class="empty">ما نشرت أي شيء بعد.</div>';
- const mediaMap=await signedMediaMap((postsResult.data||[]).flatMap(p=>[...(p.image_urls||[]),p.video_url]).filter(Boolean));const req=requestsResult.data||[];
+ const req=requestsResult.data||[];
  if(req.length){const ids=req.map(x=>x.follower_id),pr=await db.from('profiles').select('id,username,display_name,avatar_url').in('id',ids);$('followRequests').innerHTML=req.map(x=>{const p=pr.data?.find(y=>y.id===x.follower_id);return '<div class="followRequest">'+avatar(p)+'<span>'+esc(p?.display_name||p?.username||'عضو')+'</span><div class="requestActions"><button class="btn" data-accept-follow="'+x.follower_id+'">قبول</button><button class="btn secondary" data-decline-follow="'+x.follower_id+'">رفض</button></div></div>'}).join('')}
  else $('followRequests').textContent='لا توجد طلبات جديدة.';
  const savedIds=(savedResult.data||[]).map(x=>x.post_id);

@@ -166,6 +166,48 @@ body{background:radial-gradient(ellipse at 50% -12%,#533078 0,transparent 42%),r
  #homePage .welcomeLine{display:none}
  #homePage .storiesCard{margin-top:4px}
 }
+
+/* TikTok-style profile and dedicated navigation */
+@media(max-width:699px){
+ .instaBottom{grid-template-columns:repeat(6,minmax(0,1fr))}
+ .instaBottom .nav .ico{font-size:24px}
+ #profilePage{padding:0 12px}
+ .profileScreen{padding-top:5px}
+ .profileTop{position:relative;padding:0 4px 12px}
+ .profileCover{height:92px;border-radius:18px;background:linear-gradient(115deg,#321d4d,#171324 58%,#3b2252);border:1px solid #51376d;position:relative;overflow:hidden}
+ .profileCover:after{content:"NEXO";position:absolute;left:15px;top:3px;font-size:62px;font-weight:1000;letter-spacing:8px;color:#ffffff0d}
+ .profileIdentity{display:flex;align-items:center;gap:10px;margin-top:-34px;padding:0 9px;position:relative}
+ .profileBigAvatar{width:76px!important;height:76px!important;border:4px solid #090a10;object-fit:cover;background:#37244d}
+ .profileIdentityText{flex:1;min-width:0;padding-top:28px}
+ .profileIdentityText h2{font-size:17px;margin:0 0 4px}
+ .profileEditBtn{font-size:11px;padding:8px 10px;margin-top:27px;white-space:nowrap}
+ .profileBio{font-size:12px;line-height:1.6;padding:4px 10px 0;margin:0}
+ .profileTikStats{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin:12px 0;padding:10px 3px;border-top:1px solid #292632;border-bottom:1px solid #292632}
+ .profileTikStats div{background:transparent;padding:5px 2px;align-items:center;text-align:center}
+ .profileTikStats b{font-size:17px}
+ .profileTikStats span{font-size:10px}
+ .profileTabs{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid #302b3a;margin-bottom:8px}
+ .profileTab{background:transparent;color:#a9a2b6;padding:12px 3px;font-size:12px;border-bottom:2px solid transparent}
+ .profileTab.active{color:#fff;border-bottom-color:#c17bff}
+ .profileGridPanel{min-height:130px}
+ .profileMediaGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px}
+ .profileMediaTile{position:relative;aspect-ratio:3/4;overflow:hidden;background:#191624;border-radius:5px}
+ .profileMediaTile img,.profileMediaTile video{width:100%;height:100%;object-fit:cover;display:block}
+ .profileMediaTile .tileText{position:absolute;left:0;right:0;bottom:0;padding:24px 5px 5px;background:linear-gradient(transparent,#000b);font-size:10px;color:#fff;line-height:1.4}
+ .profileMediaTile .tileLikes{position:absolute;left:6px;bottom:6px;color:#fff;font-size:10px;text-shadow:0 1px 4px #000}
+ .profileSavedList{padding:8px 0}
+ .profileEditCard{margin:18px 0 12px}
+}
+@media(min-width:700px){
+ .instaBottom{grid-template-columns:repeat(6,1fr)}
+ #profilePage{max-width:700px;margin:auto}
+ .profileMediaGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+ .profileMediaTile{aspect-ratio:3/4;overflow:hidden;position:relative;border-radius:12px;background:#191624}
+ .profileMediaTile img,.profileMediaTile video{width:100%;height:100%;object-fit:cover}
+ .profileTabs{display:flex;justify-content:center;gap:45px;border-bottom:1px solid #302b3a}
+ .profileTab{padding:14px;background:transparent;color:#aaa}
+ .profileTab.active{color:white;border-bottom:2px solid #bd83ff}
+}
 </style></head>
 <body><main class="wrap">
 <header class="top instaTop"><div class="topActions"><button class="topIcon instaPlus" id="topCreate" aria-label="إنشاء منشور">＋</button><button class="topIcon" id="topCommunities" aria-label="المجتمعات">◎</button></div><div class="brandBlock"><div class="brand">NEXO<span class="brandDot">.</span></div></div><div class="topActions"><button class="topIcon" id="topChats" aria-label="الرسائل">♡</button><button class="topIcon" id="topStore" title="متجر NEXO">✧</button><button class="topIcon" id="topSettings">⚙</button><button class="topAvatar" id="topProfile">N</button></div><span id="connection" class="hidden">NEXO</span></header>
@@ -192,7 +234,17 @@ body{background:radial-gradient(ellipse at 50% -12%,#533078 0,transparent 42%),r
 <section id="explorePage" class="hidden"><div class="card"><h2 class="section-title">استكشاف الأشخاص</h2><input id="peopleSearch" class="field" placeholder="ابحث باسم المستخدم أو الاسم الظاهر"><div id="peopleList"></div></div><div class="card"><h2 class="section-title">اكتشف المجتمعات</h2><div id="exploreCommunities"></div></div></section>
 <section id="chatPage" class="hidden"><div class="card"><h2 class="section-title">الرسائل الخاصة</h2><p class="muted small">ابحث عن شخص لبدء محادثة خاصة.</p><input id="chatSearch" class="field" placeholder="ابحث عن مستخدم"><div id="chatPeople"></div><div class="divider"></div><h3>محادثاتك</h3><div id="chatList"></div></div><div id="chatRoom" class="card hidden"><div class="head"><button id="backChats" class="btn secondary">رجوع</button><div class="avatar" id="chatAvatar">N</div><b id="chatTitle">محادثة</b></div><div id="dmMessages" class="messages" style="margin-top:12px"></div><div class="row"><input id="dmInput" class="field" maxlength="2000" placeholder="اكتب رسالة…"><button id="sendDm" class="btn">إرسال</button></div><div id="dmMsg" class="status hidden"></div></div></section>
 <section id="communitiesPage" class="hidden"><div class="card"><h2 class="section-title">المجتمعات</h2><p class="muted">أنشئ مجتمعك أو انضم إلى مجتمع يناسب اهتماماتك.</p><input id="newCommunityName" class="field" maxlength="45" placeholder="اسم المجتمع"><textarea id="newCommunityDesc" class="field" maxlength="220" placeholder="وصف المجتمع (اختياري)"></textarea><button id="createCommunity" class="btn wide">＋ إنشاء مجتمع</button><div id="communityMsg" class="status hidden"></div></div><div class="card"><h2 class="section-title">كل المجتمعات</h2><div id="communitiesList"></div></div><div id="communityRoom" class="card hidden"><div class="head"><button id="backCommunities" class="btn secondary">رجوع</button><div><b id="roomTitle">المجتمع</b><div class="muted small">محادثة الأعضاء</div></div></div><div id="communityMessages" class="messages" style="margin-top:12px"></div><div class="row"><input id="communityInput" class="field" maxlength="2000" placeholder="اكتب رسالة للمجتمع"><button id="sendCommunity" class="btn">إرسال</button></div><div id="roomMsg" class="status hidden"></div></div></section>
-<section id="profilePage" class="hidden"><div class="card profilehero"><img id="profileAvatar" class="avatar" src="" alt="الصورة الشخصية"><h2 id="profileName">ملفي الشخصي</h2><div id="profileUsername" class="muted small"></div><p id="profileBio" class="muted"></p><div class="profileStats"><div><b id="myPostCount">0</b><span>منشور</span></div><div><b id="myFollowerCount">0</b><span>متابع</span></div><div><b id="myFollowingCount">0</b><span>أتابع</span></div></div></div><div class="card"><h2 class="section-title">تعديل الملف الشخصي</h2><label class="small muted">الصورة الشخصية</label><input id="avatarFile" class="field" type="file" accept="image/jpeg,image/png,image/webp"><label class="small muted">الاسم الظاهر</label><input id="displayName" class="field" maxlength="40" placeholder="اسمك"><label class="small muted">اسم المستخدم</label><input id="username" class="field" maxlength="24" placeholder="username"><label class="small muted">نبذة عنك</label><textarea id="bio" class="field" maxlength="160" placeholder="اكتب نبذة قصيرة"></textarea><label class="privacySwitch"><span><b>حساب خاص</b><small>فقط المتابعون الذين توافق عليهم يرون منشوراتك وقصصك</small></span><input id="privateProfileToggle" type="checkbox" class="switch"></label><button id="saveProfile" class="btn wide">حفظ التعديلات</button><div id="profileMsg" class="status hidden"></div></div><div class="card"><h3>طلبات المتابعة</h3><div id="followRequests" class="muted small">لا توجد طلبات جديدة.</div></div><div class="card"><h3>منشوراتي</h3><div id="myPosts"></div></div><div class="card"><h3>المحفوظات</h3><div id="savedPostsList" class="muted small">لا توجد عناصر محفوظة.</div></div></section>
+<section id="profilePage" class="hidden">
+<div class="profileScreen">
+ <div class="profileTop"><div class="profileCover"></div><div class="profileIdentity"><img id="profileAvatar" class="avatar profileBigAvatar" src="" alt="الصورة الشخصية"><div class="profileIdentityText"><h2 id="profileName">ملفي الشخصي</h2><div id="profileUsername" class="muted small"></div></div><button id="profileEditJump" class="btn secondary profileEditBtn">تعديل الملف</button></div><p id="profileBio" class="muted profileBio"></p></div>
+ <div class="profileStats profileTikStats"><div><b id="myFollowerCount">0</b><span>متابعون</span></div><div><b id="myFollowingCount">0</b><span>أتابع</span></div><div><b id="myLikeCount">0</b><span>إعجابات</span></div><div><b id="myPostCount">0</b><span>منشورات</span></div></div>
+ <div class="profileTabs"><button class="profileTab active" data-profile-tab="posts">▦ المنشورات</button><button class="profileTab" data-profile-tab="reels">▷ الريلز</button><button class="profileTab" data-profile-tab="saved">♡ المحفوظات</button></div>
+ <div id="profilePostsPanel" class="profileGridPanel"><div id="myPosts" class="profileMediaGrid"></div></div>
+ <div id="profileReelsPanel" class="profileGridPanel hidden"><div id="myReels" class="profileMediaGrid"></div></div>
+ <div id="profileSavedPanel" class="profileGridPanel hidden"><div id="savedPostsList" class="profileSavedList muted small">لا توجد عناصر محفوظة.</div></div>
+ <div class="card profileEditCard" id="profileEditCard"><h2 class="section-title">تعديل الملف الشخصي</h2><label class="small muted">الصورة الشخصية</label><input id="avatarFile" class="field" type="file" accept="image/jpeg,image/png,image/webp"><label class="small muted">الاسم الظاهر</label><input id="displayName" class="field" maxlength="40" placeholder="اسمك"><label class="small muted">اسم المستخدم</label><input id="username" class="field" maxlength="24" placeholder="username"><label class="small muted">نبذة عنك</label><textarea id="bio" class="field" maxlength="160" placeholder="اكتب نبذة قصيرة"></textarea><label class="privacySwitch"><span><b>حساب خاص</b><small>فقط المتابعون الذين توافق عليهم يرون منشوراتك وقصصك</small></span><input id="privateProfileToggle" type="checkbox" class="switch"></label><button id="saveProfile" class="btn wide">حفظ التعديلات</button><div id="profileMsg" class="status hidden"></div></div>
+ <div class="card"><h3>طلبات المتابعة</h3><div id="followRequests" class="muted small">لا توجد طلبات جديدة.</div></div>
+</div></section>
 <section id="settingsPage" class="hidden"><div class="card"><h2 class="section-title">الإعدادات</h2><h3>المظهر</h3><div class="setting"><div><b>الوضع الفاتح</b><div class="muted small">تغيير ألوان واجهة التطبيق</div></div><input id="themeToggle" type="checkbox" class="switch"></div><h3>الخصوصية</h3><div class="setting"><div><b>إظهار البريد في حسابي</b><div class="muted small">البريد لا يظهر للآخرين افتراضياً</div></div><input id="emailVisibility" type="checkbox" class="switch"></div><div class="setting"><div><b>تأكيد قبل حذف المنشور</b><div class="muted small">حماية من الحذف بالخطأ</div></div><input id="confirmDelete" type="checkbox" class="switch" checked></div><h3>الحساب</h3><div class="setting"><div><b>البريد الإلكتروني</b><div id="settingsEmail" class="muted small"></div></div></div><button id="settingsProfile" class="btn secondary wide">تعديل الملف الشخصي</button><button id="logoutBtn" class="btn wide" style="background:#713044">تسجيل الخروج</button><div class="muted small" style="text-align:center;margin-top:15px">NEXO · الإصدار التجريبي</div></div></section>
 
 <section id="storePage" class="hidden">
@@ -204,7 +256,7 @@ body{background:radial-gradient(ellipse at 50% -12%,#533078 0,transparent 42%),r
 </section>
 </section><div class="footer">NEXO · تواصل، شارك، وانضم</div></main>
 <div id="storyViewer" class="storyViewer hidden"><div class="storyViewerCard"><div class="storyViewerTop"><b id="storyViewerName">قصة</b><div class="row"><button id="storyPrev" class="reelAction">‹</button><button id="storyNext" class="reelAction">›</button><button id="storyClose" class="reelAction">×</button></div></div><div id="storyViewerContent"></div><div id="storyViewerCaption" class="storyViewerCaption"></div></div></div>
-<nav id="bottomNav" class="bottom hidden instaBottom"><button class="nav active" data-page="home" aria-label="الرئيسية"><span class="ico">⌂</span></button><button class="nav" data-page="reels" aria-label="ريلز"><span class="ico">▣</span></button><button class="nav" data-page="explore" aria-label="استكشاف"><span class="ico">⌕</span></button><button class="nav" data-page="live" aria-label="البث المباشر"><span class="ico">◉</span></button><button class="nav" data-page="profile" aria-label="حسابي"><span class="ico">♙</span></button></nav>
+<button id="navCreate" class="hidden" type="button"></button><nav id="bottomNav" class="bottom hidden instaBottom"><button class="nav active" data-page="home" aria-label="الرئيسية"><span class="ico">⌂</span></button><button class="nav" data-page="reels" aria-label="ريلز"><span class="ico">▣</span></button><button class="nav" data-page="communities" aria-label="المجتمعات"><span class="ico">♧</span></button><button class="nav" data-page="live" aria-label="البث المباشر"><span class="ico">◉</span></button><button class="nav" data-page="explore" aria-label="استكشاف"><span class="ico">⌕</span></button><button class="nav" data-page="profile" aria-label="حسابي"><span class="ico">♙</span></button></nav>
 <script>
 window.addEventListener('error',e=>{const m=document.getElementById('authMsg');if(m){m.textContent='تعذر تشغيل التطبيق: '+(e.message||'خطأ غير معروف');m.className='status error'}});
 try {
@@ -468,27 +520,51 @@ async function loadDmMessages(){let r=await db.from('direct_messages').select('i
 $('sendDm').onclick=async()=>{let body=$('dmInput').value.trim();if(!body||!activeDm)return;let r=await db.from('direct_messages').insert({sender_id:user.id,recipient_id:activeDm,body});if(r.error)note('dmMsg','تعذر إرسال الرسالة: '+r.error.message,'error');else{$('dmInput').value='';await loadDmMessages()}};$('backChats').onclick=()=>{hide('chatRoom');activeDm=null;if(dmChannel)db.removeChannel(dmChannel);dmChannel=null;loadChats()};
 
 async function loadProfilePage(){
- syncProfile();$('displayName').value=profile?.display_name||'';$('username').value=profile?.username||'';$('bio').value=profile?.bio||'';$('privateProfileToggle').checked=!!profile?.is_private;
+ syncProfile();
+ $('displayName').value=profile?.display_name||'';$('username').value=profile?.username||'';$('bio').value=profile?.bio||'';$('privateProfileToggle').checked=!!profile?.is_private;
  const [postsResult,followersResult,followingResult,requestsResult,savedResult]=await Promise.all([
-  db.from('posts').select('id,body,created_at,image_urls,video_url').eq('user_id',user.id).order('created_at',{ascending:false}).limit(30),
+  db.from('posts').select('id,body,created_at,image_urls,video_url').eq('user_id',user.id).order('created_at',{ascending:false}).limit(60),
   db.from('user_follows').select('follower_id').eq('following_id',user.id).eq('status','accepted'),
   db.from('user_follows').select('following_id').eq('follower_id',user.id).eq('status','accepted'),
   db.from('user_follows').select('follower_id,created_at').eq('following_id',user.id).eq('status','pending'),
-  db.from('saved_posts').select('post_id,created_at').eq('user_id',user.id).order('created_at',{ascending:false}).limit(20)
+  db.from('saved_posts').select('post_id,created_at').eq('user_id',user.id).order('created_at',{ascending:false}).limit(30)
  ]);
  if(postsResult.error)note('profileMsg',postsResult.error.message,'error');
- $('myPostCount').textContent=postsResult.data?.length||0;$('myFollowerCount').textContent=followersResult.data?.length||0;$('myFollowingCount').textContent=followingResult.data?.length||0;
- const mediaMap=await signedMediaMap((postsResult.data||[]).flatMap(p=>[...(p.image_urls||[]),p.video_url]).filter(Boolean));
- $('myPosts').innerHTML=postsResult.data?.length?postsResult.data.map(p=>'<div class="item"><div>'+esc(p.body)+'<div class="muted small">'+esc(stamp(p.created_at))+'</div></div>'+(p.video_url?'<span class="pill">فيديو</span>':p.image_urls?.[0]?'<img src="'+esc(mediaFor(p.image_urls[0],mediaMap))+'" style="width:54px;height:54px;object-fit:cover;border-radius:10px">':'')+'</div>').join(''):'<div class="empty">ما نشرت أي شيء بعد.</div>';
+ const posts=postsResult.data||[],postIds=posts.map(p=>p.id);
+ const likesResult=postIds.length?await db.from('likes').select('post_id').in('post_id',postIds):{data:[],error:null};
+ if(likesResult.error)note('profileMsg','تعذر تحميل عدد الإعجابات: '+likesResult.error.message,'error');
+ const likeCounts=new Map();(likesResult.data||[]).forEach(x=>likeCounts.set(x.post_id,(likeCounts.get(x.post_id)||0)+1));
+ $('myPostCount').textContent=posts.length;
+ $('myFollowerCount').textContent=followersResult.data?.length||0;
+ $('myFollowingCount').textContent=followingResult.data?.length||0;
+ $('myLikeCount').textContent=[...likeCounts.values()].reduce((a,b)=>a+b,0);
+ const reels=posts.filter(p=>!!p.video_url);
+ const mediaMap=await signedMediaMap(posts.flatMap(p=>[...(p.image_urls||[]),p.video_url]).filter(Boolean));
+ const tile=p=>{
+  const likes=likeCounts.get(p.id)||0,media=p.video_url
+   ?'<video src="'+esc(mediaFor(p.video_url,mediaMap))+'" muted playsinline preload="metadata"></video>'
+   :p.image_urls?.[0]?'<img loading="lazy" src="'+esc(mediaFor(p.image_urls[0],mediaMap))+'" alt="">':'<div class="tileText">'+esc(p.body||'منشور NEXO')+'</div>';
+  return '<article class="profileMediaTile">'+media+'<span class="tileLikes">♥ '+likes+'</span></article>';
+ };
+ $('myPosts').innerHTML=posts.length?posts.filter(p=>!p.video_url).map(tile).join('')||'<div class="empty">لا توجد منشورات صور أو نصوص بعد.</div>':'<div class="empty">ما نشرت أي شيء بعد.</div>';
+ $('myReels').innerHTML=reels.length?reels.map(tile).join(''):'<div class="empty">ما نشرت أي ريلز بعد.</div>';
  const req=requestsResult.data||[];
  if(req.length){const ids=req.map(x=>x.follower_id),pr=await db.from('profiles').select('id,username,display_name,avatar_url').in('id',ids);$('followRequests').innerHTML=req.map(x=>{const p=pr.data?.find(y=>y.id===x.follower_id);return '<div class="followRequest">'+avatar(p)+'<span>'+esc(p?.display_name||p?.username||'عضو')+'</span><div class="requestActions"><button class="btn" data-accept-follow="'+x.follower_id+'">قبول</button><button class="btn secondary" data-decline-follow="'+x.follower_id+'">رفض</button></div></div>'}).join('')}
  else $('followRequests').textContent='لا توجد طلبات جديدة.';
  const savedIds=(savedResult.data||[]).map(x=>x.post_id);
- if(savedIds.length){const sr=await db.from('posts').select('id,body,video_url,image_urls').in('id',savedIds);$('savedPostsList').innerHTML=(sr.data||[]).map(p=>'<div class="item"><span>'+esc(p.body||'منشور محفوظ')+'</span><span class="pill">'+(p.video_url?'فيديو':'منشور')+'</span></div>').join('')||'المحفوظات غير متاحة حالياً.'}
+ if(savedIds.length){const sr=await db.from('posts').select('id,body,video_url,image_urls').in('id',savedIds);$('savedPostsList').innerHTML=(sr.data||[]).map(p=>'<div class="item"><span>'+esc(p.body||'منشور محفوظ')+'</span><span class="pill">'+(p.video_url?'ريلز':'منشور')+'</span></div>').join('')||'المحفوظات غير متاحة حالياً.'}
  else $('savedPostsList').textContent='لا توجد عناصر محفوظة.';
+ setProfileTab('posts');
+}
+function setProfileTab(tab){
+ const valid=['posts','reels','saved'].includes(tab)?tab:'posts';
+ document.querySelectorAll('[data-profile-tab]').forEach(b=>b.classList.toggle('active',b.dataset.profileTab===valid));
+ ['posts','reels','saved'].forEach(x=>$('profile'+x[0].toUpperCase()+x.slice(1)+'Panel').classList.toggle('hidden',x!==valid));
 }
 $('profilePage').onclick=async e=>{
  const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.profileTab){setProfileTab(b.dataset.profileTab);return}
+ if(b.id==='profileEditJump'){$('profileEditCard').scrollIntoView({behavior:'smooth',block:'start'});return}
  const target=b.dataset.acceptFollow||b.dataset.declineFollow;if(!target)return;
  const status=b.dataset.acceptFollow?'accepted':'declined';
  const r=await db.from('user_follows').update({status}).eq('follower_id',target).eq('following_id',user.id).eq('status','pending');

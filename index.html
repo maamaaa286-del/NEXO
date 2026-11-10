@@ -76,6 +76,51 @@ body{background:radial-gradient(ellipse at 50% -12%,#533078 0,transparent 42%),r
 .footer{padding:22px 0 30px}
 @media(min-width:700px){.wrap{width:min(780px,100%)}.bottom{left:calc(50% - 390px);right:calc(50% - 390px)}.welcomeLine{padding:28px 24px}}
 @media(max-width:380px){.topActions{gap:5px}.topIcon,.topAvatar{width:35px;height:35px}.nav{font-size:8px}.nav .ico{font-size:19px}}
+
+/* NEXO social experience refresh */
+.reelsIntro{display:none}
+.reelTop{display:flex;align-items:center;justify-content:space-between;padding:2px 0 10px}
+.reelsFeed{display:flex;flex-direction:column;gap:12px;height:calc(100dvh - 142px);overflow-y:auto;overscroll-behavior:contain;scroll-snap-type:y mandatory;scrollbar-width:none;margin-inline:-13px;width:calc(100% + 26px);padding:0 0 12px}
+.reelsFeed::-webkit-scrollbar{display:none}
+.reelSlide{position:relative;flex:0 0 auto;height:calc(100dvh - 154px);min-height:440px;scroll-snap-align:start;scroll-snap-stop:always;overflow:hidden;background:#050508;border-radius:18px;border:1px solid #302a43}
+.reelSlide video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#080811}
+.reelShade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,#0005,transparent 23%,transparent 52%,#000b 100%)}
+.reelInfo{position:absolute;right:14px;left:78px;bottom:18px;color:#fff;text-shadow:0 1px 4px #000;font-size:13px;z-index:2}
+.reelInfo b{display:block;font-size:14px;margin-bottom:6px}
+.reelInfo p{margin:0;line-height:1.5;white-space:pre-wrap}
+.reelRail{position:absolute;left:10px;bottom:25px;display:flex;flex-direction:column;gap:17px;align-items:center;z-index:3}
+.reelAction{width:48px;min-height:45px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:#1119;border:1px solid #ffffff28;border-radius:16px;color:white;font-size:21px;backdrop-filter:blur(8px)}
+.reelAction small{font-size:10px}
+.reelAction.active{color:#ff8fca;background:#51213fbb}
+.reelAvatar{width:44px;height:44px;border:2px solid #fff;border-radius:50%;object-fit:cover;background:#34234d}
+.reelFollow{border-radius:50%;background:#8b5cf6;color:white;width:22px;height:22px;margin-top:-10px;border:2px solid #fff;font-weight:900}
+.reelComments{position:absolute;z-index:5;left:8px;right:8px;bottom:8px;max-height:48%;overflow:auto;background:#171421f5;border:1px solid #ffffff24;border-radius:18px;padding:12px;color:white;backdrop-filter:blur(18px)}
+.reelCommentList{max-height:150px;overflow:auto;font-size:12px}
+.reelCommentLine{padding:6px 0;border-bottom:1px solid #ffffff18}
+.reelCommentInput{display:flex;gap:7px;align-items:center;margin-top:8px}
+.reelCommentInput input{margin:0;background:#0b0a12;color:white;min-width:0}
+.reelCommentInput button{padding:10px 14px}
+.storiesCard{background:linear-gradient(120deg,#201832,#11101b 70%)}
+.storyRail{gap:15px}
+.storyItem{border:0;background:transparent;padding:0;min-width:64px;cursor:pointer}
+.storyItem .storyAvatar{overflow:hidden}
+.storyAvatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.storyAdd{background:#211a31;border:2px solid #141321;color:#d9baff}
+.storyViewer{position:fixed;inset:0;z-index:100;background:#050508f5;display:flex;align-items:center;justify-content:center;padding:12px}
+.storyViewerCard{width:min(440px,100%);height:min(88dvh,820px);position:relative;background:#171421;border-radius:22px;overflow:hidden}
+.storyViewerMedia{width:100%;height:100%;object-fit:contain;background:#050508}
+.storyViewerTop{position:absolute;z-index:2;top:14px;right:14px;left:14px;display:flex;align-items:center;justify-content:space-between;color:white;text-shadow:0 1px 5px #000}
+.storyViewerCaption{position:absolute;bottom:18px;right:15px;left:15px;color:white;text-shadow:0 1px 5px #000}
+.profileStats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:15px}
+.profileStats div{display:flex;flex-direction:column;gap:3px;background:#ffffff08;border-radius:14px;padding:10px}
+.profileStats b{font-size:18px}.profileStats span{font-size:11px;color:var(--muted)}
+.privacySwitch{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;margin:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.privacySwitch span{display:flex;flex-direction:column;gap:4px}.privacySwitch small{font-size:11px;color:var(--muted)}
+.followRequest{display:flex;align-items:center;gap:9px;padding:9px 0;border-bottom:1px solid var(--line)}
+.followRequest .requestActions{display:flex;gap:5px;margin-right:auto}
+.followRequest .requestActions button{padding:7px 10px;font-size:11px}
+@media(min-width:700px){.reelsFeed{width:min(440px,100%);margin:0 auto;height:calc(100dvh - 142px)}.reelSlide{height:calc(100dvh - 154px)}}
+
 </style></head>
 <body><main class="wrap">
 <header class="top"><div class="brandBlock"><div class="brand">NEXO<span class="brandDot">.</span></div><div class="muted small">مساحتك، عالمك</div></div><div class="topActions"><button class="topIcon" id="topCommunities">◎</button><button class="topIcon" id="topChats">✉</button><button class="topIcon" id="topStore" title="متجر NEXO">✧</button><button class="topIcon" id="topSettings">⚙</button><button class="topAvatar" id="topProfile">N</button></div><span id="connection" class="hidden">NEXO</span></header>
@@ -83,11 +128,11 @@ body{background:radial-gradient(ellipse at 50% -12%,#533078 0,transparent 42%),r
 <section id="appView" class="hidden">
 <section id="homePage">
 <div class="welcomeLine"><div><div class="eyebrow">YOUR SPACE. YOUR PEOPLE.</div><h1 id="helloName">أهلاً بك 👋</h1><p class="muted">وش الجديد في عالمك اليوم؟</p></div><div class="welcomeOrb">✦</div></div>
-<div class="storiesCard"><div class="storiesHead"><b>اكتشف مجتمع NEXO</b><button class="textBtn" id="storyExplore">اكتشف الكل</button></div><div class="storyRail"><div class="storyItem"><div class="storyRing"><div class="storyAvatar">N</div></div><span>أهلاً بك</span></div><div class="storyItem"><div class="storyRing"><div class="storyAvatar">✦</div></div><span>المميز</span></div><div class="storyItem"><div class="storyRing"><div class="storyAvatar">＋</div></div><span>اكتشف</span></div></div></div>
+<div class="storiesCard"><div class="storiesHead"><b>قصص الأشخاص الذين تتابعهم</b><button class="textBtn" id="storyExplore">اكتشف أشخاصاً</button></div><div class="storyRail" id="storyRail"><div class="storyItem"><div class="storyRing"><div class="storyAvatar">…</div></div><span>تحميل</span></div></div><input id="storyFile" class="hidden" type="file" accept="image/jpeg,image/png,image/webp,video/mp4,video/webm,video/quicktime"></div>
 <div class="card composer"><div class="head"><div class="avatar" id="miniAvatar">N</div><button class="composerTrigger" id="focusComposer">شاركنا بماذا تفكر؟</button></div><div class="composerTools"><button class="toolChip" id="composerPhoto">▧ صورة</button><button class="toolChip" id="composerReel">▷ مقطع ريلز</button><button class="toolChip" id="composerCommunity">◎ مجتمع</button></div></div>
 <div class="card composerExpanded hidden" id="composerExpanded"><h2 class="section-title">إنشاء منشور</h2><textarea id="postText" class="field" maxlength="500" placeholder="اكتب شيئاً يستحق المشاركة…"></textarea><input id="postFiles" type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple class="field"><div id="imagePreview" class="preview"></div><div class="row" style="justify-content:space-between"><span class="muted small" id="charCount">0 / 500 · حتى 4 صور</span><button id="publishBtn" class="btn">نشر المنشور</button></div><div id="postMsg" class="status hidden"></div></div>
 <div class="feedHeading"><div><div class="eyebrow">THE LATEST</div><h2 class="section-title">آخر المنشورات</h2></div><span class="livePill"><i></i> مباشر</span></div><div id="posts"><div class="empty">جاري تحميل المنشورات…</div></div></section>
-<section id="reelsPage" class="hidden"><div class="reelsIntro"><div class="eyebrow">NEXO SHORTS</div><h1>ريلز ✦</h1><p class="muted">لحظات قصيرة، أفكار كبيرة.</p></div><div class="card"><b>شارك مقطعك الأول</b><p class="muted small">MP4 أو WebM أو MOV · حتى 30 ميغابايت</p><input id="reelFile" class="field" type="file" accept="video/mp4,video/webm,video/quicktime"><input id="reelCaption" class="field" maxlength="500" placeholder="اكتب وصفاً للمقطع…"><button id="publishReel" class="btn wide">＋ نشر ريلز</button><div id="reelMsg" class="status hidden"></div></div><div id="reelsFeed" class="reelsFeed"><div class="empty">جاري تحميل الريلز…</div></div></section><section id="livePage" class="hidden">
+<section id="reelsPage" class="hidden"><div class="reelTop"><div><div class="eyebrow">NEXO SHORTS</div><b>ريلز لك ✦</b></div><button id="showReelComposer" class="btn">＋ انشر فيديو</button></div><div id="reelComposer" class="card hidden"><b>انشر مقطعك</b><p class="muted small">MP4 أو WebM أو MOV · حتى 30 ميغابايت</p><input id="reelFile" class="field" type="file" accept="video/mp4,video/webm,video/quicktime"><input id="reelCaption" class="field" maxlength="500" placeholder="اكتب وصفاً للمقطع…"><div class="row"><button id="publishReel" class="btn">نشر الريلز</button><button id="hideReelComposer" class="btn secondary">إغلاق</button></div><div id="reelMsg" class="status hidden"></div></div><div id="reelsFeed" class="reelsFeed"><div class="empty">جاري تحميل الريلز…</div></div></section><section id="livePage" class="hidden">
 <div class="liveHero"><div class="eyebrow">NEXO LIVE ARENA</div><h1>ساحة البثوث <span>●</span></h1><p class="muted">تابع لاعبيك المفضلين وشاركهم اللحظة.</p><div class="liveStats"><div><b id="liveCount">0</b><span>بث مباشر</span></div><div><b>80%</b><span>حصة الستريمر من دعم التوكن</span></div><div><b>20%</b><span>حصة NEXO</span></div></div></div>
 <div class="card liveCreate"><div class="liveCreateHead"><div><div class="eyebrow">GO LIVE</div><h2 class="section-title">أنشئ صفحة بثك</h2></div><span class="liveBadge">● LIVE</span></div>
 <input id="liveTitle" class="field" maxlength="100" placeholder="عنوان البث — مثلاً رانكد مع الشباب">
@@ -102,7 +147,7 @@ body{background:radial-gradient(ellipse at 50% -12%,#533078 0,transparent 42%),r
 <section id="explorePage" class="hidden"><div class="card"><h2 class="section-title">استكشاف الأشخاص</h2><input id="peopleSearch" class="field" placeholder="ابحث باسم المستخدم أو الاسم الظاهر"><div id="peopleList"></div></div><div class="card"><h2 class="section-title">اكتشف المجتمعات</h2><div id="exploreCommunities"></div></div></section>
 <section id="chatPage" class="hidden"><div class="card"><h2 class="section-title">الرسائل الخاصة</h2><p class="muted small">ابحث عن شخص لبدء محادثة خاصة.</p><input id="chatSearch" class="field" placeholder="ابحث عن مستخدم"><div id="chatPeople"></div><div class="divider"></div><h3>محادثاتك</h3><div id="chatList"></div></div><div id="chatRoom" class="card hidden"><div class="head"><button id="backChats" class="btn secondary">رجوع</button><div class="avatar" id="chatAvatar">N</div><b id="chatTitle">محادثة</b></div><div id="dmMessages" class="messages" style="margin-top:12px"></div><div class="row"><input id="dmInput" class="field" maxlength="2000" placeholder="اكتب رسالة…"><button id="sendDm" class="btn">إرسال</button></div><div id="dmMsg" class="status hidden"></div></div></section>
 <section id="communitiesPage" class="hidden"><div class="card"><h2 class="section-title">المجتمعات</h2><p class="muted">أنشئ مجتمعك أو انضم إلى مجتمع يناسب اهتماماتك.</p><input id="newCommunityName" class="field" maxlength="45" placeholder="اسم المجتمع"><textarea id="newCommunityDesc" class="field" maxlength="220" placeholder="وصف المجتمع (اختياري)"></textarea><button id="createCommunity" class="btn wide">＋ إنشاء مجتمع</button><div id="communityMsg" class="status hidden"></div></div><div class="card"><h2 class="section-title">كل المجتمعات</h2><div id="communitiesList"></div></div><div id="communityRoom" class="card hidden"><div class="head"><button id="backCommunities" class="btn secondary">رجوع</button><div><b id="roomTitle">المجتمع</b><div class="muted small">محادثة الأعضاء</div></div></div><div id="communityMessages" class="messages" style="margin-top:12px"></div><div class="row"><input id="communityInput" class="field" maxlength="2000" placeholder="اكتب رسالة للمجتمع"><button id="sendCommunity" class="btn">إرسال</button></div><div id="roomMsg" class="status hidden"></div></div></section>
-<section id="profilePage" class="hidden"><div class="card profilehero"><img id="profileAvatar" class="avatar" src="" alt="الصورة الشخصية"><h2 id="profileName">ملفي الشخصي</h2><div id="profileUsername" class="muted small"></div><p id="profileBio" class="muted"></p><div class="row" style="justify-content:center"><span class="pill" id="myPostCount">منشوراتي</span></div></div><div class="card"><h2 class="section-title">تعديل الملف الشخصي</h2><label class="small muted">الصورة الشخصية</label><input id="avatarFile" class="field" type="file" accept="image/jpeg,image/png,image/webp"><label class="small muted">الاسم الظاهر</label><input id="displayName" class="field" maxlength="40" placeholder="اسمك"><label class="small muted">اسم المستخدم</label><input id="username" class="field" maxlength="24" placeholder="username"><label class="small muted">نبذة عنك</label><textarea id="bio" class="field" maxlength="160" placeholder="اكتب نبذة قصيرة"></textarea><button id="saveProfile" class="btn wide">حفظ التعديلات</button><div id="profileMsg" class="status hidden"></div></div><div class="card"><h3>منشوراتي</h3><div id="myPosts"></div></div></section>
+<section id="profilePage" class="hidden"><div class="card profilehero"><img id="profileAvatar" class="avatar" src="" alt="الصورة الشخصية"><h2 id="profileName">ملفي الشخصي</h2><div id="profileUsername" class="muted small"></div><p id="profileBio" class="muted"></p><div class="profileStats"><div><b id="myPostCount">0</b><span>منشور</span></div><div><b id="myFollowerCount">0</b><span>متابع</span></div><div><b id="myFollowingCount">0</b><span>أتابع</span></div></div></div><div class="card"><h2 class="section-title">تعديل الملف الشخصي</h2><label class="small muted">الصورة الشخصية</label><input id="avatarFile" class="field" type="file" accept="image/jpeg,image/png,image/webp"><label class="small muted">الاسم الظاهر</label><input id="displayName" class="field" maxlength="40" placeholder="اسمك"><label class="small muted">اسم المستخدم</label><input id="username" class="field" maxlength="24" placeholder="username"><label class="small muted">نبذة عنك</label><textarea id="bio" class="field" maxlength="160" placeholder="اكتب نبذة قصيرة"></textarea><label class="privacySwitch"><span><b>حساب خاص</b><small>فقط المتابعون الذين توافق عليهم يرون منشوراتك وقصصك</small></span><input id="privateProfileToggle" type="checkbox" class="switch"></label><button id="saveProfile" class="btn wide">حفظ التعديلات</button><div id="profileMsg" class="status hidden"></div></div><div class="card"><h3>طلبات المتابعة</h3><div id="followRequests" class="muted small">لا توجد طلبات جديدة.</div></div><div class="card"><h3>منشوراتي</h3><div id="myPosts"></div></div><div class="card"><h3>المحفوظات</h3><div id="savedPostsList" class="muted small">لا توجد عناصر محفوظة.</div></div></section>
 <section id="settingsPage" class="hidden"><div class="card"><h2 class="section-title">الإعدادات</h2><h3>المظهر</h3><div class="setting"><div><b>الوضع الفاتح</b><div class="muted small">تغيير ألوان واجهة التطبيق</div></div><input id="themeToggle" type="checkbox" class="switch"></div><h3>الخصوصية</h3><div class="setting"><div><b>إظهار البريد في حسابي</b><div class="muted small">البريد لا يظهر للآخرين افتراضياً</div></div><input id="emailVisibility" type="checkbox" class="switch"></div><div class="setting"><div><b>تأكيد قبل حذف المنشور</b><div class="muted small">حماية من الحذف بالخطأ</div></div><input id="confirmDelete" type="checkbox" class="switch" checked></div><h3>الحساب</h3><div class="setting"><div><b>البريد الإلكتروني</b><div id="settingsEmail" class="muted small"></div></div></div><button id="settingsProfile" class="btn secondary wide">تعديل الملف الشخصي</button><button id="logoutBtn" class="btn wide" style="background:#713044">تسجيل الخروج</button><div class="muted small" style="text-align:center;margin-top:15px">NEXO · الإصدار التجريبي</div></div></section>
 
 <section id="storePage" class="hidden">
@@ -113,13 +158,14 @@ body{background:radial-gradient(ellipse at 50% -12%,#533078 0,transparent 42%),r
 <div class="card"><h2 class="section-title">آخر حركة في الرصيد</h2><div id="storeLedger" class="muted small">لا توجد حركات بعد.</div></div>
 </section>
 </section><div class="footer">NEXO · تواصل، شارك، وانضم</div></main>
+<div id="storyViewer" class="storyViewer hidden"><div class="storyViewerCard"><div class="storyViewerTop"><b id="storyViewerName">قصة</b><div class="row"><button id="storyPrev" class="reelAction">‹</button><button id="storyNext" class="reelAction">›</button><button id="storyClose" class="reelAction">×</button></div></div><div id="storyViewerContent"></div><div id="storyViewerCaption" class="storyViewerCaption"></div></div></div>
 <nav id="bottomNav" class="bottom hidden"><button class="nav active" data-page="home"><span class="ico">⌂</span>الرئيسية</button><button class="nav" data-page="explore"><span class="ico">⌕</span>استكشاف</button><button class="nav createNav" id="navCreate"><span class="ico">＋</span>إنشاء</button><button class="nav" data-page="reels"><span class="ico">▷</span>ريلز</button><button class="nav" data-page="live"><span class="ico">●</span>لايف</button><button class="nav" data-page="profile"><span class="ico">◉</span>حسابي</button></nav>
 <script>
 window.addEventListener('error',e=>{const m=document.getElementById('authMsg');if(m){m.textContent='تعذر تشغيل التطبيق: '+(e.message||'خطأ غير معروف');m.className='status error'}});
 try {
 (()=> {
 const URL='https://cgyvcrqhghiuwtfeyuht.supabase.co',KEY='sb_publishable_sGyJSuk5UL2k8E3oZqR4mQ_o5A86ghP',db=window.supabase.createClient(URL,KEY,{auth:{autoRefreshToken:true,persistSession:true,detectSessionInUrl:true}}),$=id=>document.getElementById(id);
-let user=null,profile=null,activeDm=null,activeCommunity=null,dmChannel=null,communityChannel=null,selectedFiles=[],activeLive=null,liveRoomConnection=null,recoveryMode=new URLSearchParams(location.search).get('recovery')==='1'||new URLSearchParams(location.hash.slice(1)).get('type')==='recovery';
+let user=null,profile=null,activeDm=null,activeCommunity=null,dmChannel=null,communityChannel=null,selectedFiles=[],activeLive=null,liveRoomConnection=null,storyGroups=[],storyGroupIndex=0,storyItemIndex=0,reelsObserver=null,activeReelVideo=null,recoveryMode=new URLSearchParams(location.search).get('recovery')==='1'||new URLSearchParams(location.hash.slice(1)).get('type')==='recovery';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const note=(id,msg,type='')=>{$(id).textContent=msg;$(id).className='status'+(type?' '+type:'')};
 const hide=id=>$(id).classList.add('hidden'),show=id=>$(id).classList.remove('hidden');
@@ -129,7 +175,7 @@ $('saveNewPassword').onclick=async()=>{const password=$('newPassword').value;if(
 $('signupBtn').onclick=async()=>{const b=$('signupBtn');b.disabled=true;try{let email=$('email').value.trim(),password=$('password').value;if(!email||!password){note('authMsg','أدخل البريد الإلكتروني وكلمة المرور.','error');return}if(password.length<6){note('authMsg','كلمة المرور يجب أن تكون 6 أحرف على الأقل.','error');return}let r=await db.auth.signUp({email,password});if(r.error)note('authMsg',r.error.message,'error');else if(r.data.session)await enter(r.data.user);else note('authMsg','تم إنشاء الحساب. افحص بريدك لتأكيده ثم سجّل الدخول.','ok')}catch(e){note('authMsg','تعذر إنشاء الحساب: '+(e?.message||String(e)),'error')}finally{b.disabled=false}};
 const initial=s=>(String(s||'N').trim()[0]||'N').toUpperCase(),stamp=s=>new Date(s).toLocaleString('ar-JO',{dateStyle:'short',timeStyle:'short'});
 const avatar=(p)=>p?.avatar_url?'<img class="avatar" src="'+esc(p.avatar_url)+'" alt="">':'<div class="avatar">'+esc(initial(p?.display_name||p?.username))+'</div>';
-function page(n){['home','explore','reels','live','liveRoom','communities','chat','profile','settings','store'].forEach(x=>$(x+'Page').classList.toggle('hidden',x!==n));document.querySelectorAll('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===n));if(n==='explore')loadExplore();if(n==='reels')loadReels();if(n==='live')loadLive();if(n==='communities')loadCommunities();if(n==='chat')loadChats();if(n==='profile')loadProfilePage();if(n==='settings')loadSettings();if(n==='store')loadStore()}
+function page(n){['home','explore','reels','live','liveRoom','communities','chat','profile','settings','store'].forEach(x=>$(x+'Page').classList.toggle('hidden',x!==n));document.querySelectorAll('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===n));if(n==='home'){loadStories();loadPosts()}if(n==='explore')loadExplore();if(n==='reels')loadReels();if(n==='live')loadLive();if(n==='communities')loadCommunities();if(n==='chat')loadChats();if(n==='profile')loadProfilePage();if(n==='settings')loadSettings();if(n==='store')loadStore()}
 document.querySelectorAll('.nav[data-page]').forEach(b=>b.onclick=()=>page(b.dataset.page));$('refreshLives').onclick=loadLive;$('backLive').onclick=async()=>{if(activeLive?.streamer_id===user.id&&activeLive.status==='live'){if(!confirm('الرجوع سينهي البث المباشر. هل تريد المتابعة؟'))return;let q=await db.from('live_streams').update({status:'ended',ended_at:new Date().toISOString()}).eq('id',activeLive.id).eq('streamer_id',user.id);if(q.error){note('liveRoomMsg','تعذر إنهاء البث: '+q.error.message,'error');return}}await stopLiveKit();if(activeLive&&activeLive.streamer_id!==user.id)await db.from('live_stream_viewers').delete().eq('stream_id',activeLive.id).eq('user_id',user.id);activeLive=null;page('live')};$('startLive').onclick=createLive;$('navCreate').onclick=()=>{page('home');show('composerExpanded');$('postText').focus();$('composerExpanded').scrollIntoView({behavior:'smooth',block:'center'})};$('focusComposer').onclick=()=>{show('composerExpanded');$('postText').focus()};$('composerPhoto').onclick=()=>{show('composerExpanded');$('postFiles').click()};$('composerReel').onclick=()=>page('reels');$('composerCommunity').onclick=()=>page('communities');$('storyExplore').onclick=()=>page('explore');$('topCommunities').onclick=()=>page('communities');$('topChats').onclick=()=>page('chat');$('topSettings').onclick=()=>page('settings');$('topStore').onclick=()=>page('store');$('topProfile').onclick=()=>page('profile');
 async function ensureProfile(){let r=await db.from('profiles').select('*').eq('id',user.id).maybeSingle();if(r.error)throw r.error;if(!r.data){let uname='user_'+user.id.replace(/-/g,'').slice(0,12);r=await db.from('profiles').upsert({id:user.id,username:uname,display_name:user.email?.split('@')[0]||'عضو NEXO',bio:''},{onConflict:'id'}).select().single();if(r.error)throw r.error}profile=r.data;syncProfile()}
 function syncProfile(){let n=profile?.display_name||profile?.username||'عضو NEXO';$('helloName').textContent='أهلاً، '+n;$('miniAvatar').textContent=initial(n);$('profileAvatar').src=profile?.avatar_url||'';$('profileName').textContent=n;$('profileUsername').textContent='@'+(profile?.username||'');$('topProfile').textContent=initial(n);$('profileBio').textContent=profile?.bio||'لا توجد نبذة بعد'}
@@ -137,11 +183,151 @@ async function enter(u){user=u;hide('authView');show('appView');show('bottomNav'
 async function upload(file,bucket){if(!file)return null;const max=bucket==='avatars'?5*1024*1024:8*1024*1024,types=bucket==='avatars'?/^image\/(jpeg|png|webp)$/:/^image\/(jpeg|png|webp|gif)$/;if(file.size>max)throw Error(bucket==='avatars'?'حجم الصورة الشخصية يجب ألا يتجاوز 5 ميغابايت':'حجم الصورة يجب ألا يتجاوز 8 ميغابايت');if(!types.test(file.type))throw Error('نوع الصورة غير مدعوم لهذا القسم');let ext=file.name.split('.').pop().toLowerCase().replace(/[^a-z0-9]/g,'')||'jpg',path=user.id+'/'+Date.now()+'_'+Math.random().toString(36).slice(2)+'.'+ext;let r=await db.storage.from(bucket).upload(path,file,{cacheControl:'3600',upsert:false});if(r.error)throw r.error;return db.storage.from(bucket).getPublicUrl(path).data.publicUrl}
 $('postFiles').onchange=()=>{selectedFiles=[...$('postFiles').files].slice(0,4);$('imagePreview').innerHTML=selectedFiles.map(f=>'<img src="'+URL.createObjectURL(f)+'">').join('');$('charCount').textContent=$('postText').value.length+' / 500 · '+selectedFiles.length+'/4 صور'};
 $('postText').oninput=()=>$('charCount').textContent=$('postText').value.length+' / 500 · '+selectedFiles.length+'/4 صور';
-async function loadPosts(){let r=await db.from('posts').select('id,user_id,body,created_at,image_urls,video_url').order('created_at',{ascending:false}).limit(60);if(r.error){$('posts').innerHTML='<div class="card">'+esc(r.error.message)+'</div>';return}if(!r.data.length){$('posts').innerHTML='<div class="card empty">لسه ما في منشورات. كن أول من يشارك!</div>';return}let ids=r.data.map(p=>p.id),uids=[...new Set(r.data.map(p=>p.user_id))],[lr,cr,pr]=await Promise.all([db.from('likes').select('post_id,user_id').in('post_id',ids),db.from('comments').select('id,post_id,user_id,body,created_at').in('post_id',ids).order('created_at'),db.from('profiles').select('id,username,display_name,avatar_url').in('id',uids)]),likes=lr.data||[],comments=cr.data||[],people=pr.data||[],person=id=>people.find(p=>p.id===id);$('posts').innerHTML=r.data.map(p=>{let a=person(p.user_id),mine=p.user_id===user.id,pc=comments.filter(c=>c.post_id===p.id),liked=likes.some(l=>l.post_id===p.id&&l.user_id===user.id),imgs=(p.image_urls||[]).map(u=>'<img class="postimg" loading="lazy" src="'+esc(u)+'">').join('')+(p.video_url?'<video class="postimg" controls playsinline preload="metadata" src="'+esc(p.video_url)+'"></video>':'');return '<article class="card post"><div class="posttop">'+avatar(a)+'<div><div class="postname">'+esc(a?.display_name||a?.username||'عضو NEXO')+'</div><div class="posttime">'+esc(stamp(p.created_at))+'</div></div></div><div class="postbody">'+esc(p.body)+'</div>'+imgs+'<div class="actions"><button class="action '+(liked?'active':'')+'" data-like="'+p.id+'">'+(liked?'♥':'♡')+' '+likes.filter(l=>l.post_id===p.id).length+'</button><button class="action" data-toggle="'+p.id+'">تعليقات '+pc.length+'</button>'+(mine?'<button class="action" data-del="'+p.id+'">حذف</button>':'')+'</div><div id="comments-'+p.id+'" class="hidden">'+pc.map(c=>'<div class="comment"><b>'+esc(person(c.user_id)?.display_name||'عضو')+':</b> '+esc(c.body)+'</div>').join('')+'<div class="commentbox"><input class="field" id="c-'+p.id+'" maxlength="500" placeholder="اكتب تعليقاً"><button class="btn" data-sendcomment="'+p.id+'">إرسال</button></div></div></article>'}).join('')}
-$('posts').onclick=async e=>{let b=e.target.closest('button');if(!b)return;if(b.dataset.like){let id=b.dataset.like,old=await db.from('likes').select('post_id').eq('post_id',id).eq('user_id',user.id).maybeSingle(),r=old.data?await db.from('likes').delete().eq('post_id',id).eq('user_id',user.id):await db.from('likes').insert({post_id:id,user_id:user.id});if(r.error)alert(r.error.message);else loadPosts()}if(b.dataset.toggle)$( 'comments-'+b.dataset.toggle).classList.toggle('hidden');if(b.dataset.sendcomment){let id=b.dataset.sendcomment,body=$('c-'+id).value.trim();if(body){let r=await db.from('comments').insert({post_id:id,user_id:user.id,body});if(r.error)alert(r.error.message);else loadPosts()}}if(b.dataset.del){if($('confirmDelete').checked&&!confirm('تأكيد حذف المنشور؟'))return;let r=await db.from('posts').delete().eq('id',b.dataset.del).eq('user_id',user.id);if(r.error)alert(r.error.message);else loadPosts()}};
+
+async function loadPosts(){
+ const r=await db.from('posts').select('id,user_id,body,created_at,image_urls,video_url').order('created_at',{ascending:false}).limit(60);
+ if(r.error){$('posts').innerHTML='<div class="card">'+esc(r.error.message)+'</div>';return}
+ if(!r.data?.length){$('posts').innerHTML='<div class="card empty">ما في منشورات لسه. تابع أشخاصاً أو شارك أول منشور.</div>';return}
+ const ids=r.data.map(x=>x.id),uids=[...new Set(r.data.map(x=>x.user_id))];
+ const [lr,cr,pr,sr,fr]=await Promise.all([
+  db.from('likes').select('post_id,user_id').in('post_id',ids),
+  db.from('comments').select('id,post_id,user_id,body,created_at').in('post_id',ids).order('created_at'),
+  db.from('profiles').select('id,username,display_name,avatar_url').in('id',uids),
+  db.from('saved_posts').select('post_id').eq('user_id',user.id).in('post_id',ids),
+  db.from('user_follows').select('following_id,status').eq('follower_id',user.id)
+ ]);
+ const likes=lr.data||[],comments=cr.data||[],people=pr.data||[],saved=new Set((sr.data||[]).map(x=>x.post_id)),follows=fr.data||[];
+ const person=id=>people.find(x=>x.id===id);
+ r.data.sort((a,b)=>{const af=follows.some(x=>x.following_id===a.user_id&&x.status==='accepted')||a.user_id===user.id,bf=follows.some(x=>x.following_id===b.user_id&&x.status==='accepted')||b.user_id===user.id;return Number(bf)-Number(af)||new Date(b.created_at)-new Date(a.created_at)});
+ $('posts').innerHTML=r.data.map(p=>{
+  const a=person(p.user_id),mine=p.user_id===user.id,liked=likes.some(x=>x.post_id===p.id&&x.user_id===user.id),following=follows.find(x=>x.following_id===p.user_id),pc=comments.filter(x=>x.post_id===p.id);
+  const media=(p.image_urls||[]).map(url=>'<img class="postimg" loading="lazy" src="'+esc(url)+'">').join('')+(p.video_url?'<video class="postimg" controls playsinline preload="metadata" src="'+esc(p.video_url)+'"></video>':'');
+  return '<article class="card post"><div class="posttop">'+avatar(a)+'<div><div class="postname">'+esc(a?.display_name||a?.username||'عضو NEXO')+'</div><div class="posttime">@'+esc(a?.username||'nexo_user')+' · '+esc(stamp(p.created_at))+'</div></div>'+(!mine?'<button class="action" data-follow="'+p.user_id+'">'+(following?(following.status==='pending'?'مطلوب':'تتابعه'):'متابعة')+'</button>':'')+'</div><div class="postbody">'+esc(p.body)+'</div>'+media+'<div class="actions"><button class="action '+(liked?'active':'')+'" data-like="'+p.id+'">'+(liked?'♥':'♡')+' '+likes.filter(x=>x.post_id===p.id).length+'</button><button class="action" data-toggle="'+p.id+'">تعليقات '+pc.length+'</button><button class="action '+(saved.has(p.id)?'active':'')+'" data-save="'+p.id+'">'+(saved.has(p.id)?'محفوظ':'حفظ')+'</button><button class="action" data-share="'+p.id+'" data-url="'+esc(p.video_url||(p.image_urls||[])[0]||location.href)+'" data-caption="'+esc(p.body||'')+'">مشاركة ↗</button>'+(mine?'<button class="action" data-del="'+p.id+'">حذف</button>':'')+'</div><div id="comments-'+p.id+'" class="hidden">'+pc.map(c=>'<div class="comment"><b>'+esc(person(c.user_id)?.display_name||'عضو')+':</b> '+esc(c.body)+'</div>').join('')+'<div class="commentbox"><input class="field" id="c-'+p.id+'" maxlength="500" placeholder="اكتب تعليقاً"><button class="btn" data-sendcomment="'+p.id+'">إرسال</button></div></div></article>';
+ }).join('');
+}
+$('posts').onclick=async e=>{
+ const b=e.target.closest('button');if(!b)return;
+ if(b.dataset.like){const id=b.dataset.like,old=await db.from('likes').select('post_id').eq('post_id',id).eq('user_id',user.id).maybeSingle(),r=old.data?await db.from('likes').delete().eq('post_id',id).eq('user_id',user.id):await db.from('likes').insert({post_id:id,user_id:user.id});if(r.error)alert(r.error.message);else loadPosts();return}
+ if(b.dataset.save){try{await toggleSaved(b.dataset.save);await loadPosts()}catch(err){alert(err.message)}return}
+ if(b.dataset.follow){try{const st=await toggleFollow(b.dataset.follow);b.textContent=st==='pending'?'مطلوب':st==='accepted'?'تتابعه':'متابعة';}catch(err){alert(err.message)}return}
+ if(b.dataset.share){await shareMedia(b.dataset.url,b.dataset.caption);return}
+ if(b.dataset.toggle){$('comments-'+b.dataset.toggle).classList.toggle('hidden');return}
+ if(b.dataset.sendcomment){const id=b.dataset.sendcomment,body=$('c-'+id).value.trim();if(body){const r=await db.from('comments').insert({post_id:id,user_id:user.id,body});if(r.error)alert(r.error.message);else loadPosts()}return}
+ if(b.dataset.del){if($('confirmDelete').checked&&!confirm('تأكيد حذف المنشور؟'))return;const r=await db.from('posts').delete().eq('id',b.dataset.del).eq('user_id',user.id);if(r.error)alert(r.error.message);else loadPosts()}
+};
 $('publishBtn').onclick=async()=>{let body=$('postText').value.trim();if(!body&&!selectedFiles.length){note('postMsg','اكتب شيئاً أو اختر صورة.','error');return}let b=$('publishBtn');b.disabled=true;try{let urls=[];for(let f of selectedFiles)urls.push(await upload(f,'post-media'));let r=await db.from('posts').insert({user_id:user.id,body:body||' ',image_urls:urls});if(r.error)throw r.error;$('postText').value='';$('postFiles').value='';selectedFiles=[];$('imagePreview').innerHTML='';note('postMsg','تم نشر المنشور.','ok');await loadPosts()}catch(e){note('postMsg','تعذر النشر: '+e.message,'error')}finally{b.disabled=false}};
 
-async function loadReels(){let r=await db.from('posts').select('id,user_id,body,created_at,video_url').not('video_url','is',null).order('created_at',{ascending:false}).limit(40);if(r.error){$('reelsFeed').innerHTML='<div class="empty">'+esc(r.error.message)+'</div>';return}if(!r.data.length){$('reelsFeed').innerHTML='<div class="empty reelEmpty">لسه ما في ريلز. كن أول من ينشر مقطعاً في NEXO ✦</div>';return}let ids=[...new Set(r.data.map(x=>x.user_id))],pr=await db.from('profiles').select('id,username,display_name').in('id',ids);$('reelsFeed').innerHTML=r.data.map(x=>{let p=pr.data?.find(z=>z.id===x.user_id);return '<article class="reelTile"><video controls playsinline preload="metadata" src="'+esc(x.video_url)+'"></video><div class="reelMeta"><b>@'+esc(p?.username||'nexo_user')+'</b>'+esc(x.body||'مقطع من NEXO')+'</div></article>'}).join('')}
+
+async function toggleFollow(targetId){
+ const q=await db.from('user_follows').select('status').eq('follower_id',user.id).eq('following_id',targetId).maybeSingle();
+ if(q.error)throw q.error;
+ if(q.data){const d=await db.from('user_follows').delete().eq('follower_id',user.id).eq('following_id',targetId);if(d.error)throw d.error;return 'removed'}
+ const ins=await db.from('user_follows').insert({follower_id:user.id,following_id:targetId});
+ if(ins.error)throw ins.error;
+ const check=await db.from('user_follows').select('status').eq('follower_id',user.id).eq('following_id',targetId).single();
+ if(check.error)throw check.error;
+ return check.data.status;
+}
+async function toggleSaved(postId){
+ const q=await db.from('saved_posts').select('post_id').eq('user_id',user.id).eq('post_id',postId).maybeSingle();
+ if(q.error)throw q.error;
+ if(q.data){const d=await db.from('saved_posts').delete().eq('user_id',user.id).eq('post_id',postId);if(d.error)throw d.error;return false}
+ const i=await db.from('saved_posts').insert({user_id:user.id,post_id:postId});if(i.error)throw i.error;return true;
+}
+async function shareMedia(url,caption){
+ try{if(navigator.share){await navigator.share({title:'NEXO',text:caption||'شاهد هذا المحتوى على NEXO',url:url});return}
+ await navigator.clipboard.writeText(url);alert('تم نسخ رابط المحتوى')}
+ catch(e){if(e.name!=='AbortError')alert('تعذرت المشاركة على هذا الجهاز')}
+}
+async function loadStories(){
+ const r=await db.from('nexo_stories').select('id,user_id,media_url,media_type,caption,created_at,expires_at').gt('expires_at',new Date().toISOString()).order('created_at',{ascending:true}).limit(100);
+ if(r.error){$('storyRail').innerHTML='<span class="muted small">تعذر تحميل القصص: '+esc(r.error.message)+'</span>';return}
+ const ids=[...new Set((r.data||[]).map(x=>x.user_id))];
+ let people=[];
+ if(ids.length){const p=await db.from('profiles').select('id,username,display_name,avatar_url').in('id',ids);people=p.data||[]}
+ storyGroups=ids.map(id=>({userId:id,person:people.find(p=>p.id===id),items:r.data.filter(x=>x.user_id===id)})).sort((a,b)=>a.userId===user.id?-1:b.userId===user.id?1:0);
+ const own=storyGroups.find(x=>x.userId===user.id);
+ $('storyRail').innerHTML='<button class="storyItem" id="createStory"><div class="storyRing"><div class="storyAvatar storyAdd">'+(profile?.avatar_url?'<img src="'+esc(profile.avatar_url)+'">':'＋')+'</div></div><span>قصتك</span></button>'+
+ storyGroups.filter(g=>g.userId!==user.id).map(g=>'<button class="storyItem" data-openstory="'+g.userId+'"><div class="storyRing"><div class="storyAvatar">'+(g.person?.avatar_url?'<img src="'+esc(g.person.avatar_url)+'">':esc((g.person?.display_name||g.person?.username||'N').slice(0,1)))+'</div></div><span>'+esc((g.person?.display_name||g.person?.username||'عضو').slice(0,12))+'</span></button>').join('');
+ $('createStory').onclick=()=>$('storyFile').click();
+ $('storyRail').querySelectorAll('[data-openstory]').forEach(b=>b.onclick=()=>openStory(b.dataset.openstory));
+}
+async function uploadStory(file){
+ if(!file)return;
+ const isVideo=file.type.startsWith('video/'),okImage=['image/jpeg','image/png','image/webp'].includes(file.type),okVideo=['video/mp4','video/webm','video/quicktime'].includes(file.type);
+ if(!okImage&&!okVideo){alert('اختر صورة أو فيديو بصيغة مدعومة.');return}
+ if(file.size>(isVideo?30:8)*1024*1024){alert(isVideo?'حجم الفيديو الأقصى 30 ميغابايت.':'حجم الصورة الأقصى 8 ميغابايت.');return}
+ try{
+  const ext=file.name.split('.').pop().toLowerCase().replace(/[^a-z0-9]/g,'')||'mp4',path=user.id+'/'+Date.now()+'_story.'+ext;
+  const up=await db.storage.from('post-media').upload(path,file,{cacheControl:'3600',upsert:false,contentType:file.type});if(up.error)throw up.error;
+  const url=db.storage.from('post-media').getPublicUrl(path).data.publicUrl;
+  const ins=await db.from('nexo_stories').insert({user_id:user.id,media_url:url,media_type:isVideo?'video':'image',expires_at:new Date(Date.now()+86400000).toISOString()});
+  if(ins.error)throw ins.error;
+  await loadStories();alert('تم نشر قصتك لمدة 24 ساعة');
+ }catch(e){alert('تعذر نشر القصة: '+e.message)}
+}
+$('storyFile').onchange=()=>{const file=$('storyFile').files[0];uploadStory(file);$('storyFile').value=''};
+function openStory(userId){storyGroupIndex=storyGroups.findIndex(g=>g.userId===userId);storyItemIndex=0;if(storyGroupIndex<0)return;renderStory()}
+function renderStory(){
+ const g=storyGroups[storyGroupIndex];if(!g)return;
+ const item=g.items[storyItemIndex];if(!item)return;
+ $('storyViewerName').textContent=g.person?.display_name||g.person?.username||'قصتي';
+ $('storyViewerCaption').textContent=item.caption||'';
+ $('storyViewerContent').innerHTML=item.media_type==='video'?'<video class="storyViewerMedia" src="'+esc(item.media_url)+'" autoplay controls playsinline></video>':'<img class="storyViewerMedia" src="'+esc(item.media_url)+'" alt="قصة">';
+ show('storyViewer');
+}
+function moveStory(dir){
+ const g=storyGroups[storyGroupIndex];if(!g)return;
+ if(storyItemIndex+dir>=0&&storyItemIndex+dir<g.items.length){storyItemIndex+=dir;renderStory();return}
+ storyGroupIndex+=dir>0?1:-1;
+ if(storyGroupIndex<0||storyGroupIndex>=storyGroups.length){hide('storyViewer');return}
+ storyItemIndex=dir>0?0:storyGroups[storyGroupIndex].items.length-1;renderStory();
+}
+$('storyPrev').onclick=()=>moveStory(-1);$('storyNext').onclick=()=>moveStory(1);$('storyClose').onclick=()=>hide('storyViewer');
+async function loadReels(){
+ const r=await db.from('posts').select('id,user_id,body,created_at,video_url').not('video_url','is',null).order('created_at',{ascending:false}).limit(60);
+ if(r.error){$('reelsFeed').innerHTML='<div class="empty">'+esc(r.error.message)+'</div>';return}
+ if(!r.data?.length){$('reelsFeed').innerHTML='<div class="empty reelEmpty">لسه ما في ريلز. انشر أول فيديو في NEXO ✦</div>';return}
+ const ids=r.data.map(x=>x.id),uids=[...new Set(r.data.map(x=>x.user_id))];
+ const [lr,cr,pr,sr,fr]=await Promise.all([
+  db.from('likes').select('post_id,user_id').in('post_id',ids),
+  db.from('comments').select('id,post_id,user_id,body,created_at').in('post_id',ids).order('created_at'),
+  db.from('profiles').select('id,username,display_name,avatar_url').in('id',uids),
+  db.from('saved_posts').select('post_id').eq('user_id',user.id).in('post_id',ids),
+  db.from('user_follows').select('following_id,status').eq('follower_id',user.id)
+ ]);
+ const likes=lr.data||[],comments=cr.data||[],people=pr.data||[],saved=new Set((sr.data||[]).map(x=>x.post_id)),follows=fr.data||[];
+ const person=id=>people.find(x=>x.id===id);
+ $('reelsFeed').innerHTML=r.data.map(p=>{
+  const a=person(p.user_id),mine=p.user_id===user.id,liked=likes.some(x=>x.post_id===p.id&&x.user_id===user.id),following=follows.find(x=>x.following_id===p.user_id),pc=comments.filter(x=>x.post_id===p.id),avatarHtml=a?.avatar_url?'<img class="reelAvatar" src="'+esc(a.avatar_url)+'">':'<div class="reelAvatar" style="display:grid;place-items:center;color:white">'+esc((a?.display_name||a?.username||'N').slice(0,1))+'</div>';
+  return '<article class="reelSlide" data-reel-slide="'+p.id+'"><video src="'+esc(p.video_url)+'" autoplay muted playsinline loop preload="metadata"></video><div class="reelShade"></div><div class="reelInfo"><b>@'+esc(a?.username||'nexo_user')+(mine?' · أنت':'')+'</b><p>'+esc(p.body||'مقطع من NEXO')+'</p></div><div class="reelRail">'+avatarHtml+(!mine?'<button class="reelFollow" data-reel-follow="'+p.user_id+'" title="متابعة">'+(following?(following.status==='pending'?'…':'✓'):'＋')+'</button>':'')+'<button class="reelAction '+(liked?'active':'')+'" data-reel-like="'+p.id+'">♥<small>'+likes.filter(x=>x.post_id===p.id).length+'</small></button><button class="reelAction" data-reel-comment="'+p.id+'">▤<small>'+pc.length+'</small></button><button class="reelAction '+(saved.has(p.id)?'active':'')+'" data-reel-save="'+p.id+'">▣<small>حفظ</small></button><button class="reelAction" data-reel-share="'+p.id+'" data-url="'+esc(p.video_url)+'" data-caption="'+esc(p.body||'')+'">↗<small>مشاركة</small></button><button class="reelAction" data-reel-sound="'+p.id+'">♪<small>صوت</small></button></div><div class="reelComments hidden" id="reel-comments-'+p.id+'"><div class="reelCommentList">'+pc.slice(-6).map(c=>'<div class="reelCommentLine"><b>'+esc(people.find(x=>x.id===c.user_id)?.display_name||'عضو')+':</b> '+esc(c.body)+'</div>').join('')+'</div><div class="reelCommentInput"><input class="field" id="reel-c-'+p.id+'" maxlength="500" placeholder="اكتب تعليقاً…"><button class="btn" data-reel-send="'+p.id+'">إرسال</button></div></div></article>';
+ }).join('');
+ if(reelsObserver)reelsObserver.disconnect();
+ if('IntersectionObserver' in window){
+  reelsObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+   const v=entry.target.querySelector('video');if(!v)return;
+   if(entry.isIntersecting&&entry.intersectionRatio>=0.65){if(activeReelVideo&&activeReelVideo!==v)activeReelVideo.pause();activeReelVideo=v;v.play().catch(()=>{})}
+   else v.pause();
+  }),{root:$('reelsFeed'),threshold:[0.25,0.65,0.9]});
+  $('reelsFeed').querySelectorAll('video').forEach(v=>reelsObserver.observe(v));
+ }else{$('reelsFeed').querySelector('video')?.play().catch(()=>{})}
+}
+$('reelsFeed').onclick=async e=>{
+ const b=e.target.closest('button');
+ if(b){
+  if(b.dataset.reelLike){const id=b.dataset.reelLike,q=await db.from('likes').select('post_id').eq('post_id',id).eq('user_id',user.id).maybeSingle(),r=q.data?await db.from('likes').delete().eq('post_id',id).eq('user_id',user.id):await db.from('likes').insert({post_id:id,user_id:user.id});if(r.error)alert(r.error.message);else loadReels();return}
+  if(b.dataset.reelSave){try{await toggleSaved(b.dataset.reelSave);await loadReels()}catch(e){alert(e.message)}return}
+  if(b.dataset.reelFollow){try{const state=await toggleFollow(b.dataset.reelFollow);b.textContent=state==='pending'?'…':state==='accepted'?'✓':'＋'}catch(e){alert(e.message)}return}
+  if(b.dataset.reelComment){$('reel-comments-'+b.dataset.reelComment).classList.toggle('hidden');return}
+  if(b.dataset.reelSend){const id=b.dataset.reelSend,input=$('reel-c-'+id),body=input.value.trim();if(!body)return;const r=await db.from('comments').insert({post_id:id,user_id:user.id,body});if(r.error)alert(r.error.message);else loadReels();return}
+  if(b.dataset.reelShare){await shareMedia(b.dataset.url,b.dataset.caption);return}
+  if(b.dataset.reelSound){const v=b.closest('.reelSlide').querySelector('video');v.muted=!v.muted;b.classList.toggle('active',!v.muted);if(!v.muted)v.play().catch(()=>{});return}
+ }
+ const v=e.target.closest('.reelSlide')?.querySelector('video');if(v&&e.target===v){if(v.paused)v.play().catch(()=>{});else v.pause()}
+};
+$('showReelComposer').onclick=()=>show('reelComposer');$('hideReelComposer').onclick=()=>hide('reelComposer');
+
+async function loadReels_legacy(){let r=await db.from('posts').select('id,user_id,body,created_at,video_url').not('video_url','is',null).order('created_at',{ascending:false}).limit(40);if(r.error){$('reelsFeed').innerHTML='<div class="empty">'+esc(r.error.message)+'</div>';return}if(!r.data.length){$('reelsFeed').innerHTML='<div class="empty reelEmpty">لسه ما في ريلز. كن أول من ينشر مقطعاً في NEXO ✦</div>';return}let ids=[...new Set(r.data.map(x=>x.user_id))],pr=await db.from('profiles').select('id,username,display_name').in('id',ids);$('reelsFeed').innerHTML=r.data.map(x=>{let p=pr.data?.find(z=>z.id===x.user_id);return '<article class="reelTile"><video controls playsinline preload="metadata" src="'+esc(x.video_url)+'"></video><div class="reelMeta"><b>@'+esc(p?.username||'nexo_user')+'</b>'+esc(x.body||'مقطع من NEXO')+'</div></article>'}).join('')}
 $('publishReel').onclick=async()=>{let file=$('reelFile').files[0],caption=$('reelCaption').value.trim();if(!file){note('reelMsg','اختر مقطع فيديو أولاً.','error');return}if(!['video/mp4','video/webm','video/quicktime'].includes(file.type)){note('reelMsg','الصيغ المدعومة MP4 وWebM وMOV.','error');return}if(file.size>30*1024*1024){note('reelMsg','حجم الفيديو الأقصى 30 ميغابايت.','error');return}let b=$('publishReel');b.disabled=true;try{let ext=file.name.split('.').pop().toLowerCase().replace(/[^a-z0-9]/g,'')||'mp4',path=user.id+'/'+Date.now()+'_reel.'+ext,up=await db.storage.from('post-media').upload(path,file,{cacheControl:'3600',upsert:false,contentType:file.type});if(up.error)throw up.error;let url=db.storage.from('post-media').getPublicUrl(path).data.publicUrl,ins=await db.from('posts').insert({user_id:user.id,body:caption||'ريلز جديد من NEXO',image_urls:[],video_url:url});if(ins.error)throw ins.error;$('reelFile').value='';$('reelCaption').value='';note('reelMsg','تم نشر الريلز بنجاح.','ok');await loadReels()}catch(e){note('reelMsg','تعذر نشر المقطع: '+e.message,'error')}finally{b.disabled=false}};
 
 
@@ -199,7 +385,7 @@ if(mine){
   };
 }}
 async function loadExplore(){await Promise.all([searchPeople($('peopleSearch').value,'peopleList'),communityCards('exploreCommunities')])}
-async function searchPeople(q,target){let r=await db.from('profiles').select('id,username,display_name,avatar_url,bio').neq('id',user.id).limit(40);if(r.error){$(target).textContent=r.error.message;return}let arr=(r.data||[]).filter(p=>(p.username+' '+p.display_name).toLowerCase().includes(q.toLowerCase()));$(target).innerHTML=arr.length?arr.map(p=>'<div class="chatrow" data-person="'+p.id+'">'+avatar(p)+'<div><b>'+esc(p.display_name||p.username)+'</b><div class="muted small">@'+esc(p.username)+'</div></div><button class="btn secondary" style="margin-right:auto">مراسلة</button></div>').join(''):'<div class="empty">لا يوجد أشخاص مطابقون.</div>'}
+async function searchPeople(q,target){let r=await db.from('profiles').select('id,username,display_name,avatar_url,bio,is_private').neq('id',user.id).limit(40);if(r.error){$(target).textContent=r.error.message;return}let arr=(r.data||[]).filter(p=>(p.username+' '+p.display_name).toLowerCase().includes(q.toLowerCase()));let fr=await db.from('user_follows').select('following_id,status').eq('follower_id',user.id),follows=fr.data||[];$(target).innerHTML=arr.length?arr.map(p=>{let f=follows.find(x=>x.following_id===p.id);return '<div class="chatrow" data-person="'+p.id+'">'+avatar(p)+'<div><b>'+esc(p.display_name||p.username)+'</b><div class="muted small">@'+esc(p.username)+'</div></div><button class="btn secondary" data-follow-person="'+p.id+'" style="margin-right:auto">'+(f?(f.status==='pending'?'مطلوب':'تتابعه'):'متابعة')+'</button></div>'}).join(''):'<div class="empty">لا يوجد أشخاص مطابقون.</div>'}
 $('peopleSearch').oninput=()=>searchPeople($('peopleSearch').value,'peopleList');$('chatSearch').oninput=()=>searchPeople($('chatSearch').value,'chatPeople');
 async function communityCards(target){let r=await db.from('communities').select('id,name,description,creator_id').order('created_at',{ascending:false});if(r.error){$(target).textContent=r.error.message;return}$(target).innerHTML=r.data.length?r.data.map(c=>'<div class="item"><div><div class="itemtitle">'+esc(c.name)+'</div><div class="muted small">'+esc(c.description||'مجتمع NEXO')+'</div></div><button class="btn secondary" data-opencommunity="'+c.id+'" data-name="'+esc(c.name)+'">عرض</button></div>').join(''):'<div class="empty">لا توجد مجتمعات بعد.</div>'}
 async function loadCommunities(){await communityCards('communitiesList')}
@@ -210,12 +396,39 @@ async function openCommunity(id,name){activeCommunity=id;$('roomTitle').textCont
 async function loadCommunityMessages(){let r=await db.from('community_messages').select('id,user_id,body,created_at').eq('community_id',activeCommunity).order('created_at').limit(100);if(r.error){$('communityMessages').textContent=r.error.message;return}let ids=[...new Set(r.data.map(m=>m.user_id))],p=ids.length?await db.from('profiles').select('id,display_name,username').in('id',ids):{data:[]};$('communityMessages').innerHTML=r.data.map(m=>'<div class="bubble '+(m.user_id===user.id?'mine':'')+'"><b>'+esc(p.data?.find(x=>x.id===m.user_id)?.display_name||'عضو')+'</b><div>'+esc(m.body)+'</div><span class="small">'+esc(stamp(m.created_at))+'</span></div>').join('')||'<div class="empty">ابدأ الحديث مع أعضاء المجتمع.</div>';$('communityMessages').scrollTop=$('communityMessages').scrollHeight}
 $('sendCommunity').onclick=async()=>{let body=$('communityInput').value.trim();if(!body||!activeCommunity)return;let r=await db.from('community_messages').insert({community_id:activeCommunity,user_id:user.id,body});if(r.error)note('roomMsg',r.error.message,'error');else{$('communityInput').value='';loadCommunityMessages()}};$('backCommunities').onclick=()=>{hide('communityRoom');if(communityChannel)db.removeChannel(communityChannel);communityChannel=null};
 async function loadChats(){await searchPeople($('chatSearch').value,'chatPeople');let r=await db.from('direct_messages').select('sender_id,recipient_id,body,created_at').or('sender_id.eq.'+user.id+',recipient_id.eq.'+user.id).order('created_at',{ascending:false}).limit(100);if(r.error){$('chatList').textContent=r.error.message;return}let map=new Map();for(let m of r.data){let id=m.sender_id===user.id?m.recipient_id:m.sender_id;if(!map.has(id))map.set(id,m)}let ids=[...map.keys()],p=ids.length?await db.from('profiles').select('id,display_name,username,avatar_url').in('id',ids):{data:[]};$('chatList').innerHTML=ids.length?ids.map(id=>{let x=p.data?.find(z=>z.id===id),m=map.get(id);return '<div class="chatrow" data-person="'+id+'">'+avatar(x)+'<div><b>'+esc(x?.display_name||x?.username||'عضو')+'</b><div class="muted small">'+esc(m.body.slice(0,65))+'</div></div></div>'}).join(''):'<div class="empty">محادثاتك ستظهر هنا.</div>'}
-$('chatPeople').onclick=$('chatList').onclick=async e=>{let b=e.target.closest('[data-person]');if(!b)return;let p=await db.from('profiles').select('id,username,display_name,avatar_url').eq('id',b.dataset.person).single();if(p.data)openDm(p.data)};
+$('peopleList').onclick=async e=>{let f=e.target.closest('[data-follow-person]');if(f){try{const st=await toggleFollow(f.dataset.followPerson);f.textContent=st==='pending'?'مطلوب':st==='accepted'?'تتابعه':'متابعة'}catch(err){alert(err.message)}return}let row=e.target.closest('[data-person]');if(row){let p=await db.from('profiles').select('id,username,display_name,avatar_url').eq('id',row.dataset.person).single();if(p.data)openDm(p.data)}};$('chatPeople').onclick=$('chatList').onclick=async e=>{let f=e.target.closest('[data-follow-person]');if(f){try{const st=await toggleFollow(f.dataset.followPerson);f.textContent=st==='pending'?'مطلوب':st==='accepted'?'تتابعه':'متابعة'}catch(err){alert(err.message)}return}let b=e.target.closest('[data-person]');if(!b)return;let p=await db.from('profiles').select('id,username,display_name,avatar_url').eq('id',b.dataset.person).single();if(p.data)openDm(p.data)};
 async function openDm(p){activeDm=p.id;$('chatTitle').textContent=p.display_name||p.username;$('chatAvatar').textContent=initial(p.display_name||p.username);show('chatRoom');await loadDmMessages();if(dmChannel)db.removeChannel(dmChannel);dmChannel=db.channel('dm-'+[user.id,p.id].sort().join('-')).on('postgres_changes',{event:'INSERT',schema:'public',table:'direct_messages'},payload=>{let m=payload.new;if((m.sender_id===user.id&&m.recipient_id===activeDm)||(m.sender_id===activeDm&&m.recipient_id===user.id))loadDmMessages()}).subscribe()}
 async function loadDmMessages(){let r=await db.from('direct_messages').select('id,sender_id,recipient_id,body,created_at').or('and(sender_id.eq.'+user.id+',recipient_id.eq.'+activeDm+'),and(sender_id.eq.'+activeDm+',recipient_id.eq.'+user.id+')').order('created_at').limit(150);if(r.error){$('dmMessages').textContent=r.error.message;return}$('dmMessages').innerHTML=r.data.map(m=>'<div class="bubble '+(m.sender_id===user.id?'mine':'')+'">'+esc(m.body)+'<div class="small">'+esc(stamp(m.created_at))+'</div></div>').join('')||'<div class="empty">ابدأ أول محادثة.</div>';$('dmMessages').scrollTop=$('dmMessages').scrollHeight}
 $('sendDm').onclick=async()=>{let body=$('dmInput').value.trim();if(!body||!activeDm)return;let r=await db.from('direct_messages').insert({sender_id:user.id,recipient_id:activeDm,body});if(r.error)note('dmMsg','تعذر إرسال الرسالة: '+r.error.message,'error');else{$('dmInput').value='';await loadDmMessages()}};$('backChats').onclick=()=>{hide('chatRoom');activeDm=null;if(dmChannel)db.removeChannel(dmChannel);dmChannel=null;loadChats()};
-async function loadProfilePage(){syncProfile();$('displayName').value=profile?.display_name||'';$('username').value=profile?.username||'';$('bio').value=profile?.bio||'';let r=await db.from('posts').select('id,body,created_at,image_urls').eq('user_id',user.id).order('created_at',{ascending:false}).limit(30);$('myPostCount').textContent=(r.data?.length||0)+' منشور';$('myPosts').innerHTML=r.data?.length?r.data.map(p=>'<div class="item"><div>'+esc(p.body)+'<div class="muted small">'+esc(stamp(p.created_at))+'</div></div>'+(p.image_urls?.[0]?'<img src="'+esc(p.image_urls[0])+'" style="width:54px;height:54px;object-fit:cover;border-radius:10px">':'')+'</div>').join(''):'<div class="empty">ما نشرت أي شيء بعد.</div>'}
-$('saveProfile').onclick=async()=>{let username=$('username').value.trim().toLowerCase(),display_name=$('displayName').value.trim(),bio=$('bio').value.trim();if(!/^[a-z0-9_]{3,24}$/.test(username)){note('profileMsg','اسم المستخدم من 3 إلى 24 حرفاً إنجليزياً أو رقماً أو _.','error');return}let b=$('saveProfile');b.disabled=true;try{let avatar_url=profile?.avatar_url||null;if($('avatarFile').files[0])avatar_url=await upload($('avatarFile').files[0],'avatars');let r=await db.from('profiles').upsert({id:user.id,username,display_name:display_name||username,bio,avatar_url},{onConflict:'id'}).select().single();if(r.error)throw r.error;profile=r.data;syncProfile();note('profileMsg','تم حفظ الملف الشخصي.','ok')}catch(e){note('profileMsg','تعذر الحفظ: '+e.message,'error')}finally{b.disabled=false}};
+
+async function loadProfilePage(){
+ syncProfile();$('displayName').value=profile?.display_name||'';$('username').value=profile?.username||'';$('bio').value=profile?.bio||'';$('privateProfileToggle').checked=!!profile?.is_private;
+ const [postsResult,followersResult,followingResult,requestsResult,savedResult]=await Promise.all([
+  db.from('posts').select('id,body,created_at,image_urls,video_url').eq('user_id',user.id).order('created_at',{ascending:false}).limit(30),
+  db.from('user_follows').select('follower_id').eq('following_id',user.id).eq('status','accepted'),
+  db.from('user_follows').select('following_id').eq('follower_id',user.id).eq('status','accepted'),
+  db.from('user_follows').select('follower_id,created_at').eq('following_id',user.id).eq('status','pending'),
+  db.from('saved_posts').select('post_id,created_at').eq('user_id',user.id).order('created_at',{ascending:false}).limit(20)
+ ]);
+ if(postsResult.error)note('profileMsg',postsResult.error.message,'error');
+ $('myPostCount').textContent=postsResult.data?.length||0;$('myFollowerCount').textContent=followersResult.data?.length||0;$('myFollowingCount').textContent=followingResult.data?.length||0;
+ $('myPosts').innerHTML=postsResult.data?.length?postsResult.data.map(p=>'<div class="item"><div>'+esc(p.body)+'<div class="muted small">'+esc(stamp(p.created_at))+'</div></div>'+(p.video_url?'<span class="pill">فيديو</span>':p.image_urls?.[0]?'<img src="'+esc(p.image_urls[0])+'" style="width:54px;height:54px;object-fit:cover;border-radius:10px">':'')+'</div>').join(''):'<div class="empty">ما نشرت أي شيء بعد.</div>';
+ const req=requestsResult.data||[];
+ if(req.length){const ids=req.map(x=>x.follower_id),pr=await db.from('profiles').select('id,username,display_name,avatar_url').in('id',ids);$('followRequests').innerHTML=req.map(x=>{const p=pr.data?.find(y=>y.id===x.follower_id);return '<div class="followRequest">'+avatar(p)+'<span>'+esc(p?.display_name||p?.username||'عضو')+'</span><div class="requestActions"><button class="btn" data-accept-follow="'+x.follower_id+'">قبول</button><button class="btn secondary" data-decline-follow="'+x.follower_id+'">رفض</button></div></div>'}).join('')}
+ else $('followRequests').textContent='لا توجد طلبات جديدة.';
+ const savedIds=(savedResult.data||[]).map(x=>x.post_id);
+ if(savedIds.length){const sr=await db.from('posts').select('id,body,video_url,image_urls').in('id',savedIds);$('savedPostsList').innerHTML=(sr.data||[]).map(p=>'<div class="item"><span>'+esc(p.body||'منشور محفوظ')+'</span><span class="pill">'+(p.video_url?'فيديو':'منشور')+'</span></div>').join('')||'المحفوظات غير متاحة حالياً.'}
+ else $('savedPostsList').textContent='لا توجد عناصر محفوظة.';
+}
+$('profilePage').onclick=async e=>{
+ const b=e.target.closest('button');if(!b)return;
+ const target=b.dataset.acceptFollow||b.dataset.declineFollow;if(!target)return;
+ const status=b.dataset.acceptFollow?'accepted':'declined';
+ const r=await db.from('user_follows').update({status}).eq('follower_id',target).eq('following_id',user.id).eq('status','pending');
+ if(r.error)alert(r.error.message);else loadProfilePage();
+};
+
+$('saveProfile').onclick=async()=>{let username=$('username').value.trim().toLowerCase(),display_name=$('displayName').value.trim(),bio=$('bio').value.trim();if(!/^[a-z0-9_]{3,24}$/.test(username)){note('profileMsg','اسم المستخدم من 3 إلى 24 حرفاً إنجليزياً أو رقماً أو _.','error');return}let b=$('saveProfile');b.disabled=true;try{let avatar_url=profile?.avatar_url||null;if($('avatarFile').files[0])avatar_url=await upload($('avatarFile').files[0],'avatars');let r=await db.from('profiles').upsert({id:user.id,username,display_name:display_name||username,bio,avatar_url,is_private:$('privateProfileToggle').checked},{onConflict:'id'}).select().single();if(r.error)throw r.error;profile=r.data;syncProfile();note('profileMsg','تم حفظ الملف الشخصي.','ok')}catch(e){note('profileMsg','تعذر الحفظ: '+e.message,'error')}finally{b.disabled=false}};
 
 async function loadStore(){
  if(!user)return;

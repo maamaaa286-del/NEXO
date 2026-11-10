@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>OPEN CITY | Mobile Prototype</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#91a9b5;font-family:system-ui;touch-action:none}canvas{display:block}
+#hud{position:fixed;inset:0;pointer-events:none;color:white}.top{position:absolute;top:14px;left:14px;right:14px;display:flex;justify-content:space-between}.brand{font-weight:900;letter-spacing:2px;text-shadow:0 2px 8px #000}.pill,#hint,#status{background:#1119;border:1px solid #ffffff30;border-radius:12px;padding:8px 12px;font-size:12px;backdrop-filter:blur(8px)}#hint{position:absolute;top:58px;left:50%;transform:translateX(-50%);white-space:nowrap}#status{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:10px}
+#pad{position:fixed;bottom:22px;left:18px;width:144px;height:144px;pointer-events:auto}.key{position:absolute;width:46px;height:46px;border-radius:14px;border:1px solid #ffffff55;background:#111b;color:white;font-size:20px}#up{top:0;left:49px}#down{bottom:0;left:49px}#left{top:49px;left:0}#right{top:49px;right:0}
+#actions{position:fixed;bottom:28px;right:18px;display:flex;gap:10px;pointer-events:auto}.act{width:62px;height:62px;border-radius:50%;border:1px solid #ffffff66;background:#151b;color:white;font-weight:700;font-size:11px}#enter{background:#2563ebdd}
+</style></head><body>
+<div id="hud"><div class="top"><div class="brand">OPEN CITY <span style="color:#93c5fd">/ TEST 01</span></div><div class="pill" id="mode">استكشاف المدينة</div></div><div id="hint">اسحب الشاشة لتدوير الكاميرا • تحرّك بالأزرار</div><div id="status">نموذج أولي ثلاثي الأبعاد — قيد التطوير</div></div>
+<div id="pad"><button class="key" id="up">▲</button><button class="key" id="down">▼</button><button class="key" id="left">◀</button><button class="key" id="right">▶</button></div>
+<div id="actions"><button class="act" id="enter">دخول<br>السيارة</button></div>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script>
+(()=>{if(!window.THREE){document.getElementById('hint').textContent='تعذّر تحميل محرك 3D — تأكد من الإنترنت';return}
+const scene=new THREE.Scene();scene.background=new THREE.Color(0x9eb9c4);scene.fog=new THREE.Fog(0x9eb9c4,45,150);
+const camera=new THREE.PerspectiveCamera(65,innerWidth/innerHeight,.1,250);
+const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=true;renderer.outputColorSpace=THREE.SRGBColorSpace;document.body.appendChild(renderer.domElement);
+scene.add(new THREE.HemisphereLight(0xdceeff,0x56604d,2));const sun=new THREE.DirectionalLight(0xffedce,2.1);sun.position.set(-30,50,25);sun.castShadow=true;scene.add(sun);
+const M=(c)=>new THREE.MeshStandardMaterial({color:c,roughness:.85});
+function box(w,h,d,m,x,y,z){const o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;scene.add(o);return o}
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(220,220),M(0x71836d));ground.rotation.x=-Math.PI/2;ground.receiveShadow=true;scene.add(ground);
+const road=M(0x303941),side=M(0xb5b1a4),stripe=M(0xe8dfb6),glass=M(0x8eb4c4);
+box(15,.08,180,road,0,.04,0);box(180,.08,13,road,0,.04,0);
+for(let z=-85;z<90;z+=12)box(.16,.015,5,stripe,0,.09,z);
+for(let x=-85;x<90;x+=12)box(5,.015,.16,stripe,x,.09,0);
+for(const s of [-1,1]){box(2,.15,180,side,s*8.5,.09,0);box(180,.15,2,side,0,.09,s*7.5)}
+const facades=[0xc7b69e,0x9babb2,0xd0c7b7,0x7d8e91,0xb8a18b].map(M);
+for(let gx=-5;gx<=5;gx++)for(let gz=-5;gz<=5;gz++){if(Math.abs(gx)<2&&Math.abs(gz)<2||Math.random()<.32)continue;const x=gx*18+(Math.random()-.5)*2,z=gz*18+(Math.random()-.5)*2,w=7+Math.random()*4,d=7+Math.random()*4,h=8+Math.random()*22;box(w,h,d,facades[Math.floor(Math.random()*facades.length)],x,h/2,z);box(w+.3,.35,d+.3,M(0x555b5d),x,h+.15,z);for(let y=2;y<h-1;y+=2.5)for(let xx=-w/2+1;xx<w/2;xx+=2)box(.9,1.1,.06,glass,x+xx,y,z+d/2+.04)}
+const tree=M(0x38634a),wood=M(0x6a4a32);for(let i=0;i<32;i++){const x=(Math.random()-.5)*100,z=(Math.random()-.5)*130;if(Math.abs(x)<11)continue;const t=new THREE.Mesh(new THREE.CylinderGeometry(.18,.25,2,7),wood);t.position.set(x,1,z);scene.add(t);const crown=new THREE.Mesh(new THREE.SphereGeometry(1.3,8,7),tree);crown.position.set(x,2.7,z);crown.scale.y=1.2;scene.add(crown)}
+const player=new THREE.Group();scene.add(player);const torso=new THREE.Mesh(new THREE.CapsuleGeometry(.42,.85,4,8),M(0x263d68));torso.position.y=1.12;player.add(torso);const head=new THREE.Mesh(new THREE.SphereGeometry(.28,12,10),M(0xd5a27d));head.position.y=1.95;player.add(head);player.position.set(0,0,5);
+const car=new THREE.Group();scene.add(car);const body=new THREE.Mesh(new THREE.BoxGeometry(2.15,.62,4.1),M(0x9d2d32));body.position.y=.75;car.add(body);const cabin=new THREE.Mesh(new THREE.BoxGeometry(1.65,.72,2),M(0x253a49));cabin.position.set(0,1.38,-.25);car.add(cabin);for(const x of [-1,1])for(const z of [-1.35,1.35]){const wh=new THREE.Mesh(new THREE.CylinderGeometry(.39,.39,.23,16),M(0x17191b));wh.rotation.z=Math.PI/2;wh.position.set(x,.43,z);car.add(wh)}car.position.set(3,0,1);
+const keys={};function bind(id,k){const el=document.getElementById(id);el.addEventListener('pointerdown',e=>{e.preventDefault();keys[k]=true;el.setPointerCapture(e.pointerId)});['pointerup','pointercancel','lostpointercapture'].forEach(ev=>el.addEventListener(ev,()=>keys[k]=false))}bind('up','f');bind('down','b');bind('left','l');bind('right','r');
+let driving=false,angle=0,speed=0,dragX=null;document.getElementById('enter').onclick=()=>{if(!driving&&player.position.distanceTo(car.position)<6){driving=true;player.visible=false;document.getElementById('mode').textContent='قيادة السيارة';document.getElementById('enter').innerHTML='خروج'}else if(driving){driving=false;player.visible=true;player.position.copy(car.position).add(new THREE.Vector3(2,0,0));document.getElementById('mode').textContent='استكشاف المدينة';document.getElementById('enter').innerHTML='دخول<br>السيارة'}else document.getElementById('hint').textContent='اقترب من السيارة أولاً'};
+renderer.domElement.addEventListener('pointerdown',e=>{if(e.clientY<innerHeight-170)dragX=e.clientX});renderer.domElement.addEventListener('pointermove',e=>{if(dragX!==null){angle-=(e.clientX-dragX)*.006;dragX=e.clientX}});['pointerup','pointercancel'].forEach(ev=>renderer.domElement.addEventListener(ev,()=>dragX=null));
+const clock=new THREE.Clock(),v=new THREE.Vector3();function loop(){requestAnimationFrame(loop);const dt=Math.min(clock.getDelta(),.04),f=(keys.f?1:0)-(keys.b?1:0),turn=(keys.r?1:0)-(keys.l?1:0);
+if(driving){speed=THREE.MathUtils.clamp((speed+f*12*dt)*Math.pow(.92,dt*30),-7,17);car.rotation.y-=turn*dt*(.9+Math.abs(speed)*.055);car.position.x+=Math.sin(car.rotation.y)*speed*dt;car.position.z+=Math.cos(car.rotation.y)*speed*dt}else if(f||turn){angle+=turn*dt*2.3;player.rotation.y=angle;v.set(0,0,-f*dt*5).applyAxisAngle(new THREE.Vector3(0,1,0),angle);player.position.add(v)}
+const target=driving?car.position:player.position,rot=driving?car.rotation.y:angle;const desired=new THREE.Vector3(Math.sin(rot)*8,5.2,Math.cos(rot)*8).add(target);camera.position.lerp(desired,1-Math.pow(.001,dt));camera.lookAt(target.x,target.y+1,target.z);renderer.render(scene,camera)}
+loop();addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)})})();
+</script></body></html>

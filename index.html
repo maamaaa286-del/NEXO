@@ -121,9 +121,54 @@ body{background:radial-gradient(ellipse at 50% -12%,#533078 0,transparent 42%),r
 .followRequest .requestActions button{padding:7px 10px;font-size:11px}
 @media(min-width:700px){.reelsFeed{width:min(440px,100%);margin:0 auto;height:calc(100dvh - 142px)}.reelSlide{height:calc(100dvh - 154px)}}
 
+
+/* Instagram-inspired NEXO home layout */
+@media(max-width:699px){
+ body{padding-bottom:calc(70px + env(safe-area-inset-bottom));background:#090a10}
+ .wrap{width:100%;padding:0 0 24px}
+ .top.instaTop{height:58px;margin:0;padding:0 15px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;background:#090a10;border-bottom:1px solid #22212a;box-shadow:none}
+ .instaTop .brandBlock{grid-column:2;grid-row:1}
+ .instaTop .brand{font-size:29px;letter-spacing:1px;background:linear-gradient(100deg,#fff,#d9c7ff);color:transparent;background-clip:text}
+ .instaTop .topActions{gap:10px}
+ .instaTop .topActions:first-child{grid-column:1;grid-row:1;justify-content:flex-start}
+ .instaTop .topActions:last-of-type{grid-column:3;grid-row:1;justify-content:flex-end}
+ .instaTop .topIcon,.instaTop .topAvatar{width:34px;height:34px;border:0;border-radius:10px;background:transparent;box-shadow:none;font-size:25px;padding:0}
+ .instaTop #topStore,.instaTop #topSettings,.instaTop #topProfile,.instaTop #topCommunities{display:none}
+ .instaTop .instaPlus{font-size:31px}
+ #homePage .welcomeLine{display:none}
+ #homePage .storiesCard{margin:0;padding:13px 12px 11px;border:0;border-bottom:1px solid #24232b;border-radius:0;background:#090a10;box-shadow:none}
+ #homePage .storiesHead{margin-bottom:10px;font-size:12px}
+ #homePage .storiesHead b{font-size:13px}
+ #homePage .storyRail{gap:14px;padding:1px 2px 3px}
+ #homePage .storyItem{min-width:65px;font-size:10px;color:#f1eff6}
+ #homePage .storyRing{width:66px;height:66px;padding:3px;margin-bottom:5px;background:conic-gradient(#ffbd45,#f51b83,#9c39e8,#ffbd45);box-shadow:none}
+ #homePage .storyAvatar{border:2px solid #090a10;background:#24212d;font-size:20px}
+ #homePage .composer{margin:0;padding:12px 14px;border:0;border-bottom:1px solid #25232d;border-radius:0;background:#0c0c13;box-shadow:none}
+ #homePage .composerTrigger{border-radius:25px;background:#17161f;border-color:#34313c;text-align:right}
+ #homePage .composerTools{margin-top:8px;padding-top:7px;border:0;justify-content:space-around}
+ #homePage .toolChip{font-size:11px;padding:5px 8px}
+ #homePage .feedHeading{padding:15px 14px 2px}
+ #homePage .feedHeading .section-title{font-size:19px}
+ #homePage .feedHeading .eyebrow{display:none}
+ #homePage .post{margin:8px 0 13px;padding:12px 0;border:0;border-bottom:1px solid #292731;border-radius:0;background:#090a10;box-shadow:none}
+ #homePage .posttop{padding:0 13px}
+ #homePage .postbody{padding:0 13px;margin:10px 0;font-size:14px}
+ #homePage .postimg{display:block;width:100%;max-height:none;height:auto;aspect-ratio:auto;object-fit:contain;border:0;border-radius:0;margin:8px 0}
+ #homePage .actions{margin:0 13px;padding-top:9px;border-color:#27252e}
+ .instaBottom{left:0;right:0;bottom:0;height:calc(57px + env(safe-area-inset-bottom));padding:5px 13px calc(5px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(5,1fr);gap:4px;border:0;border-top:1px solid #292731;border-radius:0;background:#090a10;box-shadow:none;backdrop-filter:blur(18px)}
+ .instaBottom .nav{min-height:43px;padding:4px 2px;border-radius:10px;background:transparent;color:#f4f1f8}
+ .instaBottom .nav .ico{font-size:27px;line-height:32px}
+ .instaBottom .nav.active{background:transparent;color:#fff}
+ .instaBottom .nav.active .ico{filter:drop-shadow(0 0 5px #b77aff)}
+}
+@media(min-width:700px){
+ .top.instaTop{display:flex;justify-content:space-between}
+ #homePage .welcomeLine{display:none}
+ #homePage .storiesCard{margin-top:4px}
+}
 </style></head>
 <body><main class="wrap">
-<header class="top"><div class="brandBlock"><div class="brand">NEXO<span class="brandDot">.</span></div><div class="muted small">مساحتك، عالمك</div></div><div class="topActions"><button class="topIcon" id="topCommunities">◎</button><button class="topIcon" id="topChats">✉</button><button class="topIcon" id="topStore" title="متجر NEXO">✧</button><button class="topIcon" id="topSettings">⚙</button><button class="topAvatar" id="topProfile">N</button></div><span id="connection" class="hidden">NEXO</span></header>
+<header class="top instaTop"><div class="topActions"><button class="topIcon instaPlus" id="topCreate" aria-label="إنشاء منشور">＋</button><button class="topIcon" id="topCommunities" aria-label="المجتمعات">◎</button></div><div class="brandBlock"><div class="brand">NEXO<span class="brandDot">.</span></div></div><div class="topActions"><button class="topIcon" id="topChats" aria-label="الرسائل">♡</button><button class="topIcon" id="topStore" title="متجر NEXO">✧</button><button class="topIcon" id="topSettings">⚙</button><button class="topAvatar" id="topProfile">N</button></div><span id="connection" class="hidden">NEXO</span></header>
 <section id="authView" class="card auth"><h1>أهلاً بك في NEXO</h1><p class="muted">سجّل دخولك وابدأ التواصل</p><input id="email" class="field" type="email" autocomplete="email" placeholder="البريد الإلكتروني"><input id="password" class="field" type="password" autocomplete="current-password" placeholder="كلمة المرور"><button id="loginBtn" class="btn wide">تسجيل الدخول</button><button id="signupBtn" class="btn secondary wide">إنشاء حساب جديد</button><button id="resetPassword" class="textBtn wide" type="button">نسيت كلمة المرور؟</button><div id="passwordResetPanel" class="hidden"><h3>تعيين كلمة مرور جديدة</h3><p class="muted small">اكتب كلمة مرور جديدة لحسابك.</p><input id="newPassword" class="field" type="password" autocomplete="new-password" minlength="8" placeholder="كلمة المرور الجديدة"><button id="saveNewPassword" class="btn wide">حفظ كلمة المرور الجديدة</button></div><div id="authMsg" class="status hidden"></div></section>
 <section id="appView" class="hidden">
 <section id="homePage">
@@ -159,7 +204,7 @@ body{background:radial-gradient(ellipse at 50% -12%,#533078 0,transparent 42%),r
 </section>
 </section><div class="footer">NEXO · تواصل، شارك، وانضم</div></main>
 <div id="storyViewer" class="storyViewer hidden"><div class="storyViewerCard"><div class="storyViewerTop"><b id="storyViewerName">قصة</b><div class="row"><button id="storyPrev" class="reelAction">‹</button><button id="storyNext" class="reelAction">›</button><button id="storyClose" class="reelAction">×</button></div></div><div id="storyViewerContent"></div><div id="storyViewerCaption" class="storyViewerCaption"></div></div></div>
-<nav id="bottomNav" class="bottom hidden"><button class="nav active" data-page="home"><span class="ico">⌂</span>الرئيسية</button><button class="nav" data-page="explore"><span class="ico">⌕</span>استكشاف</button><button class="nav createNav" id="navCreate"><span class="ico">＋</span>إنشاء</button><button class="nav" data-page="reels"><span class="ico">▷</span>ريلز</button><button class="nav" data-page="live"><span class="ico">●</span>لايف</button><button class="nav" data-page="profile"><span class="ico">◉</span>حسابي</button></nav>
+<nav id="bottomNav" class="bottom hidden instaBottom"><button class="nav active" data-page="home" aria-label="الرئيسية"><span class="ico">⌂</span></button><button class="nav" data-page="reels" aria-label="ريلز"><span class="ico">▣</span></button><button class="nav" data-page="explore" aria-label="استكشاف"><span class="ico">⌕</span></button><button class="nav" data-page="live" aria-label="البث المباشر"><span class="ico">◉</span></button><button class="nav" data-page="profile" aria-label="حسابي"><span class="ico">♙</span></button></nav>
 <script>
 window.addEventListener('error',e=>{const m=document.getElementById('authMsg');if(m){m.textContent='تعذر تشغيل التطبيق: '+(e.message||'خطأ غير معروف');m.className='status error'}});
 try {
@@ -176,7 +221,7 @@ $('signupBtn').onclick=async()=>{const b=$('signupBtn');b.disabled=true;try{let 
 const initial=s=>(String(s||'N').trim()[0]||'N').toUpperCase(),stamp=s=>new Date(s).toLocaleString('ar-JO',{dateStyle:'short',timeStyle:'short'});
 const avatar=(p)=>p?.avatar_url?'<img class="avatar" src="'+esc(p.avatar_url)+'" alt="">':'<div class="avatar">'+esc(initial(p?.display_name||p?.username))+'</div>';
 function page(n){['home','explore','reels','live','liveRoom','communities','chat','profile','settings','store'].forEach(x=>$(x+'Page').classList.toggle('hidden',x!==n));document.querySelectorAll('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===n));if(n==='home'){loadStories();loadPosts()}if(n==='explore')loadExplore();if(n==='reels')loadReels();if(n==='live')loadLive();if(n==='communities')loadCommunities();if(n==='chat')loadChats();if(n==='profile')loadProfilePage();if(n==='settings')loadSettings();if(n==='store')loadStore()}
-document.querySelectorAll('.nav[data-page]').forEach(b=>b.onclick=()=>page(b.dataset.page));$('refreshLives').onclick=loadLive;$('backLive').onclick=async()=>{if(activeLive?.streamer_id===user.id&&activeLive.status==='live'){if(!confirm('الرجوع سينهي البث المباشر. هل تريد المتابعة؟'))return;let q=await db.from('live_streams').update({status:'ended',ended_at:new Date().toISOString()}).eq('id',activeLive.id).eq('streamer_id',user.id);if(q.error){note('liveRoomMsg','تعذر إنهاء البث: '+q.error.message,'error');return}}await stopLiveKit();if(activeLive&&activeLive.streamer_id!==user.id)await db.from('live_stream_viewers').delete().eq('stream_id',activeLive.id).eq('user_id',user.id);activeLive=null;page('live')};$('startLive').onclick=createLive;$('navCreate').onclick=()=>{page('home');show('composerExpanded');$('postText').focus();$('composerExpanded').scrollIntoView({behavior:'smooth',block:'center'})};$('focusComposer').onclick=()=>{show('composerExpanded');$('postText').focus()};$('composerPhoto').onclick=()=>{show('composerExpanded');$('postFiles').click()};$('composerReel').onclick=()=>page('reels');$('composerCommunity').onclick=()=>page('communities');$('storyExplore').onclick=()=>page('explore');$('topCommunities').onclick=()=>page('communities');$('topChats').onclick=()=>page('chat');$('topSettings').onclick=()=>page('settings');$('topStore').onclick=()=>page('store');$('topProfile').onclick=()=>page('profile');
+document.querySelectorAll('.nav[data-page]').forEach(b=>b.onclick=()=>page(b.dataset.page));$('topCreate').onclick=()=>{page('home');show('composerExpanded');$('postText').focus();$('composerExpanded').scrollIntoView({behavior:'smooth',block:'center'})};$('topChats').onclick=()=>page('chat');$('refreshLives').onclick=loadLive;$('backLive').onclick=async()=>{if(activeLive?.streamer_id===user.id&&activeLive.status==='live'){if(!confirm('الرجوع سينهي البث المباشر. هل تريد المتابعة؟'))return;let q=await db.from('live_streams').update({status:'ended',ended_at:new Date().toISOString()}).eq('id',activeLive.id).eq('streamer_id',user.id);if(q.error){note('liveRoomMsg','تعذر إنهاء البث: '+q.error.message,'error');return}}await stopLiveKit();if(activeLive&&activeLive.streamer_id!==user.id)await db.from('live_stream_viewers').delete().eq('stream_id',activeLive.id).eq('user_id',user.id);activeLive=null;page('live')};$('startLive').onclick=createLive;$('navCreate').onclick=()=>{page('home');show('composerExpanded');$('postText').focus();$('composerExpanded').scrollIntoView({behavior:'smooth',block:'center'})};$('focusComposer').onclick=()=>{show('composerExpanded');$('postText').focus()};$('composerPhoto').onclick=()=>{show('composerExpanded');$('postFiles').click()};$('composerReel').onclick=()=>page('reels');$('composerCommunity').onclick=()=>page('communities');$('storyExplore').onclick=()=>page('explore');$('topCommunities').onclick=()=>page('communities');$('topChats').onclick=()=>page('chat');$('topSettings').onclick=()=>page('settings');$('topStore').onclick=()=>page('store');$('topProfile').onclick=()=>page('profile');
 async function ensureProfile(){let r=await db.from('profiles').select('*').eq('id',user.id).maybeSingle();if(r.error)throw r.error;if(!r.data){let uname='user_'+user.id.replace(/-/g,'').slice(0,12);r=await db.from('profiles').upsert({id:user.id,username:uname,display_name:user.email?.split('@')[0]||'عضو NEXO',bio:''},{onConflict:'id'}).select().single();if(r.error)throw r.error}profile=r.data;syncProfile()}
 function syncProfile(){let n=profile?.display_name||profile?.username||'عضو NEXO';$('helloName').textContent='أهلاً، '+n;$('miniAvatar').textContent=initial(n);$('profileAvatar').src=profile?.avatar_url||'';$('profileName').textContent=n;$('profileUsername').textContent='@'+(profile?.username||'');$('topProfile').textContent=initial(n);$('profileBio').textContent=profile?.bio||'لا توجد نبذة بعد'}
 async function enter(u){user=u;hide('authView');show('appView');show('bottomNav');try{await ensureProfile();await loadPosts();page('home');await handlePayPalReturn()}catch(e){note('authMsg','تعذر تحميل الحساب: '+e.message,'error')}}

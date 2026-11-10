@@ -717,13 +717,140 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
 @media(max-width:390px){.wrap{padding-inline:12px!important}.top{margin-inline:-12px!important;padding-inline:10px!important}.topActions{gap:4px!important}.topIcon,.topAvatar{width:34px!important;height:34px!important}.brand{font-size:24px!important}.brandTagline{font-size:6px}.welcomeLine{padding:17px 14px!important}.welcomeLine h1{font-size:22px!important}.navLabel{font-size:8px!important}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 
+
+/* NEXO PULSE — unified product design system */
+:root{
+ color-scheme:dark;
+ --bg:#0b100e;--panel:#141b17;--line:#29372f;
+ --purple:#b9f36b;--pink:#8de0b1;--text:#f2f7f1;--muted:#9ba99e;
+ --pulse:#b9f36b;--pulse-ink:#172313;--surface:#19221c;--surface-2:#202b23;
+ --glow:rgba(185,243,107,.16)
+}
+html{background:var(--bg);scroll-behavior:smooth}
+body{background:radial-gradient(ellipse at 50% -18%,#253b2b 0,transparent 43%),radial-gradient(ellipse at 100% 60%,#15231b 0,transparent 34%),var(--bg)!important;color:var(--text)!important;padding-bottom:116px!important}
+.wrap{width:min(820px,100%)!important;padding:12px 17px 42px!important}
+.top{position:sticky!important;top:0!important;z-index:40!important;margin:0 -17px 18px!important;padding:13px 17px!important;background:rgba(11,16,14,.91)!important;border:0!important;border-bottom:1px solid var(--line)!important;box-shadow:0 8px 28px #0003!important;backdrop-filter:blur(24px)!important}
+.brand{font-size:29px!important;letter-spacing:3px!important;color:#f4f8f2!important;background:none!important;text-shadow:none!important}
+.brandMark{display:inline-grid;place-items:center;width:27px;height:27px;margin-left:4px;border-radius:9px;background:var(--pulse);color:#152016!important;font-size:24px!important;vertical-align:middle}
+.brandDot{color:var(--pulse)!important}
+.brandTagline{color:#91a095!important;font-size:8px!important;letter-spacing:2px!important}
+.topIcon,.topAvatar{width:39px!important;height:39px!important;border-radius:13px!important;background:#172019!important;border:1px solid #34443a!important;color:#dce8dc!important;box-shadow:none!important}
+.topIcon#topStore{background:var(--pulse)!important;color:#142012!important;border-color:var(--pulse)!important}
+.topAvatar{background:linear-gradient(145deg,#b9f36b,#6fae75)!important;color:#152016!important;border:0!important}
+.welcomeLine{position:relative!important;overflow:hidden!important;display:flex!important;align-items:center!important;justify-content:space-between!important;margin:8px 0 16px!important;padding:24px 22px!important;border:1px solid #3b5140!important;border-radius:25px!important;background:linear-gradient(115deg,#1e3023 0%,#17231b 54%,#121a15 100%)!important;box-shadow:0 18px 45px #0004!important}
+.welcomeLine:after{content:"N";position:absolute!important;left:20px!important;top:-50px!important;font-size:190px!important;font-weight:1000!important;color:#d6ffb009!important;pointer-events:none!important}
+.eyebrow{color:var(--pulse)!important;font-size:9px!important;letter-spacing:1.8px!important;font-weight:900!important}
+.welcomeLine h1{font-size:27px!important;font-weight:900!important;margin:8px 0!important;letter-spacing:-.5px!important}
+.welcomeLine p{color:#b4c2b6!important;font-size:12px!important}
+.welcomeOrb{width:66px!important;height:66px!important;border-radius:21px!important;background:var(--pulse)!important;color:#182317!important;font-size:29px!important;box-shadow:0 12px 30px var(--glow)!important}
+.storiesCard{border:1px solid var(--line)!important;border-radius:20px!important;background:var(--panel)!important;box-shadow:none!important;padding:15px!important}
+.storiesHead{color:#e8f0e7!important}
+.storyRing{background:linear-gradient(135deg,#d9ff9c,#72c98e,#d9ff9c)!important;box-shadow:none!important}
+.storyAvatar{background:#1c2820!important;border-color:var(--panel)!important;color:#d9ffb0!important}
+.storyAdd{background:#1b2820!important;color:var(--pulse)!important}
+.composer,.card{background:var(--panel)!important;border:1px solid var(--line)!important;border-radius:20px!important;box-shadow:0 10px 28px #0002!important}
+.composer{padding:15px!important}
+.composerTrigger{background:#0f1511!important;border:1px solid #344238!important;border-radius:14px!important;color:#a8b5aa!important;min-height:46px!important}
+.composerTools{border-color:var(--line)!important;justify-content:flex-start!important;gap:8px!important}
+.toolChip{background:#1b2820!important;border:1px solid #304237!important;color:#d0e0d1!important;border-radius:11px!important;padding:8px 11px!important}
+.toolChip:first-child{color:#c8f78a!important}
+.feedHeading{padding:19px 4px 9px!important}
+.feedHeading .section-title,.section-title{color:var(--text)!important;font-size:19px!important;font-weight:900!important;letter-spacing:-.25px!important}
+.livePill{background:#1c2a20!important;border:1px solid #3c5940!important;color:#c6f18b!important;border-radius:30px!important}
+.livePill i{background:#b9f36b!important;box-shadow:0 0 10px #b9f36b!important}
+.post{background:var(--panel)!important;border:1px solid var(--line)!important;border-radius:20px!important;padding:15px!important;box-shadow:0 9px 24px #0002!important}
+.posttop{gap:11px!important}
+.avatar{background:linear-gradient(145deg,#b9f36b,#72c98e)!important;border:2px solid #344b37!important;color:#172316!important}
+.postname{color:#eff6ed!important;font-size:14px!important}
+.posttime,.muted{color:var(--muted)!important}
+.postbody{color:#e4ece3!important;font-size:14px!important;line-height:1.85!important}
+.postimg{border:1px solid #334238!important;border-radius:15px!important}
+.actions{border-color:var(--line)!important;gap:7px!important}
+.action{background:#1b251e!important;border:1px solid #334238!important;color:#d0ddd1!important;border-radius:11px!important;padding:8px 11px!important}
+.action.active{background:#304526!important;border-color:#8ebd5c!important;color:#d7ff9d!important}
+.btn{background:var(--pulse)!important;border:1px solid var(--pulse)!important;color:#152013!important;border-radius:12px!important;box-shadow:0 7px 18px rgba(185,243,107,.12)!important;font-weight:900!important}
+.btn.secondary{background:#202b23!important;border:1px solid #3b4b40!important;color:#e0ebe0!important;box-shadow:none!important}
+.field{background:#0f1511!important;border:1px solid #344238!important;border-radius:12px!important;color:#f2f7f1!important;padding:13px!important}
+.field::placeholder{color:#77867a!important}
+.field:focus{border-color:var(--pulse)!important;box-shadow:0 0 0 3px rgba(185,243,107,.12)!important}
+.empty{background:#141b17!important;border:1px dashed #3b4a3e!important;border-radius:15px!important;color:#aab8ab!important}
+.status{background:#1b2a20!important;border:1px solid #3a5940!important;color:#d6f1c7!important;border-radius:12px!important}
+.status.error{background:#321e1d!important;border-color:#69403a!important;color:#ffd1c8!important}
+.status.ok{background:#173324!important;border-color:#3c694c!important;color:#c8f4d1!important}
+.bottom{left:50%!important;right:auto!important;transform:translateX(-50%)!important;bottom:9px!important;width:min(790px,calc(100% - 22px))!important;grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:5px!important;padding:8px 9px calc(8px + env(safe-area-inset-bottom))!important;background:rgba(17,24,19,.96)!important;border:1px solid #35463a!important;border-radius:19px!important;box-shadow:0 12px 38px #0009!important;backdrop-filter:blur(22px)!important}
+.nav{min-height:48px!important;border-radius:12px!important;color:#8f9d91!important;font-size:9px!important;font-weight:800!important}
+.nav .ico{font-size:20px!important}
+.nav.active{background:#2b3b2a!important;color:#d7ff9c!important}
+.nav.active .ico{color:var(--pulse)!important}
+.navLabel{font-size:9px!important}
+.reelsFeed{gap:12px!important}
+.reelSlide{border:1px solid #344238!important;border-radius:17px!important;background:#070b08!important}
+.reelAction{background:#101811cc!important;border-color:#ffffff30!important}
+.reelAction.active{background:#344d2acc!important;color:#d7ff9c!important}
+.reelComments{background:#151e18f5!important;border-color:#445345!important}
+.reelCommentInput input{background:#0d130f!important}
+.storyViewer{background:#050805f7!important}
+.storyViewerCard{background:#141b17!important}
+.liveHero{background:linear-gradient(120deg,#1e3023,#141d17 65%,#101611)!important;border:1px solid #405541!important;border-radius:22px!important;box-shadow:0 15px 38px #0004!important}
+.liveHero h1,.liveRoomTitle,.liveCardBody h3{color:#f1f7ef!important}
+.liveHeroKicker,.liveCreateKicker{color:var(--pulse)!important}
+.liveHeroMark,.liveCreateIcon{background:#2d422a!important;border:1px solid #587346!important;color:#d6ff9b!important}
+.liveHero h1 span{background:#344a2b!important;color:#d6ff9b!important}
+.liveStats div,.tokenBreakdown div{background:#1b261e!important;border:1px solid #3a4a3c!important;border-radius:13px!important}
+.liveStats b,.tokenBreakdown b{color:#d4f69e!important}
+.liveThumb,.liveReady .liveThumb{background:radial-gradient(circle at 50% 35%,#3b5a38,#1c2b20 58%,#101611)!important;color:#d8ff9e!important}
+.liveCard{background:#141b17!important;border-color:#334238!important}
+.liveBadge{color:#ff9c9c!important;border-color:#704044!important}
+.liveMediaBox{background:#070b08!important;border-color:#344238!important}
+.profileTop,.profileStats,.profileTabs{background:#141b17!important;border-color:#334238!important}
+.profileCover{background:linear-gradient(115deg,#263d29,#63864c 58%,#18271d)!important}
+.profileBigAvatar{border-color:#141b17!important;box-shadow:0 0 0 2px #b9f36b!important}
+.profileStats b{color:#d7ff9c!important}
+.profileTabs{border-radius:15px!important}
+.profileTab{color:#a6b4a8!important}
+.profileTab.active{background:#2a3a29!important;color:#d7ff9c!important}
+.messages{background:#0f1511!important;border-color:#344238!important}
+.bubble{background:#202b23!important;border:1px solid #35463a!important;color:#f0f6ef!important}
+.bubble.mine{background:#3a582f!important;color:#f6ffec!important;border:0!important}
+.chatrow,.item,.setting{border-color:#2c3930!important;color:#edf4eb!important}
+.pill{background:#2d422b!important;color:#d7ff9c!important}
+#settingsPage h3{color:#c8ef91!important}
+.switch{accent-color:#b9f36b!important}
+#storePage .card{background:#141b17!important;border-color:#334238!important}
+#storeBalance{color:#d7ff9c!important}
+#storePackages>*,#promotionPlans>*{background:#1b251e!important;border-color:#3b4b40!important;color:#edf4eb!important}
+.cameraStage{background:#070b08!important;border-color:#405541!important;border-radius:20px!important}
+.cameraSpark{background:#2a3b28!important;color:#d7ff9c!important}
+.cameraFilter{background:#1b251e!important;border-color:#344238!important;color:#c5d1c6!important}
+.cameraFilter.active{background:#304729!important;border-color:#9acb66!important;color:#e0ffb6!important}
+.auth{background:linear-gradient(145deg,#1b2a20,#121a15)!important;border-color:#405541!important;border-radius:23px!important}
+#authView:before{color:#d7ff9c!important;text-shadow:0 0 24px #b9f36b44!important}
+.footer{color:#718074!important}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--pulse)!important;outline-offset:3px!important}
+button,.card,.field,.nav{transition:background-color .18s ease,border-color .18s ease,color .18s ease,transform .18s ease!important}
+@media(hover:hover){.topIcon:hover,.nav:hover,.action:hover,.toolChip:hover{border-color:#9cc875!important;filter:brightness(1.1)}.btn:not(:disabled):hover{filter:brightness(1.04);transform:translateY(-1px)}}
+@media(max-width:430px){
+ .wrap{padding-inline:12px!important}
+ .top{margin-inline:-12px!important;padding-inline:11px!important}
+ .topActions{gap:4px!important}
+ .topIcon,.topAvatar{width:34px!important;height:34px!important}
+ .brand{font-size:24px!important}
+ .brandTagline{font-size:6px!important;letter-spacing:1.3px!important}
+ .welcomeLine{padding:19px 15px!important}
+ .welcomeLine h1{font-size:22px!important}
+ .welcomeOrb{width:52px!important;height:52px!important}
+ .navLabel{font-size:8px!important}
+ .bottom{width:calc(100% - 14px)!important;bottom:6px!important}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
 </style></head>
-<body><script>try{if(localStorage.getItem("nexo-design-version")!=="purple-v1"){localStorage.setItem("nexo-theme","dark");localStorage.setItem("nexo-design-version","purple-v1")}document.body.classList.toggle("light",localStorage.getItem("nexo-theme")==="light")}catch(e){}</script><main class="wrap">
-<header class="top instaTop"><div class="topActions"><button class="topIcon instaPlus" id="topCreate" aria-label="إنشاء منشور">＋</button><button class="topIcon" id="topCommunities" aria-label="المجتمعات">◎</button></div><div class="brandBlock"><div class="brand"><span class="brandMark">∞</span> NEXO<span class="brandDot">.</span></div><div class="brandTagline">YOUR WORLD STARTS HERE</div></div><div class="topActions"><button class="topIcon" id="topChats" aria-label="الرسائل">♡</button><button class="topIcon themeQuick" id="themeQuickToggle" type="button" aria-label="تبديل المظهر" aria-pressed="false" title="تبديل الوضع">☾</button><button class="topIcon" id="topStore" title="متجر NEXO">✧</button><button class="topIcon" id="topSettings">⚙</button><button class="topAvatar" id="topProfile">N</button></div><span id="connection" class="hidden">NEXO</span></header>
+<body><script>try{if(localStorage.getItem("nexo-design-version")!=="pulse-v2"){localStorage.setItem("nexo-theme","dark");localStorage.setItem("nexo-design-version","pulse-v2")}document.body.classList.toggle("light",localStorage.getItem("nexo-theme")==="light")}catch(e){}</script><main class="wrap">
+<header class="top instaTop"><div class="topActions"><button class="topIcon instaPlus" id="topCreate" aria-label="إنشاء منشور">＋</button><button class="topIcon" id="topCommunities" aria-label="المجتمعات">◎</button></div><div class="brandBlock"><div class="brand"><span class="brandMark">∞</span> NEXO<span class="brandDot">.</span></div><div class="brandTagline">BE PART OF THE MOMENT</div></div><div class="topActions"><button class="topIcon" id="topChats" aria-label="الرسائل">♡</button><button class="topIcon themeQuick" id="themeQuickToggle" type="button" aria-label="تبديل المظهر" aria-pressed="false" title="تبديل الوضع">☾</button><button class="topIcon" id="topStore" title="متجر NEXO">✧</button><button class="topIcon" id="topSettings">⚙</button><button class="topAvatar" id="topProfile">N</button></div><span id="connection" class="hidden">NEXO</span></header>
 <section id="authView" class="card auth"><h1>أهلاً بك في NEXO</h1><p class="muted">سجّل دخولك وابدأ التواصل</p><input id="email" class="field" type="email" autocomplete="email" placeholder="البريد الإلكتروني"><input id="password" class="field" type="password" autocomplete="current-password" placeholder="كلمة المرور"><button id="loginBtn" class="btn wide">تسجيل الدخول</button><button id="signupBtn" class="btn secondary wide">إنشاء حساب جديد</button><button id="resetPassword" class="textBtn wide" type="button">نسيت كلمة المرور؟</button><div id="passwordResetPanel" class="hidden"><h3>تعيين كلمة مرور جديدة</h3><p class="muted small">اكتب كلمة مرور جديدة لحسابك.</p><input id="newPassword" class="field" type="password" autocomplete="new-password" minlength="8" placeholder="كلمة المرور الجديدة"><button id="saveNewPassword" class="btn wide">حفظ كلمة المرور الجديدة</button></div><div id="authMsg" class="status hidden"></div></section>
 <section id="appView" class="hidden">
 <section id="homePage">
-<div class="welcomeLine"><div><div class="eyebrow">YOUR SPACE. YOUR PEOPLE.</div><h1 id="helloName">أهلاً بك 👋</h1><p class="muted">وش الجديد في عالمك اليوم؟</p></div><div class="welcomeOrb">✦</div></div>
+<div class="welcomeLine"><div><div class="eyebrow">NEXO PULSE · YOUR COMMUNITY</div><h1 id="helloName">أهلاً بك 👋</h1><p class="muted">اكتشف الناس، شارك لحظتك، وكن جزءاً من الحدث.</p></div><div class="welcomeOrb">✦</div></div>
 <div class="storiesCard"><div class="storiesHead"><b>قصص الأشخاص الذين تتابعهم</b><div class="row"><button class="textBtn" id="addStory">＋ أضف قصة</button><button class="textBtn" id="storyExplore">اكتشف أشخاصاً</button></div></div><div class="storyRail" id="storyRail"><div class="storyItem"><div class="storyRing"><div class="storyAvatar">…</div></div><span>تحميل</span></div></div><input id="storyFile" class="hidden" type="file" accept="image/jpeg,image/png,image/webp,video/mp4,video/webm,video/quicktime"></div>
 <div class="card composer"><div class="head"><div class="avatar" id="miniAvatar">N</div><button class="composerTrigger" id="focusComposer">شاركنا بماذا تفكر؟</button></div><div class="composerTools"><button class="toolChip" id="composerPhoto">▧ صورة</button><button class="toolChip" id="composerReel">▷ مقطع ريلز</button><button class="toolChip" id="composerCommunity">◎ مجتمع</button></div></div>
 <div class="card composerExpanded hidden" id="composerExpanded"><h2 class="section-title">إنشاء منشور</h2><textarea id="postText" class="field" maxlength="500" placeholder="اكتب شيئاً يستحق المشاركة…"></textarea><input id="postFiles" type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple class="field"><div id="imagePreview" class="preview"></div><div class="row" style="justify-content:space-between"><span class="muted small" id="charCount">0 / 500 · حتى 4 صور</span><button id="publishBtn" class="btn">نشر المنشور</button></div><div id="postMsg" class="status hidden"></div></div>

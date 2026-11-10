@@ -1,489 +1,71 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>NEXO</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#090912">
+<title>NEXO</title><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-:root{color-scheme:dark;--bg:#090912;--panel:#151522;--line:#29293d;--purple:#8b5cf6;--muted:#a7a7bc}
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(circle at top,#20133b 0,#090912 45%);color:#f7f4ff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
-main{max-width:720px;margin:auto;padding:22px 16px 60px}
-.brand{font-size:34px;font-weight:900;letter-spacing:3px;color:#c4a7ff;text-align:center;margin:12px}
-.sub{text-align:center;color:var(--muted);margin-bottom:24px}
-.card{background:#151522ef;border:1px solid var(--line);border-radius:18px;padding:18px;margin:14px 0;box-shadow:0 12px 35px #0005}
-h2{font-size:19px;margin:0 0 14px}
-label{display:block;color:#d6c9f7;font-size:14px;margin:12px 0 6px}
-input,textarea{width:100%;background:#0d0d17;color:white;border:1px solid #38364e;border-radius:11px;padding:13px;font-size:15px;outline:none}
-textarea{min-height:90px;resize:vertical}
-button{border:0;border-radius:11px;background:linear-gradient(100deg,#7c3aed,#a855f7);color:white;padding:12px 17px;font-weight:700;font-size:15px;cursor:pointer;margin-top:12px}
-button.secondary{background:#29263a;border:1px solid #45405c}
-button:disabled{opacity:.5}
-.row{display:flex;gap:8px;flex-wrap:wrap}
-.row button{flex:1}
-.muted{color:var(--muted);font-size:13px;line-height:1.7}
-.hidden{display:none!important}
-.post{white-space:pre-wrap;line-height:1.7}
-.meta{font-size:12px;color:var(--muted);margin-bottom:8px}
-.status{padding:10px;border-radius:10px;background:#211b32;color:#d9c7ff;font-size:13px;margin-top:12px;white-space:pre-wrap}
-.tabs{display:flex;gap:8px;position:sticky;top:0;background:#090912ef;padding:8px 0;z-index:2}
-.tabs button{flex:1;margin:0}
-.empty{text-align:center;color:var(--muted);padding:20px}
-</style>
-</head>
-<body>
-<main>
-
-<div class="brand">NEXO</div>
-<div class="sub">مساحتك للتواصل والمجتمعات</div>
-
-<section id="setup" class="card">
-<h2>ربط مشروع NEXO</h2>
-<p class="muted">أدخل بيانات مشروع Supabase لربط التطبيق بقاعدة البيانات.</p>
-
-<label>Project URL</label>
-<input id="url" type="url" placeholder="https://xxxxx.supabase.co" autocomplete="url">
-
-<label>Publishable Key</label>
-<input id="key" type="password" placeholder="sb_publishable_..." autocomplete="off">
-
-<button id="connect">اتصال بالمشروع</button>
-<div id="setupStatus" class="status">أدخل رابط المشروع والمفتاح العام ثم اضغط اتصال.</div>
-<p class="muted">استخدم المفتاح العام Publishable فقط. لا تضع مفتاح Secret أو service_role هنا.</p>
-</section>
-
-<section id="auth" class="card hidden">
-<h2>تسجيل الدخول أو إنشاء حساب</h2>
-
-<label>البريد الإلكتروني</label>
-<input id="email" type="email" placeholder="name@example.com" autocomplete="email">
-
-<label>كلمة المرور</label>
-<input id="password" type="password" placeholder="كلمة المرور" autocomplete="current-password">
-
-<div class="row">
-<button id="signup">إنشاء حساب</button>
-<button class="secondary" id="login">دخول</button>
-</div>
-
-<div id="authStatus" class="status"></div>
-</section>
-
-<section id="app" class="hidden">
-
-<div class="card">
-<div class="row">
-<div style="flex:1">
-<b id="welcome">أهلاً بك في NEXO</b>
-<div class="muted" id="userEmail"></div>
-</div>
-<button class="secondary" id="logout">خروج</button>
-</div>
-</div>
-
-<div class="tabs">
-<button data-tab="feed">المنشورات</button>
-<button data-tab="communities">المجتمعات</button>
-</div>
-
-<div id="feed">
-<div class="card">
-<h2>اكتب منشوراً</h2>
-<textarea id="postText" placeholder="شو حاب تشارك؟"></textarea>
-<button id="publish">نشر</button>
-<div id="postStatus" class="status hidden"></div>
-</div>
-<div id="posts"></div>
-</div>
-
-<div id="communities" class="hidden">
-<div class="card">
-<h2>المجتمعات</h2>
-<div id="communityList" class="muted">لا توجد مجتمعات بعد.</div>
-</div>
-</div>
-
-</section>
-</main>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
+:root{color-scheme:dark;--bg:#090912;--panel:#151522;--line:#302d45;--purple:#8b5cf6;--pink:#b34fe8;--text:#f7f5ff;--muted:#aaa6bd}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -15%,#30204a,transparent 48%),var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif}button,input,textarea{font:inherit}button{cursor:pointer;color:white;border:0}.hidden{display:none!important}.wrap{width:min(760px,100%);margin:auto;padding:18px 14px 90px}.top{display:flex;justify-content:space-between;align-items:center;margin:8px 4px 20px}.brand{font-size:32px;font-weight:950;letter-spacing:2px;background:linear-gradient(100deg,#c08cff,#7c4dff);color:transparent;background-clip:text}.muted{color:var(--muted)}.small{font-size:12px}.card{background:#151522f2;border:1px solid var(--line);border-radius:22px;padding:19px;margin:14px 0;box-shadow:0 12px 34px #0003}.auth{max-width:460px;margin:8vh auto}.field{display:block;width:100%;background:#0d0d18;border:1px solid #39354f;border-radius:14px;color:white;padding:14px;margin:9px 0;outline:none}.field:focus{border-color:var(--purple)}textarea.field{min-height:105px;resize:vertical}.btn{background:linear-gradient(110deg,#7938e9,#b34fe8);border-radius:14px;padding:12px 18px;font-weight:800}.btn.secondary{background:#28243a;border:1px solid #413a5d}.btn:disabled{opacity:.55}.wide{width:100%;margin-top:8px}.status{padding:12px 14px;border-radius:13px;background:#241e36;color:#ddceff;margin-top:12px;line-height:1.5;overflow-wrap:anywhere}.status.error{background:#351c2a;color:#ffb5c0}.status.ok{background:#173328;color:#a8f0d0}.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:15px 0}.tab{background:#211d32;border:1px solid #39324f;border-radius:14px;padding:13px 5px;color:#d4cde4;font-weight:800}.tab.active{background:linear-gradient(110deg,#7938e9,#ad4ce8);color:#fff;border-color:transparent}.profile-head,.posttop,.community{display:flex;align-items:center;gap:12px}.profile-head{justify-content:space-between}.avatar{width:46px;height:46px;flex:none;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,#7c3aed,#c052e9);font-weight:900;font-size:20px}.section-title{font-size:21px;margin:3px 0 14px}.post{padding:18px}.posttop .avatar{width:40px;height:40px}.postname{font-weight:850}.posttime{font-size:12px;color:var(--muted);margin-top:3px}.postbody{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.8;margin:15px 0}.actions{display:flex;gap:8px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:12px}.action{background:#242137;color:#ded7ed;border:1px solid #39334f;border-radius:12px;padding:9px 12px}.action.active{color:#edceff;border-color:#8b5cf6;background:#302047}.comment{background:#201e2e;border-radius:12px;padding:9px 12px;margin-top:8px;line-height:1.6;overflow-wrap:anywhere}.commentbox{display:flex;gap:8px;margin-top:10px}.commentbox .field{margin:0;min-width:0}.community{justify-content:space-between}.community h3{margin:0 0 5px}.divider{height:1px;background:var(--line);margin:15px 0}.empty{text-align:center;color:var(--muted);padding:26px 10px}.footer{text-align:center;color:#777187;font-size:12px;padding:22px}
+@media(min-width:600px){.wrap{padding-top:28px}.card{padding:23px}}
+</style></head><body><main class="wrap">
+<header class="top"><div><div class="brand">NEXO</div><div class="muted small">مساحتك للتواصل والمشاركة</div></div><div id="connection" class="muted small">جاري الاتصال…</div></header>
+<section id="authView" class="card auth"><h1>أهلاً بك في NEXO</h1><p class="muted">سجّل دخولك أو أنشئ حسابًا جديدًا</p><input id="email" class="field" type="email" autocomplete="email" placeholder="البريد الإلكتروني"><input id="password" class="field" type="password" autocomplete="current-password" placeholder="كلمة المرور"><button id="loginBtn" class="btn wide">تسجيل الدخول</button><button id="signupBtn" class="btn secondary wide">إنشاء حساب جديد</button><div id="authMsg" class="status hidden"></div></section>
+<section id="appView" class="hidden"><section class="card profile-head"><div class="avatar" id="headAvatar">N</div><div style="flex:1;min-width:0"><b id="headName">عضو NEXO</b><div id="headEmail" class="muted small"></div></div><button id="logoutBtn" class="btn secondary">خروج</button></section>
+<nav class="tabs"><button class="tab active" data-tab="feed">المنشورات</button><button class="tab" data-tab="communities">المجتمعات</button><button class="tab" data-tab="profile">ملفي</button></nav>
+<section id="feedTab"><div class="card"><h2 class="section-title">اكتب منشوراً</h2><textarea id="postText" class="field" maxlength="500" placeholder="شارك أفكارك مع المجتمع…"></textarea><div style="display:flex;justify-content:space-between;align-items:center"><span id="charCount" class="muted small">0 / 500</span><button id="publishBtn" class="btn">نشر</button></div><div id="postMsg" class="status hidden"></div></div><div id="posts"><div class="empty">جاري تحميل المنشورات…</div></div></section>
+<section id="communitiesTab" class="hidden"><div class="card"><h2 class="section-title">المجتمعات</h2><p class="muted">انضم إلى المجتمعات التي تهمك.</p><div id="communities"><div class="empty">جاري التحميل…</div></div><div id="communityMsg" class="status hidden"></div></div></section>
+<section id="profileTab" class="hidden"><div class="card"><h2 class="section-title">الملف الشخصي</h2><label class="muted small">الاسم الظاهر</label><input id="displayName" class="field" maxlength="40" placeholder="اسمك"><label class="muted small">اسم المستخدم (إنجليزي/أرقام/_)</label><input id="username" class="field" maxlength="24" placeholder="username"><label class="muted small">نبذة عنك</label><textarea id="bio" class="field" maxlength="160" placeholder="اكتب نبذة قصيرة…"></textarea><button id="saveProfileBtn" class="btn wide">حفظ التعديلات</button><div id="profileMsg" class="status hidden"></div></div></section></section>
+<div class="footer">NEXO · تواصل، شارك، وانضم</div></main>
 <script>
-(() => {
- let supabase = null;
- let currentUser = null;
-
- const $ = id => document.getElementById(id);
-
- const msg = (id,text) => {
-  $(id).textContent = text;
-  $(id).classList.remove('hidden');
- };
-
- const show = (id,on) => {
-  $(id).classList.toggle('hidden',!on);
- };
-
- function normalizeProjectUrl(rawUrl){
-  const parsed = new URL(rawUrl.trim());
-
-  if(parsed.protocol !== 'https:' && parsed.hostname !== 'localhost'){
-   throw new Error('يجب أن يبدأ رابط المشروع بـ https://');
-  }
-
-  if(!parsed.hostname){
-   throw new Error('رابط المشروع غير صحيح.');
-  }
-
-  // استخدام أصل الرابط فقط وإزالة أي مسار إضافي مثل rest/v1
-  return parsed.origin;
- }
-
- $('url').value = localStorage.getItem('nexo_url') || '';
- $('key').value = localStorage.getItem('nexo_key') || '';
-
- $('connect').onclick = async () => {
-  const rawUrl = $('url').value.trim();
-  const key = $('key').value.trim();
-
-  if(!rawUrl || !key){
-   msg('setupStatus','أدخل رابط المشروع والمفتاح العام أولاً.');
-   return;
-  }
-
-  if(!window.supabase){
-   msg('setupStatus','تعذر تحميل مكتبة Supabase. تأكد من الإنترنت وأعد فتح الصفحة.');
-   return;
-  }
-
-  try {
-   const projectUrl = normalizeProjectUrl(rawUrl);
-
-   supabase = window.supabase.createClient(projectUrl,key,{
-    auth:{
-     persistSession:true,
-     autoRefreshToken:true,
-     detectSessionInUrl:true
-    }
-   });
-
-   const {data,error} = await supabase.auth.getSession();
-
-   if(error) throw error;
-
-   localStorage.setItem('nexo_url',projectUrl);
-   localStorage.setItem('nexo_key',key);
-
-   $('url').value = projectUrl;
-
-   msg('setupStatus','تم الاتصال بإعدادات المشروع. سجّل الدخول أو أنشئ حساباً.');
-
-   show('auth',true);
-   show('app',false);
-
-   if(data.session){
-    await enterApp(data.session.user);
-   }
-
-  } catch(e) {
-   msg('setupStatus','تعذر الاتصال: '+e.message);
-  }
- };
-
- $('signup').onclick = async () => {
-  if(!supabase){
-   msg('authStatus','اضغط اتصال بالمشروع أولاً.');
-   return;
-  }
-
-  const email = $('email').value.trim();
-  const password = $('password').value;
-
-  if(!email || !password){
-   msg('authStatus','أدخل البريد الإلكتروني وكلمة المرور.');
-   return;
-  }
-
-  if(password.length < 6){
-   msg('authStatus','كلمة المرور يجب أن تكون 6 أحرف على الأقل.');
-   return;
-  }
-
-  const button = $('signup');
-  button.disabled = true;
-
-  try {
-   msg('authStatus','جاري إنشاء الحساب...');
-
-   const {data,error} = await supabase.auth.signUp({
-    email:email,
-    password:password
-   });
-
-   if(error){
-    console.error('NEXO SIGNUP ERROR:',error);
-    msg('authStatus','خطأ التسجيل: '+error.message);
-    return;
-   }
-
-   if(data.session && data.user){
-    msg('authStatus','تم إنشاء الحساب بنجاح.');
-    await enterApp(data.user);
-   } else {
-    msg('authStatus','تم إرسال طلب التسجيل. افحص بريدك الإلكتروني إذا كان تأكيد البريد مفعّلاً.');
-   }
-
-  } catch(e) {
-   console.error('NEXO SIGNUP DETAILS:',e);
-   msg('authStatus','خطأ غير متوقع أثناء التسجيل: '+e.message);
-  } finally {
-   button.disabled = false;
-  }
- };
-
- $('login').onclick = async () => {
-  if(!supabase){
-   msg('authStatus','اضغط اتصال بالمشروع أولاً.');
-   return;
-  }
-
-  const email = $('email').value.trim();
-  const password = $('password').value;
-
-  if(!email || !password){
-   msg('authStatus','أدخل البريد الإلكتروني وكلمة المرور.');
-   return;
-  }
-
-  const button = $('login');
-  button.disabled = true;
-
-  try {
-   msg('authStatus','جاري تسجيل الدخول...');
-
-   const {data,error} = await supabase.auth.signInWithPassword({
-    email:email,
-    password:password
-   });
-
-   if(error){
-    msg('authStatus','تعذر تسجيل الدخول: '+error.message);
-    return;
-   }
-
-   msg('authStatus','تم تسجيل الدخول بنجاح.');
-
-   if(data.user){
-    await enterApp(data.user);
-   }
-
-  } catch(e) {
-   msg('authStatus','خطأ أثناء الدخول: '+e.message);
-  } finally {
-   button.disabled = false;
-  }
- };
-
- async function enterApp(user){
-  currentUser = user;
-
-  show('auth',false);
-  show('setup',false);
-  show('app',true);
-
-  $('userEmail').textContent = user.email || '';
-
-  await loadPosts();
-  await loadCommunities();
- }
-
- $('logout').onclick = async () => {
-  if(!supabase) return;
-
-  try {
-   await supabase.auth.signOut();
-  } catch(e) {
-   console.error(e);
-  }
-
-  currentUser = null;
-
-  show('app',false);
-  show('auth',true);
-  show('setup',true);
- };
-
- $('publish').onclick = async () => {
-  if(!currentUser){
-   msg('postStatus','سجّل الدخول أولاً.');
-   return;
-  }
-
-  const content = $('postText').value.trim();
-
-  if(!content){
-   msg('postStatus','اكتب شيئاً قبل النشر.');
-   return;
-  }
-
-  try {
-   const {error} = await supabase.from('posts').insert({
-    user_id:currentUser.id,
-    content:content
-   });
-
-   if(error){
-    msg('postStatus','تعذر النشر: '+error.message);
-    return;
-   }
-
-   $('postText').value = '';
-   msg('postStatus','تم نشر المنشور.');
-
-   await loadPosts();
-
-  } catch(e) {
-   msg('postStatus','خطأ أثناء النشر: '+e.message);
-  }
- };
-
- async function loadPosts(){
-  const root = $('posts');
-
-  root.innerHTML = '<div class="empty">جاري تحميل المنشورات...</div>';
-
-  try {
-   const {data,error} = await supabase
-    .from('posts')
-    .select('id,user_id,content,created_at')
-    .order('created_at',{ascending:false})
-    .limit(50);
-
-   if(error){
-    root.innerHTML = '<div class="card muted">تعذر تحميل المنشورات: '+escapeHtml(error.message)+'</div>';
-    return;
-   }
-
-   if(!data || !data.length){
-    root.innerHTML = '<div class="card empty">ما في منشورات لحد الآن. كن أول من ينشر!</div>';
-    return;
-   }
-
-   root.innerHTML = '';
-
-   for(const p of data){
-    const card = document.createElement('div');
-    card.className = 'card';
-
-    const date = p.created_at ? new Date(p.created_at).toLocaleString('ar') : '';
-
-    card.innerHTML =
-     '<div class="meta">'+escapeHtml(date)+'</div>'+
-     '<div class="post">'+escapeHtml(p.content)+'</div>'+
-     '<div class="row">'+
-     '<button class="secondary like">إعجاب</button>'+
-     '<button class="secondary commentBtn">تعليق</button>'+
-     '</div>'+
-     '<div class="comments muted"></div>';
-
-    card.querySelector('.like').onclick = async () => {
-     if(!currentUser) return;
-
-     const {error} = await supabase.from('likes').upsert({
-      post_id:p.id,
-      user_id:currentUser.id
-     },{onConflict:'post_id,user_id'});
-
-     if(error){
-      alert('تعذر تسجيل الإعجاب: '+error.message);
-     } else {
-      card.querySelector('.like').textContent = 'تم الإعجاب';
-     }
-    };
-
-    card.querySelector('.commentBtn').onclick = async () => {
-     if(!currentUser) return;
-
-     const text = prompt('اكتب تعليقك');
-
-     if(!text || !text.trim()) return;
-
-     const {error} = await supabase.from('comments').insert({
-      post_id:p.id,
-      user_id:currentUser.id,
-      content:text.trim()
-     });
-
-     if(error){
-      alert('تعذر إضافة التعليق: '+error.message);
-     } else {
-      await loadComments(p.id,card.querySelector('.comments'));
-     }
-    };
-
-    root.appendChild(card);
-
-    await loadComments(p.id,card.querySelector('.comments'));
-   }
-
-  } catch(e) {
-   root.innerHTML = '<div class="card muted">حدث خطأ: '+escapeHtml(e.message)+'</div>';
-  }
- }
-
- async function loadComments(postId,el){
-  const {data,error} = await supabase
-   .from('comments')
-   .select('content,created_at')
-   .eq('post_id',postId)
-   .order('created_at');
-
-  if(error){
-   el.textContent = 'تعذر تحميل التعليقات: '+error.message;
-   return;
-  }
-
-  el.textContent = data && data.length
-   ? data.map(c=>'• '+c.content).join('\n')
-   : 'لا توجد تعليقات بعد.';
- }
-
- async function loadCommunities(){
-  const root = $('communityList');
-
-  const {data,error} = await supabase
-   .from('communities')
-   .select('id,name,description')
-   .order('created_at',{ascending:false});
-
-  if(error){
-   root.textContent = 'تعذر تحميل المجتمعات: '+error.message;
-   return;
-  }
-
-  root.textContent = data && data.length
-   ? data.map(c=>c.name+(c.description?' — '+c.description:'')).join('\n')
-   : 'لا توجد مجتمعات بعد.';
- }
-
- function escapeHtml(s){
-  return String(s).replace(/[&<>"']/g,c=>({
-   '&':'&amp;',
-   '<':'&lt;',
-   '>':'&gt;',
-   '"':'&quot;',
-   "'":'&#39;'
-  }[c]));
- }
-
- document.querySelectorAll('[data-tab]').forEach(b=>{
-  b.onclick = () => {
-   show('feed',b.dataset.tab==='feed');
-   show('communities',b.dataset.tab==='communities');
-  };
- });
-
+(()=> {
+const URL='https://cgyvcrqhghiuwtfeyuht.supabase.co';
+const KEY='sb_publishable_sGyJSuk5UL2k8E3oZqR4mQ_o5A86ghP';
+const db=window.supabase.createClient(URL,KEY);
+const $=id=>document.getElementById(id);
+let user=null,profile=null;
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const notice=(id,t,type='')=>{$(id).textContent=t;$(id).className='status'+(type?' '+type:'')};
+const hide=id=>$(id).classList.add('hidden');
+const initials=s=>(String(s||'N').trim()[0]||'N').toUpperCase();
+const date=s=>{try{return new Date(s).toLocaleString('ar-JO',{dateStyle:'medium',timeStyle:'short'})}catch{return ''}};
+function tab(name){['feed','communities','profile'].forEach(t=>$(t+'Tab').classList.toggle('hidden',t!==name));document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));if(name==='communities')loadCommunities();if(name==='profile')fillProfile()}
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>tab(b.dataset.tab));
+async function ensureProfile(){
+let {data,error}=await db.from('profiles').select('*').eq('id',user.id).maybeSingle();if(error)throw error;
+if(!data){const uname='user_'+user.id.replace(/-/g,'').slice(0,12);let r=await db.from('profiles').upsert({id:user.id,username:uname,display_name:user.email?.split('@')[0]||'عضو NEXO',bio:''},{onConflict:'id'}).select().single();if(r.error)throw r.error;data=r.data}
+profile=data;updateHeader()
+}
+function updateHeader(){let n=profile?.display_name||profile?.username||'عضو NEXO';$('headName').textContent=n;$('headAvatar').textContent=initials(n);$('headEmail').textContent=user?.email||''}
+function fillProfile(){$('displayName').value=profile?.display_name||'';$('username').value=profile?.username||'';$('bio').value=profile?.bio||''}
+async function enter(u){user=u;$('authView').classList.add('hidden');$('appView').classList.remove('hidden');try{await ensureProfile();await loadPosts()}catch(e){notice('postMsg','تعذر تحميل الحساب: '+e.message,'error')}}
+async function loadPosts(){
+$('posts').innerHTML='<div class="empty">جاري تحميل المنشورات…</div>';
+let {data:ps,error}=await db.from('posts').select('id,user_id,body,created_at').order('created_at',{ascending:false}).limit(50);
+if(error){$('posts').innerHTML='<div class="card status error">تعذر تحميل المنشورات: '+esc(error.message)+'</div>';return}
+if(!ps?.length){$('posts').innerHTML='<div class="card empty">ما في منشورات لحد الآن. كن أول من ينشر!</div>';return}
+let ids=ps.map(p=>p.id),uids=[...new Set(ps.map(p=>p.user_id))];
+let [lr,cr,pr]=await Promise.all([db.from('likes').select('post_id,user_id').in('post_id',ids),db.from('comments').select('id,post_id,user_id,body,created_at').in('post_id',ids).order('created_at'),db.from('profiles').select('id,username,display_name').in('id',uids)]);
+let likes=lr.data||[],comments=cr.data||[],people=pr.data||[];
+const person=id=>people.find(x=>x.id===id);
+$('posts').innerHTML=ps.map(p=>{let a=person(p.user_id),name=a?.display_name||a?.username||'عضو NEXO',mine=p.user_id===user.id,liked=likes.some(x=>x.post_id===p.id&&x.user_id===user.id),pc=comments.filter(x=>x.post_id===p.id);
+return '<article class="card post" data-post="'+p.id+'"><div class="posttop"><div class="avatar">'+esc(initials(name))+'</div><div><div class="postname">'+esc(name)+'</div><div class="posttime">'+esc(date(p.created_at))+'</div></div></div><div class="postbody">'+esc(p.body)+'</div><div class="actions"><button class="action '+(liked?'active':'')+'" data-like="'+p.id+'">'+(liked?'♥':'♡')+' إعجاب · '+likes.filter(x=>x.post_id===p.id).length+'</button><button class="action" data-toggle="'+p.id+'">التعليقات · '+pc.length+'</button>'+(mine?'<button class="action" data-delete="'+p.id+'">حذف منشوري</button>':'')+'</div><div class="comments hidden" id="comments-'+p.id+'">'+pc.map(c=>{let cp=person(c.user_id);return '<div class="comment"><b>'+esc(cp?.display_name||cp?.username||'عضو')+':</b> '+esc(c.body)+'</div>'}).join('')+'<div class="commentbox"><input class="field" id="comment-'+p.id+'" maxlength="500" placeholder="اكتب تعليقاً…"><button class="btn" data-send="'+p.id+'">إرسال</button></div></div></article>'}).join('');
+}
+$('posts').addEventListener('click',async e=>{let b=e.target.closest('button');if(!b)return;
+if(b.dataset.like){let id=b.dataset.like,r=await db.from('likes').select('post_id').eq('post_id',id).eq('user_id',user.id).maybeSingle();if(r.error){notice('postMsg',r.error.message,'error');return}let x=r.data?await db.from('likes').delete().eq('post_id',id).eq('user_id',user.id):await db.from('likes').insert({post_id:id,user_id:user.id});if(x.error){notice('postMsg','تعذر تحديث الإعجاب: '+x.error.message,'error');return}await loadPosts()}
+if(b.dataset.toggle)$('comments-'+b.dataset.toggle).classList.toggle('hidden');
+if(b.dataset.send){let id=b.dataset.send,body=$('comment-'+id).value.trim();if(!body)return;b.disabled=true;let r=await db.from('comments').insert({post_id:id,user_id:user.id,body});b.disabled=false;if(r.error){notice('postMsg','تعذر إضافة التعليق: '+r.error.message,'error');return}await loadPosts();$('comments-'+id)?.classList.remove('hidden')}
+if(b.dataset.delete){if(!confirm('هل تريد حذف هذا المنشور؟'))return;let r=await db.from('posts').delete().eq('id',b.dataset.delete).eq('user_id',user.id);if(r.error){notice('postMsg','تعذر الحذف: '+r.error.message,'error');return}await loadPosts()}
+});
+$('postText').oninput=()=>$('charCount').textContent=$('postText').value.length+' / 500';
+$('publishBtn').onclick=async()=>{let body=$('postText').value.trim();hide('postMsg');if(!body){notice('postMsg','اكتب نص المنشور أولاً.','error');return}let b=$('publishBtn');b.disabled=true;let r=await db.from('posts').insert({user_id:user.id,body});b.disabled=false;if(r.error){notice('postMsg','تعذر النشر: '+r.error.message,'error');return}$('postText').value='';$('charCount').textContent='0 / 500';notice('postMsg','تم نشر منشورك بنجاح.','ok');await loadPosts()};
+async function loadCommunities(){$('communities').innerHTML='<div class="empty">جاري التحميل…</div>';let [c,m]=await Promise.all([db.from('communities').select('id,name,description').order('name'),db.from('community_members').select('community_id').eq('user_id',user.id)]);if(c.error){$('communities').textContent='تعذر التحميل: '+c.error.message;return}let joined=new Set((m.data||[]).map(x=>x.community_id));if(!c.data?.length){$('communities').innerHTML='<div class="empty">لا توجد مجتمعات حالياً.</div>';return}$('communities').innerHTML=c.data.map(x=>'<div class="community"><div><h3>'+esc(x.name)+'</h3><div class="muted small">'+esc(x.description||'مجتمع NEXO')+'</div></div><button class="btn '+(joined.has(x.id)?'secondary':'')+'" data-join="'+x.id+'" data-state="'+joined.has(x.id)+'">'+(joined.has(x.id)?'مغادرة':'انضمام')+'</button></div><div class="divider"></div>').join('')}
+$('communities').addEventListener('click',async e=>{let b=e.target.closest('[data-join]');if(!b)return;let id=b.dataset.join,joined=b.dataset.state==='true';b.disabled=true;let r=joined?await db.from('community_members').delete().eq('community_id',id).eq('user_id',user.id):await db.from('community_members').insert({community_id:id,user_id:user.id});b.disabled=false;if(r.error){notice('communityMsg','تعذر تنفيذ العملية: '+r.error.message,'error');return}await loadCommunities()});
+$('saveProfileBtn').onclick=async()=>{let username=$('username').value.trim().toLowerCase(),display_name=$('displayName').value.trim(),bio=$('bio').value.trim();if(!/^[a-z0-9_]{3,24}$/.test(username)){notice('profileMsg','اسم المستخدم يجب أن يكون 3–24 حرفاً إنجليزياً أو رقماً أو _ فقط.','error');return}let b=$('saveProfileBtn');b.disabled=true;let r=await db.from('profiles').upsert({id:user.id,username,display_name:display_name||username,bio},{onConflict:'id'}).select().single();b.disabled=false;if(r.error){notice('profileMsg','تعذر حفظ الملف: '+r.error.message,'error');return}profile=r.data;updateHeader();notice('profileMsg','تم حفظ الملف الشخصي.','ok')};
+$('loginBtn').onclick=async()=>{hide('authMsg');let email=$('email').value.trim(),password=$('password').value;if(!email||!password){notice('authMsg','أدخل البريد وكلمة المرور.','error');return}let b=$('loginBtn');b.disabled=true;let r=await db.auth.signInWithPassword({email,password});b.disabled=false;if(r.error){notice('authMsg','تعذر الدخول: '+r.error.message,'error');return}await enter(r.data.user)};
+$('signupBtn').onclick=async()=>{hide('authMsg');let email=$('email').value.trim(),password=$('password').value;if(!email||password.length<6){notice('authMsg','أدخل بريداً صحيحاً وكلمة مرور من 6 أحرف على الأقل.','error');return}let b=$('signupBtn');b.disabled=true;let r=await db.auth.signUp({email,password});b.disabled=false;if(r.error){notice('authMsg','تعذر إنشاء الحساب: '+r.error.message,'error');return}if(r.data.session)await enter(r.data.user);else notice('authMsg','تم إنشاء الطلب. افحص بريدك واضغط رابط التأكيد ثم سجّل الدخول.','ok')};
+$('logoutBtn').onclick=async()=>{await db.auth.signOut();user=null;profile=null;$('appView').classList.add('hidden');$('authView').classList.remove('hidden')};
+$('connection').textContent='NEXO متصل';
+db.auth.getSession().then(({data,error})=>{if(error){notice('authMsg',error.message,'error');return}if(data.session)enter(data.session.user)});
+db.auth.onAuthStateChange((_event,session)=>{if(session?.user&&!user)enter(session.user)});
 })();
-</script>
-</body>
-</html>
+</script></body></html>
